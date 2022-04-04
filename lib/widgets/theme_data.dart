@@ -5,7 +5,9 @@ class HelpTheme {
   static const Color helpYellow = Color(0xFFF7C548);
   static const Color helpDarkGrey = Color(0xFF555555);
   static const Color helpWhiteIce = Color(0xFFF2F2F2);
-  static const Color helpButton = Color(0xFF555555);
+  static const Color helpButtonText = Color(0xFF000000);
+  static const Color helpErrorText = Color(0xFFFE6666);
+  
 
   static ThemeData theme = ThemeData(
     fontFamily: GoogleFonts.poppins().fontFamily,
