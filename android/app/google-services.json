@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "108411117040",
+    "project_id": "daumhelp-d22c4",
+    "storage_bucket": "daumhelp-d22c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108411117040:android:8d75bb4d2973f45e6ed135",
+        "android_client_info": {
+          "package_name": "com.example.daumhelp_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "108411117040-04ghdopvo1me9k1ssq6nkp47fdvvqs6r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.daumhelp_app",
+            "certificate_hash": "8ed45bedaadef79a545fc421fb464f9b023d089d"
+          }
+        },
+        {
+          "client_id": "108411117040-8jc9fr2gn6b34v96qbl6oi1g7sc6gjir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0Q_QMzy-l98hJ6lW-8bn6XvNUj2dJBbQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "108411117040-8jc9fr2gn6b34v96qbl6oi1g7sc6gjir.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
