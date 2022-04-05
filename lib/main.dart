@@ -1,13 +1,12 @@
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
+import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-
-  );
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -47,21 +46,21 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       
         title: Text(widget.title),
       ),
       body: Center(
-        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
               'You have pushed the button this many times:',
             ),
-
-            YellowButtonLarge(title: "Continuar", action:(){}),
-
-
+            YellowButtonLarge(title: "Continuar", action: () {}),
+            CustomTextField(
+              hint: "name",
+              action: () {},
+              label: 'teste',
+            ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
@@ -71,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        tooltip: 'Voltar',
         child: const Icon(Icons.add),
       ),
     );
