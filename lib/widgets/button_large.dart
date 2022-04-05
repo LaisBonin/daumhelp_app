@@ -3,8 +3,8 @@ import 'package:daumhelp_app/widgets/theme_data.dart';
 
 class YellowButtonLarge extends StatelessWidget {
   final String title;
-
   final Function action;
+
   const YellowButtonLarge({
     Key? key,
     required this.title,
@@ -13,19 +13,20 @@ class YellowButtonLarge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 24),
-      child: ElevatedButton(
-        style: HelpTheme.yellowButtonLarge(),
-        onPressed: () => action(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(fontSize: 20, color: HelpTheme.helpButtonText),
-            )
-          ],
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: Theme.of(context).primaryColor,
+        fixedSize: const Size(309, 60),
+        elevation: 50,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        )),
+      onPressed: () => action(),
+      child: Center(
+        child: Text(
+          title,
+          style:
+              const TextStyle(fontSize: 20, color: HelpTheme.helpButtonText),
         ),
       ),
     );
