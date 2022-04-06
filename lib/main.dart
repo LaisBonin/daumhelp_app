@@ -1,15 +1,14 @@
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/search_bar.dart';
 import 'package:daumhelp_app/widgets/subject_listtile.dart';
+import 'package:daumhelp_app/widgets/profile_card.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-
-  );
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -37,48 +36,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-       
-        title: Text(widget.title),
-      ),
       body: Center(
-        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            YellowButtonLarge(title: "Continuar", action: () {}),
+            SubjectListTile(
+              subjectName: 'Cálculo',
+              subjectIcon: Icon(
+                Icons.superscript,
+                size: 40,
+                color: Theme.of(context).primaryColor,
+              ),
+              subjectAction: () {},
             ),
-
-            YellowButtonLarge(title: "Continuar", action:(){}),
-
-            SubjectListTile(subjectName: 'Cálculo', subjectIcon: const Icon(Icons.superscript, size: 40,), subjectAction: (){},),
-
-            const SearchBar(),        
-
-
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            const SearchBar(),
+            const ProfileCard(
+              profileCourse: 'Engª Mecânica',
+              profilePeriod: "7º Periodo",
+              profileName: 'Eric',
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

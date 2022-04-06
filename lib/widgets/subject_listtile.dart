@@ -22,7 +22,7 @@ class SubjectListTile extends StatelessWidget {
         style: Theme.of(context).textTheme.titleMedium,
       ),
       trailing: subjectIcon,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       tileColor: Theme.of(context).hoverColor,
     );
   }
