@@ -10,10 +10,9 @@ class HelpTheme {
   static const Color helpErrorText = Color(0xFFFE6666);
 
   static ThemeData theme = ThemeData(
-    // fontFamily: GoogleFonts.poppins().fontFamily,
     textTheme: TextTheme(
       titleLarge: TextStyle(
-        fontSize: 32,
+        fontSize: 40,
         fontWeight: FontWeight.w600,
         color: helpWhiteIce,
         fontFamily: GoogleFonts.poppins().fontFamily,
@@ -21,13 +20,13 @@ class HelpTheme {
       ),
       titleMedium: TextStyle(
         fontSize: 32,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w600,
         color: helpWhiteIce,
         fontFamily: GoogleFonts.poppins().fontFamily,
-        letterSpacing: 2,
+        letterSpacing: 1,
       ),
       titleSmall: TextStyle(
-        fontSize: 12,
+        fontSize: 16,
         fontWeight: FontWeight.w400,
         color: helpWhiteIce,
         fontFamily: GoogleFonts.poppins().fontFamily,

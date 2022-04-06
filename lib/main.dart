@@ -1,4 +1,5 @@
 import 'package:daumhelp_app/widgets/button_large.dart';
+import 'package:daumhelp_app/widgets/search_bar.dart';
 import 'package:daumhelp_app/widgets/subject_listtile.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
             YellowButtonLarge(title: "Continuar", action:(){}),
 
-            SubjectListTile(subjectName: 'Cálculo', subjectIcon: const Icon(Icons.superscript, size: 40,), subjectAction: (){},),            
+            SubjectListTile(subjectName: 'Cálculo', subjectIcon: const Icon(Icons.superscript, size: 40,), subjectAction: (){},),
+
+            const SearchBar(),        
 
 
             Text(
