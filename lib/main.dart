@@ -49,23 +49,42 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            YellowButtonLarge(title: "Continuar", action: () {}),
-            CustomTextField(
-              hint: "name",
-              action: () {},
-              label: 'teste',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        child: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft,
+                  colors: [HelpTheme.helpDarkGrey, HelpTheme.helpButtonText])),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              YellowButtonLarge(title: "Continuar", action: () {}),
+              const SizedBox(
+                height: 40,
+              ),
+              CustomTextField(
+                hint: "Email",
+                errorText: "Obrigatório",obscure: false,
+                action: () {},
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              CustomTextField(
+                hint: "Senha",
+                errorText: "Obrigatório",obscure: true,
+                action: () {},
+              ),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

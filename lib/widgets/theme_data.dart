@@ -25,5 +25,6 @@ class HelpTheme {
     backgroundColor: helpDarkGrey,
     shadowColor: helpButtonText,
     canvasColor: helpWhiteIce,
+    focusColor: helpYellow,
   );
 }
