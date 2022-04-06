@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 // import 'package:daumhelp_app/widgets/theme_data.dart';
@@ -33,11 +31,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
       height: 60,
       child: TextField(
         obscureText: showPassword == false ? widget.obscure : false,
-        style: TextStyle(
-          fontSize: 16,
-          fontFamily: GoogleFonts.poppins().fontFamily,
-        ),
+        style: Theme.of(context).textTheme.titleSmall,
         decoration: InputDecoration(
+          filled: true,
+          fillColor: Theme.of(context).canvasColor,
           // errorText: errorText,
           border: const OutlineInputBorder(),
           hintText: widget.hint,
