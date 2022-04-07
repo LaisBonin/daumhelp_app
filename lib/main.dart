@@ -1,6 +1,5 @@
 import 'package:daumhelp_app/pages/login_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
-import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/search_bar.dart';
 import 'package:daumhelp_app/widgets/subject_listtile.dart';
 import 'package:daumhelp_app/widgets/profile_card.dart';
@@ -43,7 +42,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(x
       drawer: const Drawer(),
       appBar: AppBar(
         title: Text(widget.title),
@@ -73,20 +72,14 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(
                 height: 40,
               ),
-
-              
               const SizedBox(
                 height: 40,
               ),
-
               CustomTextField(
                 hint: "Email",
                 errorText: "Obrigatório",
                 obscure: false,
                 action: () {},
-              ),
-              const SizedBox(
-                height: 40,
               ),
               CustomTextField(
                 hint: "Senha",

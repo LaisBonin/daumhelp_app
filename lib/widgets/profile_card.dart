@@ -7,16 +7,18 @@ class ProfileCard extends StatelessWidget {
     required this.profileName,
     required this.profileCourse,
     required this.profilePeriod,
+    required this.cardAction,
   }) : super(key: key);
 
   final String profileName;
   final String profileCourse;
   final String profilePeriod;
+  final Function() cardAction;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: cardAction,
       child: Container(
         decoration: const BoxDecoration(
           color: HelpTheme.helpDarkGreyShadow,

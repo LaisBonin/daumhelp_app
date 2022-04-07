@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:daumhelp_app/widgets/theme_data.dart';
 
 class YellowButtonLarge extends StatelessWidget {
   final String title;
@@ -26,8 +25,7 @@ class YellowButtonLarge extends StatelessWidget {
         child: Center(
           child: Text(
             title,
-            style:
-                const TextStyle(fontSize: 20, color: HelpTheme.helpButtonText),
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).shadowColor),
           ),
         ),
       ),
