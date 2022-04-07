@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 showAlertDialog2(BuildContext context) {
   Widget cancelaButton = FloatingActionButton(
     child: const Text("Sair"),
@@ -19,7 +17,7 @@ showAlertDialog2(BuildContext context) {
       continuaButton,
     ],
   );
-  //exibe o diálogo
+  // exibe o diálogo
   showDialog(
     context: context,
     builder: (BuildContext context) {

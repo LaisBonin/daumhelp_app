@@ -1,3 +1,4 @@
+import 'package:daumhelp_app/pages/login_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/search_bar.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: HelpTheme.theme,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const LoginPage(),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -74,10 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 40,
               ),
 
-              // YellowButtonLarge(title: "Sair", action:showAlertDialog2(ContextAction) {}),
-              // const SizedBox(
-              //   height: 40,
-              // ),
+              YellowButtonLarge(title: "Sair", action:showAlertDialog2(context)),
+              const SizedBox(
+                height: 40,
+              ),
               
               CustomTextField(
                 hint: "Email",
@@ -101,3 +103,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+

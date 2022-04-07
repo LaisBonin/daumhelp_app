@@ -29,15 +29,24 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return SizedBox(
       width: 309,
       height: 60,
-      child: TextField(
+      child: TextFormField(
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Informe o email corretamente!';
+          }
+          return null;
+        },
         obscureText: showPassword == false ? widget.obscure : false,
         style: Theme.of(context).textTheme.titleSmall,
         decoration: InputDecoration(
           filled: true,
           fillColor: Theme.of(context).canvasColor,
           // errorText: errorText,
-          border: const OutlineInputBorder(),
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
           hintText: widget.hint,
+          hintStyle: const TextStyle(color: HelpTheme.helpButtonText),
           suffixIcon: widget.obscure == true
               ? GestureDetector(
                   child: Icon(
@@ -55,7 +64,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
               : null,
           focusColor: HelpTheme.helpYellow,
           focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: HelpTheme.helpYellow, width: 2.0),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(color: HelpTheme.helpYellow, width: 3.0),
           ),
         ),
       ),
