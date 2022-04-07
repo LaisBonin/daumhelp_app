@@ -1,5 +1,5 @@
+import 'package:daumhelp_app/pages/profile_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
-import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/search_bar.dart';
 import 'package:daumhelp_app/widgets/subject_listtile.dart';
 import 'package:daumhelp_app/widgets/profile_card.dart';
@@ -38,13 +38,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
         child: Container(
           width: double.infinity,
@@ -56,28 +52,22 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
-       
-            YellowButtonLarge(title: "Continuar", action:(){}),
-
-            SubjectListTile(subjectName: 'Cálculo', subjectIcon: const Icon(Icons.superscript, size: 40,), subjectAction: (){},),
-
-            const SearchBar(),        
-
               YellowButtonLarge(title: "Continuar", action: () {}),
-              const SizedBox(
-                height: 40,
+              SubjectListTile(
+                subjectName: 'Cálculo',
+                subjectIcon: Icon(
+                  Icons.superscript,
+                  size: 40,
+                  color: Theme.of(context).primaryColor,
+                ),
+                subjectAction: () {},
               ),
+              const SearchBar(),
               CustomTextField(
                 hint: "Email",
                 errorText: "Obrigatório",
                 obscure: false,
                 action: () {},
-              ),
-              const SizedBox(
-                height: 40,
               ),
               CustomTextField(
                 hint: "Senha",
@@ -85,18 +75,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 obscure: true,
                 action: () {},
               ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
-              ),
+              ProfileCard(
+                profileName: "Eric",
+                profileCourse: "Engª Mecânica",
+                profilePeriod: "7º Período",
+                cardAction: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProfilePage(),
+                    ),
+                  );
+                },
+              )
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Voltar',
-        child: const Icon(Icons.add),
       ),
     );
   }

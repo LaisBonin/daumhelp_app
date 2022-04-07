@@ -1,9 +1,5 @@
-import 'dart:ffi';
-
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
-// import 'package:daumhelp_app/widgets/theme_data.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextField extends StatefulWidget {
   final String hint;
@@ -29,16 +25,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 309,
       height: 60,
       child: TextField(
         obscureText: showPassword == false ? widget.obscure : false,
-        style: TextStyle(
-          fontSize: 16,
-          fontFamily: GoogleFonts.poppins().fontFamily,
-        ),
+        style: Theme.of(context).textTheme.titleSmall,
         decoration: InputDecoration(
-          // errorText: errorText,
           border: const OutlineInputBorder(),
           hintText: widget.hint,
           suffixIcon: widget.obscure == true

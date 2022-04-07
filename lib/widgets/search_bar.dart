@@ -1,3 +1,4 @@
+import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 
 class SearchBar extends StatelessWidget {
@@ -14,7 +15,7 @@ class SearchBar extends StatelessWidget {
           decoration: InputDecoration(
             focusedBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10),),
-              borderSide: BorderSide(color: Colors.transparent)
+              borderSide: BorderSide(color: HelpTheme.helpYellow)
             ),
             prefixIcon: Icon(Icons.search, color: Theme.of(context).primaryColor,),
             hintText: "Pesquisar...",
