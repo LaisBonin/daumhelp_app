@@ -13,10 +13,10 @@ class HelpTheme {
     textTheme: TextTheme(
       titleLarge: TextStyle(
         fontSize: 40,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.bold,
         color: helpWhiteIce,
         fontFamily: GoogleFonts.poppins().fontFamily,
-        letterSpacing: 2,
+        letterSpacing: 1,
       ),
       titleMedium: TextStyle(
         fontSize: 32,
@@ -31,6 +31,12 @@ class HelpTheme {
         color: helpWhiteIce,
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
+      headlineMedium: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        color: helpWhiteIce,
+        fontFamily: GoogleFonts.poppins().fontFamily,
+      ),
     ),
     brightness: Brightness.dark,
     primaryColor: helpYellow,
@@ -39,6 +45,5 @@ class HelpTheme {
     shadowColor: helpButtonText,
     canvasColor: helpWhiteIce,
     hoverColor: helpDarkGreyShadow,
-
   );
 }
