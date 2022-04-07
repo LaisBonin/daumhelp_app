@@ -11,7 +11,7 @@ showAlertDialog2(BuildContext context) {
   );
   //configura o AlertDialog
   AlertDialog alert = AlertDialog(
-    content: const Text("Voce realmente deseja sair?"),
+    content: Text("Voce realmente deseja sair?", style: Theme.of(context).textTheme.titleMedium,),
     actions: [
       cancelaButton,
       continuaButton,

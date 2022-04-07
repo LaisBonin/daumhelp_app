@@ -1,6 +1,11 @@
+import 'package:daumhelp_app/pages/settings_drawer.dart';
+import 'package:daumhelp_app/widgets/button_large.dart';
+import 'package:daumhelp_app/widgets/dialog_box.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
+import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:daumhelp_app/pages/settings_drawer.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -75,116 +80,71 @@ class _LoginPageState extends State<LoginPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
-                    height: 60,
-                    child: TextFormField(
-                      controller: email,
-                      style: TextStyle(
-                        color: HelpTheme.helpDarkGrey,
-                        fontSize: 16,
-                        fontFamily: GoogleFonts.poppins().fontFamily,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 1,
-                      ),
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Theme.of(context).canvasColor,
-                        // errorText: errorText,
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                  Container(
+                    child: SizedBox(
+                      height: 60,
+                      child: TextFormField(
+                        controller: email,
+                        style: TextStyle(
+                          color: HelpTheme.helpDarkGrey,
+                          fontSize: 16,
+                          fontFamily: GoogleFonts.poppins().fontFamily,
+                          fontWeight: FontWeight.w400,
                         ),
-                        hintText: 'Email',
-                        hintStyle:
-                            const TextStyle(color: HelpTheme.helpButtonText),
-                        focusColor: HelpTheme.helpYellow,
-                        focusedBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(
-                              color: HelpTheme.helpYellow, width: 3.0),
-                        ),
-                        errorBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(
-                              color: HelpTheme.helpErrorText, width: 3.0),
-                        ),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Campo Obrigatório!';
-                        } else if (!value.contains('@')) {
-                          return 'Não é um email válido!';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 14,
-                  ),
-                  SizedBox(
-                    height: 60,
-                    child: TextFormField(
-                      controller: senha,
-                      obscureText: showPassword ? true : false,
-                      style: TextStyle(
-                        color: HelpTheme.helpDarkGrey,
-                        fontSize: 16,
-                        fontFamily: GoogleFonts.poppins().fontFamily,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 1,
-                      ),
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Theme.of(context).canvasColor,
-                        // errorText: errorText,
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        hintText: 'Senha',
-                        hintStyle:
-                            const TextStyle(color: HelpTheme.helpButtonText),
-                        focusColor: HelpTheme.helpYellow,
-                        focusedBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(
-                              color: HelpTheme.helpYellow, width: 3.0),
-                        ),
-                        errorBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(
-                              color: HelpTheme.helpErrorText, width: 3.0),
-                        ),
-                        suffixIcon: GestureDetector(
-                          child: Icon(
-                            showPassword == false
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                            color: HelpTheme.helpYellow,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Theme.of(context).canvasColor,
+                          // errorText: errorText,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
-                          onTap: () {
-                            setState((() {
-                              showPassword = !showPassword;
-                            }));
-                          },
+                          hintText: 'Email',
+                          hintStyle:
+                              const TextStyle(color: HelpTheme.helpButtonText),
+                          focusColor: HelpTheme.helpYellow,
+                          focusedBorder: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                                color: HelpTheme.helpYellow, width: 3.0),
+                          ),
+                          errorBorder: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                                color: HelpTheme.helpErrorText, width: 3.0),
+                          ),
                         ),
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Campo Obrigatório!';
+                          } else if (!value.contains('@')) {
+                            return 'Não é um email válido!';
+                          }
+                          return null;
+                        },
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Informe sua senha!';
-                        } else if (value.length < 12) {
-                          return 'Sua senha deve ter no mínimo 12 caracteres';
-                        }
-                        return null;
-                      },
                     ),
                   ),
                   const SizedBox(
                     height: 14,
                   ),
+                  CustomTextField(
+                      hint: "Email",
+                      action: () {},
+                      errorText: "Campo Obrigatório!",
+                      obscure: true),
+                  const SizedBox(
+                    height: 14,
+                  ),
+                    YellowButtonLarge(
+                  title: "Sair",
+                  action: () {
+                    showAlertDialog2(context);
+                  }),
                   SizedBox(
                     height: 60,
                     child: ElevatedButton(
+                      
                       style: ElevatedButton.styleFrom(
                           primary: Theme.of(context).primaryColor,
                           elevation: 50,
@@ -217,6 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+
                   const SizedBox(
                     height: 44,
                   ),

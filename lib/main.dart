@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const Drawer(),
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -58,29 +59,26 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
-              YellowButtonLarge(title: "Continuar", action: () {}),
-              SubjectListTile(
-                subjectName: 'Cálculo',
-                subjectIcon: const Icon(
-                  Icons.superscript,
-                  size: 40,
-                ),
-                subjectAction: () {},
-              ),
-              const SearchBar(),
-              YellowButtonLarge(title: "Continuar", action: () {}),
+              // YellowButtonLarge(title: "Continuar", action: () {}),
+              // SubjectListTile(
+              //   subjectName: 'Cálculo',
+              //   subjectIcon: const Icon(
+              //     Icons.superscript,
+              //     size: 40,
+              //   ),
+              //   subjectAction: () {},
+              // ),
+              // const SearchBar(),
+              // YellowButtonLarge(title: "Continuar", action: () {}),
               const SizedBox(
                 height: 40,
               ),
 
-              YellowButtonLarge(title: "Sair", action:showAlertDialog2(context)),
+              
               const SizedBox(
                 height: 40,
               ),
-              
+
               CustomTextField(
                 hint: "Email",
                 errorText: "Obrigatório",
@@ -103,4 +101,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
