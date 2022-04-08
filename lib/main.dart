@@ -1,16 +1,8 @@
-import 'package:daumhelp_app/pages/login_page.dart';
-import 'package:daumhelp_app/pages/settings_drawer.dart';
-import 'package:daumhelp_app/pages/profile_page.dart';
 import 'package:daumhelp_app/pages/subject_list_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
-import 'package:daumhelp_app/widgets/search_bar.dart';
-import 'package:daumhelp_app/widgets/subject_listtile.dart';
-import 'package:daumhelp_app/widgets/profile_card.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
-import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); 
@@ -47,10 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const SettingsDrawer(),
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
         child: Container(
           width: double.infinity,
@@ -72,41 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     );
                   }),
-              SubjectListTile(
-                subjectName: 'Cálculo',
-                subjectIcon: Icon(
-                  Icons.superscript,
-                  size: 40,
-                  color: Theme.of(context).primaryColor,
-                ),
-                subjectAction: () {},
-              ),
-              const SearchBar(),
-              CustomTextField(
-                hint: "Email",
-                errorText: "Obrigatório",
-                obscure: false,
-                action: () {},
-              ),
-              CustomTextField(
-                hint: "Senha",
-                errorText: "Obrigatório",
-                obscure: true,
-                action: () {},
-              ),
-              ProfileCard(
-                profileName: "Eric",
-                profileCourse: "Engª Mecânica",
-                profilePeriod: "7º Período",
-                cardAction: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ProfilePage(),
-                    ),
-                  );
-                },
-              )
             ],
           ),
         ),

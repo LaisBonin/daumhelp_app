@@ -6,7 +6,7 @@ class ReturnButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.arrow_back_ios, color: Colors.grey),
+      icon: Icon(Icons.arrow_back_ios, color: Theme.of(context).primaryColor),
       onPressed: () => Navigator.of(context).pop(),
     );
   }
