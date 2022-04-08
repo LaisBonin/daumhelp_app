@@ -1,4 +1,5 @@
 import 'package:daumhelp_app/pages/profile_page.dart';
+import 'package:daumhelp_app/pages/subject_list_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/search_bar.dart';
 import 'package:daumhelp_app/widgets/subject_listtile.dart';
@@ -7,9 +8,10 @@ import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized(); 
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -52,7 +54,16 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              YellowButtonLarge(title: "Continuar", action: () {}),
+              YellowButtonLarge(
+                  title: "Continuar",
+                  action: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SubjectListPage(),
+                      ),
+                    );
+                  }),
               SubjectListTile(
                 subjectName: 'Cálculo',
                 subjectIcon: Icon(
