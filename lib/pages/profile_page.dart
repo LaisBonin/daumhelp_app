@@ -9,10 +9,11 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.bottomRight,
-              end: Alignment.topLeft,
-              colors: [HelpTheme.helpDarkGrey, HelpTheme.helpButtonText])),
+        gradient: LinearGradient(
+            begin: Alignment.bottomRight,
+            end: Alignment.topLeft,
+            colors: [HelpTheme.helpDarkGrey, HelpTheme.helpButtonText]),
+      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
