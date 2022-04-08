@@ -1,23 +1,25 @@
 import 'package:daumhelp_app/pages/settings_drawer.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/dialog_box.dart';
+import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:daumhelp_app/pages/settings_drawer.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignInPage extends StatefulWidget {
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignInPage createState() => _SignInPage();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignInPage extends State<SignInPage> {
   final formKey = GlobalKey<FormState>();
   final email = TextEditingController();
   final senha = TextEditingController();
+  late ScrollController _scrollController;
 //Valores para preenche formulário...
 
   bool isLogin = true;
@@ -26,8 +28,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
+    _scrollController = ScrollController();
     super.initState();
-    setFormAction(true);
+    // setFormAction(true);
   }
 
   setFormAction(bool acao) {
@@ -53,32 +56,39 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.bottomRight,
-                end: Alignment.topLeft,
-                colors: [HelpTheme.helpDarkGrey, HelpTheme.helpButtonText])),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 100),
+    return Container(
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+              colors: [HelpTheme.helpDarkGrey, HelpTheme.helpButtonText])),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: SingleChildScrollView(
+            controller: _scrollController,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    "Bem-vindo!",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: HelpTheme.helpWhiteIce,
-                      fontSize: 40,
-                      fontFamily: GoogleFonts.poppins().fontFamily,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Row(
+                    children: [
+                      const ReturnButton(),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        "Inscreva-se",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: HelpTheme.helpWhiteIce,
+                          fontSize: 40,
+                          fontFamily: GoogleFonts.poppins().fontFamily,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(
@@ -90,7 +100,6 @@ class _LoginPageState extends State<LoginPage> {
                         Radius.circular(10),
                       ),
                     ),
-                    
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
@@ -113,12 +122,16 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(
                             height: 14,
                           ),
-                          YellowButtonLarge(title: "Continuar", action: () {}),
+                          CustomTextField(
+                              hint: "Confirme a senha",
+                              action: () {},
+                              errorText: "Campo Obrigatório!",
+                              obscure: true),
                           const SizedBox(
-                            height: 50,
+                            height: 22,
                           ),
                           Text(
-                            "Ainda não possui uma conta?",
+                            "Ao clicar em 'Concordar e Continuar'",
                             style: TextStyle(
                               color: HelpTheme.helpWhiteIce,
                               fontSize: 16,
@@ -126,25 +139,23 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                           InkWell(
-                            onTap: () => setFormAction(!isLogin),
-                            child: Text(
-                              "Increva-se",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(color: Theme.of(context).primaryColor),
-                            ),
-                          ),
                           InkWell(
                             onTap: () => setFormAction(!isLogin),
                             child: Text(
-                              "Esqueceu sua senha?",
+                              "voce concorda com  os Termos de Servico e Politica de Privacidade ",
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall
-                                  ?.copyWith(color: Theme.of(context).primaryColor),
+                                  ?.copyWith(
+                                      color: Theme.of(context).primaryColor),
                             ),
+                          ),
+                          const SizedBox(
+                            height: 55,
+                          ),
+                          YellowButtonLarge(title: "Continuar", action: () {}),
+                          const SizedBox(
+                            height: 20,
                           ),
                         ],
                       ),
@@ -155,6 +166,9 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
+
+        // ),
+        // ),
       ),
     );
   }

@@ -11,6 +11,7 @@ import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:daumhelp_app/pages/signin_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); 
@@ -27,9 +28,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: HelpTheme.theme,
-      // 
+      home: const SignInPage()
       // home: const LoginPage(),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
