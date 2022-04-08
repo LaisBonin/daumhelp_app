@@ -1,5 +1,6 @@
 import 'package:daumhelp_app/pages/login_page.dart';
 import 'package:daumhelp_app/pages/settings_drawer.dart';
+import 'package:daumhelp_app/pages/profile_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/search_bar.dart';
 import 'package:daumhelp_app/widgets/subject_listtile.dart';

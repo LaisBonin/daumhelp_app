@@ -34,14 +34,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
             //   }
             //   return null;
             // },
-            controller: text,
+            // controller: text,
             obscureText: showPassword == false ? widget.obscure : false,
             style: Theme.of(context)
                 .textTheme
                 .titleSmall
                 ?.copyWith(color: Theme.of(context).backgroundColor),
             decoration: InputDecoration(
-              errorText: validate ? 'Voce nao preencheu este campo' : null,
+              // errorText: validate ? 'Voce nao preencheu este campo' : null,
               filled: true,
               fillColor: Theme.of(context).canvasColor,
               // errorText: errorText,
