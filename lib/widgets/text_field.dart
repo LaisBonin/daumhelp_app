@@ -25,33 +25,64 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60,
-      child: TextField(
-        obscureText: showPassword == false ? widget.obscure : false,
-        style: Theme.of(context).textTheme.titleSmall,
-        decoration: InputDecoration(
-          border: const OutlineInputBorder(),
-          hintText: widget.hint,
-          suffixIcon: widget.obscure == true
-              ? GestureDetector(
-                  child: Icon(
-                    showPassword == false
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                    color: HelpTheme.helpYellow,
-                  ),
-                  onTap: () {
-                    setState((() {
-                      showPassword = !showPassword;
-                    }));
-                  },
-                )
-              : null,
-          focusColor: HelpTheme.helpYellow,
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: HelpTheme.helpYellow, width: 2.0),
+      child: Column(
+        children: [
+          TextField(
+            // validator: (value) {
+            //   if (value!.isEmpty) {
+            //     return 'Informe o email corretamente!';
+            //   }
+            //   return null;
+            // },
+            controller: text,
+            obscureText: showPassword == false ? widget.obscure : false,
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall
+                ?.copyWith(color: Theme.of(context).backgroundColor),
+            decoration: InputDecoration(
+              errorText: validate ? 'Voce nao preencheu este campo' : null,
+              filled: true,
+              fillColor: Theme.of(context).canvasColor,
+              // errorText: errorText,
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              hintText: widget.hint,
+              hintStyle: const TextStyle(color: HelpTheme.helpDarkGrey),
+              suffixIcon: widget.obscure == true
+                  ? GestureDetector(
+                      child: Icon(
+                        showPassword == false
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: HelpTheme.helpYellow,
+                      ),
+                      onTap: () {
+                        setState((() {
+                          showPassword = !showPassword;
+                        }));
+                      },
+                    )
+                  : null,
+              focusColor: HelpTheme.helpYellow,
+              focusedBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(color: HelpTheme.helpYellow, width: 3.0),
+              ),
+            ),
           ),
-        ),
+          
+          // ElevatedButton(
+          //   onPressed: () {
+          //     setState(() {
+          //       text.text.isEmpty ? validate = true : validate = false;
+          //     });
+          //   },
+          //   child: const Text('Submit'),
+          // ),
+          
+        ],
       ),
     );
   }

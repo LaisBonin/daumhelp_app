@@ -1,4 +1,5 @@
-import 'package:daumhelp_app/pages/profile_page.dart';
+import 'package:daumhelp_app/pages/login_page.dart';
+import 'package:daumhelp_app/pages/settings_drawer.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/search_bar.dart';
 import 'package:daumhelp_app/widgets/subject_listtile.dart';
@@ -23,7 +24,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: HelpTheme.theme,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // 
+      home: const LoginPage(),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -41,6 +44,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const SettingsDrawer(),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
       body: Center(
         child: Container(
           width: double.infinity,
