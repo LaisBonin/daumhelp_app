@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SubjectListTile extends StatelessWidget {
   final String subjectName;
   final Icon subjectIcon;
-  final Function subjectAction;
+  final Function() subjectAction;
 
   const SubjectListTile(
       {Key? key,
@@ -25,7 +25,7 @@ class SubjectListTile extends StatelessWidget {
           ),
           child: ListTile(
             contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15),
-            onTap: subjectAction(),
+            onTap: subjectAction,
             title: Text(
               subjectName,
               style: Theme.of(context).textTheme.titleMedium,

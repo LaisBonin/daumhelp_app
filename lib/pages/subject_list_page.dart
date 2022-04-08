@@ -1,8 +1,9 @@
+import 'package:daumhelp_app/pages/settings_drawer.dart';
+import 'package:daumhelp_app/pages/subject_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/subject_listtile.dart';
 import '../widgets/theme_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SubjectListPage extends StatefulWidget {
@@ -13,8 +14,7 @@ class SubjectListPage extends StatefulWidget {
 }
 
 class _SubjectListPageState extends State<SubjectListPage> {
-  List subjectList = [];
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Future<QuerySnapshot<Map<String, dynamic>>> getSubjectList() async {
     var collection = FirebaseFirestore.instance.collection("subjects");
     var subjects = await collection.get();
@@ -31,13 +31,18 @@ class _SubjectListPageState extends State<SubjectListPage> {
             colors: [HelpTheme.helpDarkGrey, HelpTheme.helpButtonText]),
       ),
       child: Scaffold(
+        key: _scaffoldKey,
+        endDrawer: const SettingsDrawer(),
         backgroundColor: Colors.transparent,
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: 48,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -47,9 +52,7 @@ class _SubjectListPageState extends State<SubjectListPage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      setState(() {
-                        getSubjectList();
-                      });
+                      _scaffoldKey.currentState!.openEndDrawer();
                     },
                     icon: const Icon(
                       Icons.settings,
@@ -77,9 +80,22 @@ class _SubjectListPageState extends State<SubjectListPage> {
                       itemBuilder: ((context, index) {
                         return SubjectListTile(
                             subjectName: subjects[index]["name"],
-                            subjectIcon: Icon(handleIconFromFirebase(
-                                subjects[index]["icon"]), color: Theme.of(context).primaryColor,),
-                            subjectAction: () {});
+                            subjectIcon: Icon(
+                              handleIconFromFirebase(
+                                subjects[index]["icon"],
+                              ),
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            subjectAction: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SubjectPage(
+                                    selectedSubjectName: subjects[index]["name"],
+                                  ),
+                                ),
+                              );
+                            });
                       }),
                     );
                   }
@@ -104,8 +120,8 @@ class _SubjectListPageState extends State<SubjectListPage> {
         return FontAwesomeIcons.flask;
       case "atom":
         return FontAwesomeIcons.atom;
-      case "computer":
-        return FontAwesomeIcons.computer;
+      case "desktop":
+        return FontAwesomeIcons.desktop;
       default:
         return FontAwesomeIcons.question;
     }

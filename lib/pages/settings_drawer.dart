@@ -1,7 +1,6 @@
 import 'package:daumhelp_app/widgets/button_drawer.dart';
 import 'package:daumhelp_app/widgets/dialog_box.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
-import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 
 class SettingsDrawer extends StatelessWidget {
@@ -14,7 +13,7 @@ class SettingsDrawer extends StatelessWidget {
       child: Container(
         decoration:
             BoxDecoration(
-              border: Border(right: BorderSide(width: 3, color: Theme.of(context).primaryColor))
+              border: Border(left: BorderSide(width: 3, color: Theme.of(context).primaryColor))
             ),
         child: ListView(
           children: [
