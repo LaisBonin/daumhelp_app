@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: HelpTheme.theme,
       // 
-      home: const LoginPage(),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const LoginPage(),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
