@@ -8,14 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:daumhelp_app/pages/settings_drawer.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({Key? key}) : super(key: key);
 
   @override
-  _SignInPage createState() => _SignInPage();
+  _ForgotPassword createState() => _ForgotPassword();
 }
 
-class _SignInPage extends State<SignInPage> {
+class _ForgotPassword extends State<ForgotPassword> {
   final formKey = GlobalKey<FormState>();
   final email = TextEditingController();
   final senha = TextEditingController();
@@ -79,14 +79,12 @@ class _SignInPage extends State<SignInPage> {
                         width: 8,
                       ),
                       Text(
-                        "Inscreva-se",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: HelpTheme.helpWhiteIce,
-                          fontSize: 40,
-                          fontFamily: GoogleFonts.poppins().fontFamily,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        "Esqueceu\n" "sua senha?",
+                        textAlign: TextAlign.justify,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge
+                            ?.copyWith(color: Theme.of(context).canvasColor),
                       ),
                     ],
                   ),
@@ -106,6 +104,37 @@ class _SignInPage extends State<SignInPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  text:
+                                      "Por favor insira um endereço de email,\n"
+                                      "que enviaremos um",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall
+                                      ?.copyWith(
+                                          color: Theme.of(context).canvasColor),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text:
+                                          " link para redefinir\n" "sua senha",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall
+                                          ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 22),
                           CustomTextField(
                               hint: "Email",
                               action: () {},
@@ -114,46 +143,9 @@ class _SignInPage extends State<SignInPage> {
                           const SizedBox(
                             height: 14,
                           ),
-                          CustomTextField(
-                              hint: "Senha",
-                              action: () {},
-                              errorText: "Campo Obrigatório!",
-                              obscure: true),
-                          const SizedBox(
-                            height: 14,
-                          ),
-                          CustomTextField(
-                              hint: "Confirme a senha",
-                              action: () {},
-                              errorText: "Campo Obrigatório!",
-                              obscure: true),
-                          const SizedBox(
-                            height: 22,
-                          ),
-                          Text(
-                            "Ao clicar em 'Concordar e Continuar'",
-                            style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(
-                                      color: Theme.of(context).canvasColor)
-                            ),
-                          
-                          InkWell(
-                            onTap: () => setFormAction(!isLogin),
-                            child: Text(
-                              "você concorda com os Termos de Serviço e Politica de Privacidade ",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(
-                                      color: Theme.of(context).primaryColor),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 55,
-                          ),
-                          YellowButtonLarge(title: "Concordar e Continuar", action: () {}),
+                          YellowButtonLarge(
+                              title: "Enviar email de recuperação",
+                              action: () {}),
                           const SizedBox(
                             height: 20,
                           ),
