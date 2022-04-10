@@ -79,7 +79,7 @@ class _ForgotPassword extends State<ForgotPassword> {
                         width: 8,
                       ),
                       Text(
-                        "Esqueceu sua senha?",
+                        "Esqueceu\n" "sua senha?",
                         textAlign: TextAlign.justify,
                         style: Theme.of(context)
                             .textTheme
@@ -108,26 +108,31 @@ class _ForgotPassword extends State<ForgotPassword> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                  "Por favor insira um endereco de email, que enviaremos um",
+                              RichText(
+                                text: TextSpan(
+                                  text:
+                                      "Por favor insira um endereço de email,\n"
+                                      "que enviaremos um",
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleSmall
                                       ?.copyWith(
-                                          color:
-                                              Theme.of(context).canvasColor)),
+                                          color: Theme.of(context).canvasColor),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text:
+                                          " link para redefinir\n" "sua senha",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall
+                                          ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                    )
+                                  ],
+                                ),
+                              )
                             ],
-                          ),
-                          InkWell(
-                            onTap: () => setFormAction(!isLogin),
-                            child: Text(
-                              "link para redefinir sua senha",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(
-                                      color: Theme.of(context).primaryColor),
-                            ),
                           ),
                           const SizedBox(height: 22),
                           CustomTextField(
@@ -138,7 +143,9 @@ class _ForgotPassword extends State<ForgotPassword> {
                           const SizedBox(
                             height: 14,
                           ),
-                          YellowButtonLarge(title: "Continuar", action: () {}),
+                          YellowButtonLarge(
+                              title: "Enviar email de recuperação",
+                              action: () {}),
                           const SizedBox(
                             height: 20,
                           ),

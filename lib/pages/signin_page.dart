@@ -142,7 +142,7 @@ class _SignInPage extends State<SignInPage> {
                           InkWell(
                             onTap: () => setFormAction(!isLogin),
                             child: Text(
-                              "voce concorda com  os Termos de Servico e Politica de Privacidade ",
+                              "você concorda com os Termos de Serviço e Politica de Privacidade ",
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall
@@ -153,7 +153,7 @@ class _SignInPage extends State<SignInPage> {
                           const SizedBox(
                             height: 55,
                           ),
-                          YellowButtonLarge(title: "Continuar", action: () {}),
+                          YellowButtonLarge(title: "Concordar e Continuar", action: () {}),
                           const SizedBox(
                             height: 20,
                           ),

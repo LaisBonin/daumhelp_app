@@ -1,4 +1,5 @@
-
+import 'package:daumhelp_app/pages/forgotpass_page.dart';
+import 'package:daumhelp_app/pages/signin_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/text_field.dart';
@@ -60,97 +61,101 @@ class _LoginPageState extends State<LoginPage> {
                 end: Alignment.topLeft,
                 colors: [HelpTheme.helpDarkGrey, HelpTheme.helpButtonText])),
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 100),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    "Bem-vindo!",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: HelpTheme.helpWhiteIce,
-                      fontSize: 40,
-                      fontFamily: GoogleFonts.poppins().fontFamily,
-                      fontWeight: FontWeight.bold,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  "Bem-vindo!",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: HelpTheme.helpWhiteIce,
+                    fontSize: 40,
+                    fontFamily: GoogleFonts.poppins().fontFamily,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: HelpTheme.helpDarkGreyShadow,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomTextField(
+                            hint: "Email",
+                            action: () {},
+                            errorText: "Campo Obrigatório!",
+                            obscure: false),
+                        const SizedBox(
+                          height: 14,
+                        ),
+                        CustomTextField(
+                            hint: "Senha",
+                            action: () {},
+                            errorText: "Campo Obrigatório!",
+                            obscure: true),
+                        const SizedBox(
+                          height: 14,
+                        ),
+                        YellowButtonLarge(title: "Continuar", action: () {}),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        Text(
+                          "Ainda não possui uma conta?",
+                          style: TextStyle(
+                            color: HelpTheme.helpWhiteIce,
+                            fontSize: 16,
+                            fontFamily: GoogleFonts.poppins().fontFamily,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SignInPage())),
+                          child: Text(
+                            "Increva-se",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                    color: Theme.of(context).primaryColor),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () =>  Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ForgotPassword())),
+                          child: Text(
+                            "Esqueceu sua senha?",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                    color: Theme.of(context).primaryColor),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: HelpTheme.helpDarkGreyShadow,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomTextField(
-                              hint: "Email",
-                              action: () {},
-                              errorText: "Campo Obrigatório!",
-                              obscure: false),
-                          const SizedBox(
-                            height: 14,
-                          ),
-                          CustomTextField(
-                              hint: "Senha",
-                              action: () {},
-                              errorText: "Campo Obrigatório!",
-                              obscure: true),
-                          const SizedBox(
-                            height: 14,
-                          ),
-                          YellowButtonLarge(title: "Continuar", action: () {}),
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          Text(
-                            "Ainda não possui uma conta?",
-                            style: TextStyle(
-                              color: HelpTheme.helpWhiteIce,
-                              fontSize: 16,
-                              fontFamily: GoogleFonts.poppins().fontFamily,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                           InkWell(
-                            onTap: () => setFormAction(!isLogin),
-                            child: Text(
-                              "Increva-se",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(color: Theme.of(context).primaryColor),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () => setFormAction(!isLogin),
-                            child: Text(
-                              "Esqueceu sua senha?",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(color: Theme.of(context).primaryColor),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
