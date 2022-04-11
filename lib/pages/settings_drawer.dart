@@ -1,5 +1,5 @@
 import 'package:daumhelp_app/widgets/button_drawer.dart';
-import 'package:daumhelp_app/widgets/dialog_box.dart';
+
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:flutter/material.dart';
 
@@ -70,9 +70,7 @@ class SettingsDrawer extends StatelessWidget {
                       .textTheme
                       .titleSmall
                       ?.copyWith(color: Theme.of(context).errorColor),
-                  action: () {
-                    exitDialog(context);
-                  }),
+                  action: () {}),
             )
           ],
         ),
