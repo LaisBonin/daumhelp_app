@@ -75,8 +75,8 @@ class _UpDatePage extends State<UpDatePage> {
                   child: Row(
                     children: [
                       const ReturnButton(),
-                      const SizedBox(
-                        width: 8,
+                     const SizedBox(
+                         width: 8,
                       ),
                       Text(
                         "Sobre você",
@@ -150,15 +150,27 @@ class _UpDatePage extends State<UpDatePage> {
                                     errorText: "Campo Obrigatório!",
                                     obscure: false),
                               ),
+                              const SizedBox(
+                            width: 14,
+                          ),
                               Expanded(
                                   flex: 1,
                                   child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    color: Theme.of(context).primaryColor,
+                                    decoration: const BoxDecoration(
+                                      color: HelpTheme.helpYellow,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                    width: 60,
+                                    height: 60,
+                                    // color: Theme.of(context).primaryColor,
                                     child: IconButton(
                                         onPressed: () {},
-                                        icon: const Icon(Icons.add, size: 32,)),
+                                        icon: const Icon(
+                                          Icons.add, color: HelpTheme.helpButtonText,
+                                          size: 32,
+                                        )),
                                   ))
                             ],
                           ),
