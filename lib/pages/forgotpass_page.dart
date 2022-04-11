@@ -1,6 +1,5 @@
 import 'package:daumhelp_app/pages/settings_drawer.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
-import 'package:daumhelp_app/widgets/dialog_box.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/text_field.dart';

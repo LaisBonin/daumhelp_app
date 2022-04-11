@@ -1,20 +1,19 @@
-import 'package:daumhelp_app/pages/settings_drawer.dart';
+import 'package:daumhelp_app/pages/newpass_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:daumhelp_app/pages/settings_drawer.dart';
 
-class NewPassword extends StatefulWidget {
-  const NewPassword({Key? key}) : super(key: key);
+class FullRegistrationPage extends StatefulWidget {
+  const FullRegistrationPage({Key? key}) : super(key: key);
 
   @override
-  _NewPassword createState() => _NewPassword();
+  _FullRegistrationPage createState() => _FullRegistrationPage();
 }
 
-class _NewPassword extends State<NewPassword> {
+class _FullRegistrationPage extends State<FullRegistrationPage> {
   final formKey = GlobalKey<FormState>();
   final email = TextEditingController();
   final senha = TextEditingController();
@@ -78,12 +77,14 @@ class _NewPassword extends State<NewPassword> {
                         width: 8,
                       ),
                       Text(
-                        "Nova senha",
-                        textAlign: TextAlign.justify,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge
-                            ?.copyWith(color: Theme.of(context).canvasColor),
+                        "Meu Perfil",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: HelpTheme.helpWhiteIce,
+                          fontSize: 40,
+                          fontFamily: GoogleFonts.poppins().fontFamily,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -104,28 +105,85 @@ class _NewPassword extends State<NewPassword> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomTextField(
-                              hint: "Senha atual",
-                              action: () {},
-                              errorText: "Campo Obrigatório!",
-                              obscure: false),
-                          const SizedBox(height: 14),
-                          CustomTextField(
-                              hint: "Nova senha",
-                              action: () {},
-                              errorText: "Campo Obrigatório!",
-                              obscure: false),
-                          const SizedBox(height: 14),
-                          CustomTextField(
-                              hint: "Confirme a senha",
+                              hint: "Nome completo",
                               action: () {},
                               errorText: "Campo Obrigatório!",
                               obscure: false),
                           const SizedBox(
-                            height: 50,
+                            height: 14,
                           ),
-                          YellowButtonLarge(
-                              title: "Atualizar",
-                              action: () {}),
+                          CustomTextField(
+                              hint: "Curso",
+                              action: () {},
+                              errorText: "Campo Obrigatório!",
+                              obscure: false),
+                          const SizedBox(
+                            height: 14,
+                          ),
+                          CustomTextField(
+                              hint: "Periodo",
+                              action: () {},
+                              errorText: "Campo Obrigatório!",
+                              obscure: false),
+                          const SizedBox(
+                            height: 14,
+                          ),
+                          CustomTextField(
+                              hint: "Email",
+                              action: () {},
+                              errorText: "Campo Obrigatório!",
+                              obscure: false),
+                          const SizedBox(
+                            height: 14,
+                          ),
+                          CustomTextField(
+                              hint: "Numero do WhatsApp",
+                              action: () {},
+                              errorText: "Campo Obrigatório!",
+                              obscure: false),
+                          const SizedBox(
+                            height: 14,
+                          ),
+                          InkWell(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const NewPassword())),
+                            child: Text(
+                              "Alterar senha",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(
+                                      color: Theme.of(context).canvasColor, decoration: TextDecoration.underline),
+                                    
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 14,),
+                          CustomTextField(
+                              hint: "Habilidades",
+                              action: () {},
+                              errorText: "Campo Obrigatório!",
+                              obscure: false),
+                          // Text("Ao clicar em 'Concordar e Continuar'",
+                          //     style: Theme.of(context)
+                          //         .textTheme
+                          //         .titleSmall
+                          //         ?.copyWith(
+                          //             color: Theme.of(context).canvasColor)),
+                          // Text(
+                          //   "você concorda com os Termos de Serviço e Politica de Privacidade ",
+                          //   style: Theme.of(context)
+                          //       .textTheme
+                          //       .titleSmall
+                          //       ?.copyWith(
+                          //           color: Theme.of(context).primaryColor),
+                          // ),
+                          const SizedBox(
+                            height: 24,
+                          ),
+                          YellowButtonLarge(title: "Atualizar", action: () {}),
                           const SizedBox(
                             height: 15,
                           ),
