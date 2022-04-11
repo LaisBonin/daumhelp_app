@@ -65,7 +65,9 @@ class _SubjectListPageState extends State<SubjectListPage> {
                 future: getSubjectList(),
                 builder: ((context, snapshot) {
                   if (!snapshot.hasData && !snapshot.hasError) {
-                    return const CircularProgressIndicator();
+                    return Center(
+                        child: CircularProgressIndicator(
+                            color: Theme.of(context).primaryColor));
                   }
                   if (snapshot.hasError) {
                     return Container(
@@ -91,7 +93,8 @@ class _SubjectListPageState extends State<SubjectListPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => SubjectPage(
-                                    selectedSubjectName: subjects[index]["name"],
+                                    selectedSubjectName: subjects[index]
+                                        ["name"],
                                   ),
                                 ),
                               );

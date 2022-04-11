@@ -17,48 +17,55 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: cardAction,
-      child: Container(
-        decoration: const BoxDecoration(
-          color: HelpTheme.helpDarkGreyShadow,
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
+    return Column(
+      children: [
+        InkWell(
+          onTap: cardAction,
+          child: Container(
+            decoration: const BoxDecoration(
+              color: HelpTheme.helpDarkGreyShadow,
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    flex: 2,
+                    child: Icon(
+                      Icons.account_circle_rounded,
+                      size: 80,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: _VideoDescription(
+                      profileName: profileName,
+                      profileCourse: profileCourse,
+                      profilePeriod: profilePeriod,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 16,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                flex: 2,
-                child: Icon(
-                  Icons.account_circle_rounded,
-                  size: 80,
-                  color: Theme.of(context).canvasColor,
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: _VideoDescription(
-                  profileName: profileName,
-                  profileCourse: profileCourse,
-                  profilePeriod: profilePeriod,
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: 16,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
     );
   }
 }

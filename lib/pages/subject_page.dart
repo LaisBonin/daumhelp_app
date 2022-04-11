@@ -1,3 +1,4 @@
+import 'package:daumhelp_app/pages/profile_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/profile_card.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
@@ -8,14 +9,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SubjectPage extends StatefulWidget {
   final String selectedSubjectName;
-  const SubjectPage({Key? key, required this.selectedSubjectName}) : super(key: key);
+  const SubjectPage({Key? key, required this.selectedSubjectName})
+      : super(key: key);
 
   @override
   State<SubjectPage> createState() => _SubjectPageState();
 }
 
 class _SubjectPageState extends State<SubjectPage> {
-
   Future<QuerySnapshot<Map<String, dynamic>>> getUsersList() async {
     var collection = FirebaseFirestore.instance.collection("users");
     var users = await collection.get();
@@ -69,7 +70,7 @@ class _SubjectPageState extends State<SubjectPage> {
                 future: getUsersList(),
                 builder: ((context, snapshot) {
                   if (!snapshot.hasData && !snapshot.hasError) {
-                    return const CircularProgressIndicator();
+                    return Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor));
                   }
                   if (snapshot.hasError) {
                     return Container(
@@ -86,7 +87,21 @@ class _SubjectPageState extends State<SubjectPage> {
                             profileName: users[index]["name"],
                             profileCourse: users[index]["curso"],
                             profilePeriod: users[index]["period"],
-                            cardAction: () {});
+                            cardAction: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProfilePage(
+                                    profileCourse: users[index]["curso"],
+                                    profileLastName: users[index]["lastname"],
+                                    profileName: users[index]["name"],
+                                    profilePeriod: users[index]["period"],
+                                    profileSkills: users[index]["skills"],
+                                    profileContact: users[index]["contact"],
+                                  ),
+                                ),
+                              );
+                            });
                       }),
                     );
                   }
