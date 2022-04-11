@@ -1,5 +1,6 @@
 import 'package:daumhelp_app/pages/forgotpass_page.dart';
 import 'package:daumhelp_app/pages/login_page.dart';
+import 'package:daumhelp_app/pages/newpass_page.dart';
 import 'package:daumhelp_app/pages/subject_list_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
@@ -8,8 +9,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daumhelp_app/pages/signin_page.dart';
 
+
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); 
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -23,10 +25,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: HelpTheme.theme,
-      // home: const SignInPage()
-      home: const LoginPage(),
+      home: const NewPassword(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      // home: const ForgotPassword()
     );
   }
 }
