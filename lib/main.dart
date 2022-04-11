@@ -2,7 +2,9 @@ import 'package:daumhelp_app/pages/forgotpass_page.dart';
 import 'package:daumhelp_app/pages/fullregistration_page.dart';
 import 'package:daumhelp_app/pages/login_page.dart';
 import 'package:daumhelp_app/pages/newpass_page.dart';
+import 'package:daumhelp_app/pages/settings_drawer.dart';
 import 'package:daumhelp_app/pages/subject_list_page.dart';
+import 'package:daumhelp_app/pages/updateprofile_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: HelpTheme.theme,
-      home: const FullRegistrationPage(),
+      home: const UpDatePage(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
