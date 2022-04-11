@@ -3,7 +3,22 @@ import 'package:flutter/material.dart';
 import '../widgets/theme_data.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  final String profileName;
+  final String profileCourse;
+  final String profilePeriod;
+  final String profileLastName;
+  final String profileContact;
+  final List<dynamic> profileSkills;
+
+  const ProfilePage(
+      {Key? key,
+      required this.profileName,
+      required this.profileCourse,
+      required this.profilePeriod,
+      required this.profileLastName,
+      required this.profileSkills,
+      required this.profileContact})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +47,13 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               FullProfileCard(
-                profileName: "Eric",
-                profileCourse: "Engª Mecânica",
-                profilePeriod: "7º Período",
+                profileName: profileName,
+                profileCourse: profileCourse,
+                profilePeriod: profilePeriod,
                 cardAction: () {},
-                profileLastName: "Francischett",
+                profileLastName: profileLastName,
+                profileSkills: profileSkills,
+                profileContact: profileContact,
               )
             ],
           ),

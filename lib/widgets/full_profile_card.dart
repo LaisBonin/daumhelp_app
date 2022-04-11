@@ -1,10 +1,18 @@
 import 'package:daumhelp_app/widgets/button_large.dart';
-import 'package:daumhelp_app/widgets/search_bar.dart';
+import 'package:daumhelp_app/widgets/contact_dialog.dart';
 import 'package:daumhelp_app/widgets/skill_dot.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 
 class FullProfileCard extends StatelessWidget {
+  final String profileName;
+  final String profileLastName;
+  final String profileCourse;
+  final String profilePeriod;
+  final String profileContact;
+  final List<dynamic> profileSkills;
+  final Function() cardAction;
+
   const FullProfileCard({
     Key? key,
     required this.profileName,
@@ -12,13 +20,9 @@ class FullProfileCard extends StatelessWidget {
     required this.profileCourse,
     required this.profilePeriod,
     required this.cardAction,
+    required this.profileSkills,
+    required this.profileContact,
   }) : super(key: key);
-
-  final String profileName;
-  final String profileLastName;
-  final String profileCourse;
-  final String profilePeriod;
-  final Function() cardAction;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +48,7 @@ class FullProfileCard extends StatelessWidget {
                     child: Icon(
                       Icons.account_circle_rounded,
                       size: 80,
-                      color: Theme.of(context).canvasColor,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   Expanded(
@@ -68,19 +72,21 @@ class FullProfileCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const SearchBar(),
+              ListView.builder(
+                  padding: const EdgeInsets.all(0),
+                  shrinkWrap: true,
+                  itemCount: profileSkills.length,
+                  itemBuilder: ((context, index) {
+                    return SkillDot(skillName: profileSkills[index]);
+                  })),
               const SizedBox(
-                height: 10,
+                height: 24,
               ),
-              const SkillDot(skillName: "Cálculo Vetorial"),
-              const SkillDot(skillName: "Elétrica e Eletromagnetismo"),
-              const SkillDot(skillName: "Integral Dupla"),
-              const SkillDot(skillName: "Solidworks"),
-              const SkillDot(skillName: "Lógica de Programação"),
-              const SizedBox(
-                height: 32,
-              ),
-              YellowButtonLarge(title: "Contatar", action: () {}),
+              YellowButtonLarge(
+                  title: "Contatar",
+                  action: () {
+                    contactDialog(context, () {}, profileContact);
+                  }),
             ],
           ),
         ),
@@ -125,7 +131,7 @@ class _VideoDescription extends StatelessWidget {
           ),
           const Padding(padding: EdgeInsets.symmetric(vertical: 1.0)),
           Text(
-            profilePeriod,
+            profilePeriod + " Período",
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
