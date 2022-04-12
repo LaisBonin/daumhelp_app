@@ -1,4 +1,3 @@
-
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
@@ -6,7 +5,7 @@ import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 class NewPasswordStl extends StatelessWidget {
-  const NewPasswordStl({ Key? key }) : super(key: key);
+  const NewPasswordStl({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,6 @@ class NewPasswordStl extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: Center(
           child: SingleChildScrollView(
-            
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -78,9 +76,7 @@ class NewPasswordStl extends StatelessWidget {
                           const SizedBox(
                             height: 50,
                           ),
-                          YellowButtonLarge(
-                              title: "Atualizar",
-                              action: () {}),
+                          YellowButtonLarge(title: "Atualizar", action: () {}),
                           const SizedBox(
                             height: 15,
                           ),
@@ -97,8 +93,6 @@ class NewPasswordStl extends StatelessWidget {
         // ),
         // ),
       ),
-    
-      
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FullRegistrationPageStl extends StatelessWidget {
-  const FullRegistrationPageStl({ Key? key }) : super(key: key);
+  const FullRegistrationPageStl({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,19 +104,21 @@ class FullRegistrationPageStl extends StatelessWidget {
                             onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const NewPasswordStl())),
+                                    builder: (context) =>
+                                        const NewPasswordStl())),
                             child: Text(
                               "Alterar senha",
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall
                                   ?.copyWith(
-                                      color: Theme.of(context).canvasColor, decoration: TextDecoration.underline),
-                                    
+                                      color: Theme.of(context).canvasColor,
+                                      decoration: TextDecoration.underline),
                             ),
                           ),
                           const SizedBox(
-                            height: 14,),
+                            height: 14,
+                          ),
                           CustomTextField(
                               hint: "Habilidades",
                               action: () {},

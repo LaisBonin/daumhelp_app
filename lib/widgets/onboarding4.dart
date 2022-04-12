@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-
 class Card4 extends StatelessWidget {
-  const Card4({ Key? key }) : super(key: key);
+  const Card4({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +12,7 @@ class Card4 extends StatelessWidget {
           flex: 0,
           child: Row(
             children: [
-              Text("Vocês no\n""comando!",
+              Text("Vocês no\n" "comando!",
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium

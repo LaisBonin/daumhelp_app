@@ -1,11 +1,11 @@
-import 'package:daumhelp_app/pages/onboarding_page.dart';
+import 'package:daumhelp_app/pages/login_page_stl.dart';
 import 'package:daumhelp_app/widgets/button_dialogbox.dart';
 import 'package:flutter/material.dart';
 
 exitDialog(BuildContext context) {
   // exibe o diálogo
   showDialog(
-          context: context,
+      context: context,
       builder: (BuildContext context) {
         return Dialog(
           shape: RoundedRectangleBorder(
@@ -42,7 +42,8 @@ exitDialog(BuildContext context) {
                             action: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const OnBoarding())))
+                                    builder: (context) =>
+                                        const LoginPageStl())))
                       ],
                     ),
                     const SizedBox(

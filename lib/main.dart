@@ -1,11 +1,9 @@
-import 'package:daumhelp_app/pages/onboarding_page.dart';
-import 'package:daumhelp_app/pages/settings_drawer.dart';
+import 'package:daumhelp_app/pages/login_page_stl.dart';
 import 'package:daumhelp_app/pages/subject_list_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,8 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: HelpTheme.theme,
-      home: const OnBoarding(),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const LoginPageStl(),
     );
   }
 }

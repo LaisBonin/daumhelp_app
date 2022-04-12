@@ -19,7 +19,7 @@ class _OnBoardingState extends State<OnBoarding> {
   late ScrollController _scrollController;
 
   int _currentIndex = 0;
-  List cardList = [const Card1(), const Card2(),const Card3(),const Card4()];
+  List cardList = [const Card1(), const Card2(), const Card3(), const Card4()];
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
     for (var i = 0; i < list.length; i++) {
@@ -123,9 +123,10 @@ class _OnBoardingState extends State<OnBoarding> {
                     ],
                   ),
                 ),
-                 Padding(
-                  padding: const EdgeInsets.all(16.0),
-                child: YellowButtonLarge(title: "Candidatar-se", action: () {})),
+                Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: YellowButtonLarge(
+                        title: "Candidatar-se", action: () {})),
                 const SizedBox(
                   height: 15,
                 ),

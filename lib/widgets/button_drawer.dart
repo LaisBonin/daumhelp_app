@@ -10,7 +10,6 @@ class DrawerButton extends StatelessWidget {
     required this.title,
     required this.action,
     required this.textStyle,
-    
   }) : super(key: key);
 
   @override
@@ -20,11 +19,11 @@ class DrawerButton extends StatelessWidget {
       width: 222,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: Theme.of(context).backgroundColor,
-          elevation: 50,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          )),
+            primary: Theme.of(context).backgroundColor,
+            elevation: 50,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            )),
         onPressed: () => action(),
         child: Center(
           child: Text(

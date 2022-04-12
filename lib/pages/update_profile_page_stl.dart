@@ -5,7 +5,7 @@ import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 class UpdateProfilePageStl extends StatelessWidget {
-  const UpdateProfilePageStl({ Key? key }) : super(key: key);
+  const UpdateProfilePageStl({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,8 @@ class UpdateProfilePageStl extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
-          child: SingleChildScrollView(            child: Column(
+          child: SingleChildScrollView(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
@@ -26,8 +27,8 @@ class UpdateProfilePageStl extends StatelessWidget {
                   child: Row(
                     children: [
                       const ReturnButton(),
-                     const SizedBox(
-                         width: 8,
+                      const SizedBox(
+                        width: 8,
                       ),
                       Text(
                         "Sobre você",
@@ -102,8 +103,8 @@ class UpdateProfilePageStl extends StatelessWidget {
                                     obscure: false),
                               ),
                               const SizedBox(
-                            width: 14,
-                          ),
+                                width: 14,
+                              ),
                               Expanded(
                                   flex: 1,
                                   child: Container(
@@ -119,7 +120,8 @@ class UpdateProfilePageStl extends StatelessWidget {
                                     child: IconButton(
                                         onPressed: () {},
                                         icon: const Icon(
-                                          Icons.add, color: HelpTheme.helpButtonText,
+                                          Icons.add,
+                                          color: HelpTheme.helpButtonText,
                                           size: 32,
                                         )),
                                   ))
