@@ -1,4 +1,4 @@
-import 'package:daumhelp_app/pages/newpass_page.dart';
+import 'package:daumhelp_app/pages/newpass_page_stl.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
@@ -6,51 +6,8 @@ import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FullRegistrationPage extends StatefulWidget {
-  const FullRegistrationPage({Key? key}) : super(key: key);
-
-  @override
-  _FullRegistrationPage createState() => _FullRegistrationPage();
-}
-
-class _FullRegistrationPage extends State<FullRegistrationPage> {
-  final formKey = GlobalKey<FormState>();
-  final email = TextEditingController();
-  final senha = TextEditingController();
-  late ScrollController _scrollController;
-//Valores para preenche formulário...
-
-  bool isLogin = true;
-  bool loading = false;
-  bool showPassword = false;
-
-  @override
-  void initState() {
-    _scrollController = ScrollController();
-    super.initState();
-    // setFormAction(true);
-  }
-
-  setFormAction(bool acao) {
-    setState(() {
-      isLogin = acao;
-      if (isLogin) {
-        // Lógica do botão "continuar" vai aqui...
-      }
-    });
-  }
-
-  login() async {
-    setState(() => loading = true);
-    // Lógica de autenticação vai aqui...
-    // try {
-    //   await context.read<AuthService>().login(email.text, senha.text);
-    // } on AuthException catch (e) {
-    //   setState(() => loading = false);
-    //   ScaffoldMessenger.of(context)
-    //       .showSnackBar(SnackBar(content: Text(e.message)));
-    // }
-  }
+class FullRegistrationPageStl extends StatelessWidget {
+  const FullRegistrationPageStl({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +21,6 @@ class _FullRegistrationPage extends State<FullRegistrationPage> {
         backgroundColor: Colors.transparent,
         body: Center(
           child: SingleChildScrollView(
-            controller: _scrollController,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -148,7 +104,7 @@ class _FullRegistrationPage extends State<FullRegistrationPage> {
                             onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const NewPassword())),
+                                    builder: (context) => const NewPasswordStl())),
                             child: Text(
                               "Alterar senha",
                               style: Theme.of(context)

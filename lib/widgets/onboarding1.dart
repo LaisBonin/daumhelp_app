@@ -12,7 +12,7 @@ class Card1 extends StatelessWidget {
           flex: 0,
           child: Row(
             children: [
-              Text("Por que ajudar \n""um colega?",
+              Text("Por que ajudar \n" "um colega?",
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium
@@ -41,6 +41,7 @@ class Card1 extends StatelessWidget {
             ],
           ),
         ),
+        Container()
       ],
     );
   }

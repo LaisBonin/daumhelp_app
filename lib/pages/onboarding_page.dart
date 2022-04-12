@@ -19,7 +19,7 @@ class _OnBoardingState extends State<OnBoarding> {
   late ScrollController _scrollController;
 
   int _currentIndex = 0;
-  List cardList = [Card1(), Card2(), Card3(), Card4()];
+  List cardList = [const Card1(), const Card2(),const Card3(),const Card4()];
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
     for (var i = 0; i < list.length; i++) {
@@ -77,7 +77,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       CarouselSlider(
                         options: CarouselOptions(
                           enlargeCenterPage: true,
-                          height: 400.0,
+                          height: 477.0,
                           // aspectRatio: 2.0,
                           viewportFraction: 1.0,
                           onPageChanged: (index, reason) {
