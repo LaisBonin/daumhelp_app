@@ -42,7 +42,8 @@ exitDialog(BuildContext context) {
                             action: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const LoginPageStl())))
+                                    builder: (context) =>
+                                        const LoginPageStl())))
                       ],
                     ),
                     const SizedBox(

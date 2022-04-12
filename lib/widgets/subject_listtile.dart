@@ -24,14 +24,16 @@ class SubjectListTile extends StatelessWidget {
             ),
           ),
           child: ListTile(
-            contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15),
+            contentPadding:
+                const EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15),
             onTap: subjectAction,
             title: Text(
               subjectName,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             trailing: subjectIcon,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             tileColor: Theme.of(context).hoverColor,
           ),
         ),

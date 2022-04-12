@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-Future<void> launchURL (String url) async {
+Future<void> launchURL(String url) async {
   if (await canLaunch(url)) {
     await launch(url);
   } else {
@@ -12,13 +12,14 @@ Future<void> launchURL (String url) async {
   }
 }
 
-contactDialog(BuildContext context, Function() contactAction, String contactNumber) {
+contactDialog(
+    BuildContext context, Function() contactAction, String contactNumber) {
   showDialog(
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           child: SizedBox(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -56,10 +57,13 @@ contactDialog(BuildContext context, Function() contactAction, String contactNumb
                   const SizedBox(
                     height: 32,
                   ),
-                  YellowButtonLarge(title: "Mandar uma mensagem", action: () async {
-                      String url = "https://api.whatsapp.com/send?phone=$contactNumber&text=Ol%C3%A1!%20Vi%20seu%20perfil%20no%20D%C3%A1%20um%20Help!%20e%20gostaria%20de%20uma%20monitoria,%20poderia%20me%20ajudar?";
-                      await launchURL(url);
-                    })
+                  YellowButtonLarge(
+                      title: "Mandar uma mensagem",
+                      action: () async {
+                        String url =
+                            "https://api.whatsapp.com/send?phone=$contactNumber&text=Ol%C3%A1!%20Vi%20seu%20perfil%20no%20D%C3%A1%20um%20Help!%20e%20gostaria%20de%20uma%20monitoria,%20poderia%20me%20ajudar?";
+                        await launchURL(url);
+                      })
                 ],
               ),
             ),
