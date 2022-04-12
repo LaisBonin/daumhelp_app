@@ -5,41 +5,30 @@ class Card2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Expanded(
-          flex: 0,
-          child: Row(
-            children: [
-              Text("O poder do\n" "benefício mútuo!",
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(color: Theme.of(context).canvasColor)),
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        Expanded(
-          flex: 0,
-          child: Row(
-            children: [
-              Text(
-                  "Toda vez que você ensina outra\n"
-                  "pessoa, seu conhecimento é\n"
-                  "reforçado. Quem ensina\n"
-                  "aprende mais!",
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall
-                      ?.copyWith(color: Theme.of(context).canvasColor)),
-            ],
-          ),
-        ),
-      ],
+    return Container(
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("images/card2.png"), fit: BoxFit.none)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text("O poder do benefício mútuo!",
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium
+                  ?.copyWith(color: Theme.of(context).canvasColor)),
+          Text(
+              "Toda vez que você ensina outra\n"
+              "pessoa, seu conhecimento é\n"
+              "reforçado. Quem ensina\n"
+              "aprende mais!",
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(color: Theme.of(context).canvasColor)),
+        ],
+      ),
     );
   }
 }

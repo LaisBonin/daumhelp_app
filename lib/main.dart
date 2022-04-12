@@ -1,4 +1,6 @@
 import 'package:daumhelp_app/pages/login_page_stl.dart';
+import 'package:daumhelp_app/pages/onboarding_page.dart';
+import 'package:daumhelp_app/pages/signup_page.dart';
 import 'package:daumhelp_app/pages/subject_list_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: HelpTheme.theme,
-      home: const LoginPageStl(),
+      home: const OnBoarding(),
     );
   }
 }
