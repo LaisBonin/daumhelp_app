@@ -1,3 +1,4 @@
+import 'package:daumhelp_app/pages/my_applications_page.dart';
 import 'package:daumhelp_app/widgets/button_drawer.dart';
 import 'package:daumhelp_app/widgets/dialog_box.dart';
 
@@ -61,7 +62,13 @@ class SettingsDrawer extends StatelessWidget {
                       .textTheme
                       .titleSmall
                       ?.copyWith(color: Theme.of(context).canvasColor),
-                  action: () {}),
+                  action: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MyApplicationsPage(),
+                        ));
+                  }),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(12.0, 10.0, 12.0, 10.0),

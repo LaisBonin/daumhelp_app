@@ -1,4 +1,4 @@
-import 'package:daumhelp_app/pages/forgotpass_page.dart';
+import 'package:daumhelp_app/pages/forgot_password_page_stl.dart';
 import 'package:daumhelp_app/pages/signup_page.dart';
 import 'package:daumhelp_app/pages/subject_list_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
@@ -172,7 +172,7 @@ class LoginPageStl extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const ForgotPassword())),
+                                        const ForgotPasswordPageStl())),
                             child: Text(
                               "Esqueceu sua senha?",
                               style: Theme.of(context)
