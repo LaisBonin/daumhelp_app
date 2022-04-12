@@ -1,10 +1,10 @@
 import 'package:daumhelp_app/pages/settings_drawer.dart';
 import 'package:daumhelp_app/pages/subject_page.dart';
 import 'package:flutter/material.dart';
+import '../subject_icon_selector.dart';
 import '../widgets/subject_listtile.dart';
 import '../widgets/theme_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SubjectListPage extends StatefulWidget {
   const SubjectListPage({Key? key}) : super(key: key);
@@ -109,24 +109,5 @@ class _SubjectListPageState extends State<SubjectListPage> {
         ),
       ),
     );
-  }
-
-  IconData handleIconFromFirebase(String iconName) {
-    switch (iconName) {
-      case "rulerCombined":
-        return FontAwesomeIcons.rulerCombined;
-      case "squareRootVariable":
-        return FontAwesomeIcons.squareRootVariable;
-      case "cube":
-        return FontAwesomeIcons.cube;
-      case "flask":
-        return FontAwesomeIcons.flask;
-      case "atom":
-        return FontAwesomeIcons.atom;
-      case "desktop":
-        return FontAwesomeIcons.desktop;
-      default:
-        return FontAwesomeIcons.question;
-    }
   }
 }

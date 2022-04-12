@@ -15,7 +15,6 @@ class LoginPageStl extends StatelessWidget {
   Widget build(BuildContext context) {
     String email = "";
     String password = "";
-
     return Scaffold(
       body: Container(
         width: double.infinity,

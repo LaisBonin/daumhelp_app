@@ -12,6 +12,7 @@ import 'package:email_validator/email_validator.dart';
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
+
   bool _emailValidator(String email) {
     return EmailValidator.validate(email);
   }
