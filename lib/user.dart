@@ -1,22 +1,36 @@
 class User {
-  final String name;
-  final String lastname;
-  final String course;
-  final String period;
-  final String contact;
-  final String email;
-  final String id;
-  final List applies;
-  final List skills;
+  String? name;
+  String? lastname;
+  String? course;
+  String? period;
+  String? contact;
+  String? email;
+  String? id;
+  List? applies;
+  List? skills;
 
   User(
-      {required this.lastname,
-      required this.period,
-      required this.contact,
-      required this.email,
-      required this.id,
-      required this.applies,
-      required this.skills,
-      required this.name,
-      required this.course});
+      {this.lastname,
+      this.period,
+      this.contact,
+      this.email,
+      this.id,
+      this.applies,
+      this.skills,
+      this.name,
+      this.course});
+
+  User fromMap(Map<String, dynamic> map) {
+    return User(
+      name: map["name"] ?? "",
+      lastname: map["lastname"] ?? "",
+      course: map["curso"] ?? "",
+      period: map["period"] ?? "",
+      contact: map["contact"] ?? "",
+      email: map["email"] ?? "",
+      id: map["id"] ?? "",
+      applies: map["applies"] ?? <String>[],
+      skills: map["skills"] ?? <String>[],
+    );
+  }
 }

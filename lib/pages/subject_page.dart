@@ -18,27 +18,19 @@ class SubjectPage extends StatefulWidget {
 }
 
 class _SubjectPageState extends State<SubjectPage> {
-
   List<User> userList = [];
 
   Future<List<User>> getUsersList() async {
     var collection = FirebaseFirestore.instance.collection("users");
-    await collection.get().then((QuerySnapshot queryList) {
+    await collection
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> queryList) {
       for (var doc in queryList.docs) {
-        final User user = User(
-            applies: doc["applies"],
-            contact: doc["contact"],
-            course: doc["curso"],
-            email: doc["email"],
-            id: doc["id"],
-            lastname: doc["lastname"],
-            name: doc["name"],
-            period: doc["period"],
-            skills: doc["skills"]);
+        final user = User().fromMap(doc.data());
         userList.add(user);
       }
     });
-    return [];
+    return userList;
   }
 
   @override
@@ -82,9 +74,9 @@ class _SubjectPageState extends State<SubjectPage> {
               ),
               YellowButtonLarge(
                 action: () {},
-                title: 'Cabdidatar-se',
+                title: 'Candidatar-se',
               ),
-              FutureBuilder<List>(
+              FutureBuilder<List<User>>(
                 future: getUsersList(),
                 builder: ((context, snapshot) {
                   if (!snapshot.hasData && !snapshot.hasError) {
@@ -102,26 +94,23 @@ class _SubjectPageState extends State<SubjectPage> {
                       shrinkWrap: true,
                       itemCount: userList.length,
                       itemBuilder: ((context, index) {
-                        if (userList[index].applies.contains(widget.selectedSubjectName)) {
-                        return ProfileCard(
-                            profileName: userList[index].name,
-                            profileCourse: userList[index].course,
-                            profilePeriod: userList[index].period,
-                            cardAction: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProfilePage(
-                                    profileCourse: userList[index].course,
-                                    profileLastName: userList[index].lastname,
-                                    profileName: userList[index].name,
-                                    profilePeriod: userList[index].period,
-                                    profileSkills: userList[index].skills,
-                                    profileContact: userList[index].contact,
+                        if (userList[index]
+                            .applies!
+                            .contains(widget.selectedSubjectName)) {
+                          return ProfileCard(
+                              profileName: userList[index].name!,
+                              profileCourse: userList[index].course!,
+                              profilePeriod: userList[index].period!,
+                              cardAction: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProfilePage(
+                                      user: userList[index],
+                                    ),
                                   ),
-                                ),
-                              );
-                            });
+                                );
+                              });
                         } else {
                           return const SizedBox();
                         }

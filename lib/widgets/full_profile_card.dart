@@ -4,24 +4,16 @@ import 'package:daumhelp_app/widgets/skill_dot.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 
+import '../user.dart';
+
 class FullProfileCard extends StatelessWidget {
-  final String profileName;
-  final String profileLastName;
-  final String profileCourse;
-  final String profilePeriod;
-  final String profileContact;
-  final List<dynamic> profileSkills;
+  final User user;
   final Function() cardAction;
 
   const FullProfileCard({
     Key? key,
-    required this.profileName,
-    required this.profileLastName,
-    required this.profileCourse,
-    required this.profilePeriod,
+    required this.user,
     required this.cardAction,
-    required this.profileSkills,
-    required this.profileContact,
   }) : super(key: key);
 
   @override
@@ -54,10 +46,10 @@ class FullProfileCard extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: _VideoDescription(
-                      profileName: profileName,
-                      profileLastName: profileLastName,
-                      profileCourse: profileCourse,
-                      profilePeriod: profilePeriod,
+                      profileName: user.name!,
+                      profileLastName: user.lastname!,
+                      profileCourse: user.course!,
+                      profilePeriod: user.period!,
                     ),
                   ),
                 ],
@@ -75,9 +67,9 @@ class FullProfileCard extends StatelessWidget {
               ListView.builder(
                   padding: const EdgeInsets.all(0),
                   shrinkWrap: true,
-                  itemCount: profileSkills.length,
+                  itemCount: user.skills!.length,
                   itemBuilder: ((context, index) {
-                    return SkillDot(skillName: profileSkills[index]);
+                    return SkillDot(skillName: user.skills![index]);
                   })),
               const SizedBox(
                 height: 24,
@@ -85,7 +77,7 @@ class FullProfileCard extends StatelessWidget {
               YellowButtonLarge(
                   title: "Contatar",
                   action: () {
-                    contactDialog(context, () {}, profileContact);
+                    contactDialog(context, () {}, user.contact!);
                   }),
             ],
           ),
