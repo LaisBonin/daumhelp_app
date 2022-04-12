@@ -1,57 +1,11 @@
-import 'package:daumhelp_app/pages/settings_drawer.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-// import 'package:daumhelp_app/pages/settings_drawer.dart';
 
-class UpDatePage extends StatefulWidget {
-  const UpDatePage({Key? key}) : super(key: key);
-
-  @override
-  _UpDatePage createState() => _UpDatePage();
-}
-
-class _UpDatePage extends State<UpDatePage> {
-  final formKey = GlobalKey<FormState>();
-  final email = TextEditingController();
-  final senha = TextEditingController();
-  late ScrollController _scrollController;
-//Valores para preenche formulário...
-
-  bool isLogin = true;
-  bool loading = false;
-  bool showPassword = false;
-
-  @override
-  void initState() {
-    _scrollController = ScrollController();
-    super.initState();
-    // setFormAction(true);
-  }
-
-  setFormAction(bool acao) {
-    setState(() {
-      isLogin = acao;
-      if (isLogin) {
-        // Lógica do botão "continuar" vai aqui...
-      }
-    });
-  }
-
-  login() async {
-    setState(() => loading = true);
-    // Lógica de autenticação vai aqui...
-    // try {
-    //   await context.read<AuthService>().login(email.text, senha.text);
-    // } on AuthException catch (e) {
-    //   setState(() => loading = false);
-    //   ScaffoldMessenger.of(context)
-    //       .showSnackBar(SnackBar(content: Text(e.message)));
-    // }
-  }
+class UpdateProfilePageStl extends StatelessWidget {
+  const UpdateProfilePageStl({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +18,7 @@ class _UpDatePage extends State<UpDatePage> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
-          child: SingleChildScrollView(
-            controller: _scrollController,
-            child: Column(
+          child: SingleChildScrollView(            child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
