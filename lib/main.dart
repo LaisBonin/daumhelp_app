@@ -1,6 +1,4 @@
-import 'package:daumhelp_app/pages/forgotpass_page.dart';
-import 'package:daumhelp_app/pages/login_page.dart';
-import 'package:daumhelp_app/pages/newpass_page.dart';
+import 'package:daumhelp_app/pages/signup_page.dart';
 import 'package:daumhelp_app/pages/subject_list_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
@@ -23,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: HelpTheme.theme,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const SignUpPage(),
     );
   }
 }
