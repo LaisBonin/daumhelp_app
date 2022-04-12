@@ -66,10 +66,11 @@ class MyApplicationsPage extends StatelessWidget {
                       const Text("Something went wrong");
                     }
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
+                      return CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor,
+                      );
                     }
                     if (!snapshot.hasData) {
-                      print(snapshot.error);
                       return const Text("error");
                     }
 
@@ -86,13 +87,15 @@ class MyApplicationsPage extends StatelessWidget {
                         itemBuilder: ((context, index) {
                           return SubjectListTile(
                               subjectName: snapshot.data![index],
-                              subjectIcon: const Icon(Icons.add),
+                              subjectIcon: const Icon(null),
                               subjectAction: () {});
                         }),
                       );
                     } else {
                       // sei la quye que deu
-                      return const CircularProgressIndicator();
+                      return CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor,
+                      );
                     }
                   })
             ],
