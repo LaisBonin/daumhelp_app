@@ -1,5 +1,5 @@
 import 'package:daumhelp_app/pages/forgotpass_page.dart';
-import 'package:daumhelp_app/pages/signin_page.dart';
+import 'package:daumhelp_app/pages/signup_page.dart';
 import 'package:daumhelp_app/pages/subject_list_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
@@ -157,7 +157,7 @@ class LoginPageStl extends StatelessWidget {
                             onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const SignInPage())),
+                                    builder: (context) => const SignUpPage())),
                             child: Text(
                               "Increva-se",
                               style: Theme.of(context)

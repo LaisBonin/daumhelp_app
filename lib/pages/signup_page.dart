@@ -18,9 +18,9 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String email = "pedrocastilho.ganemg+6@gmail.com";
-    String password = "teste123";
-    String confirmpassword = "teste123";
+    String email = "";
+    String password = "";
+    String confirmpassword = "";
 
     return Container(
       decoration: const BoxDecoration(
