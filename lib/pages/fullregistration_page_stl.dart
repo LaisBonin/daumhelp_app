@@ -1,13 +1,51 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daumhelp_app/pages/newpass_page_stl.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FullRegistrationPageStl extends StatelessWidget {
-  const FullRegistrationPageStl({Key? key}) : super(key: key);
+class FullRegistrationPageStl extends StatefulWidget {
+  FullRegistrationPageStl({Key? key}) : super(key: key);
+
+  @override
+  State<FullRegistrationPageStl> createState() =>
+      _FullRegistrationPageStlState();
+}
+
+class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
+  Future<void> fetchCurrentUserData() async {
+    final collection = FirebaseFirestore.instance.collection("users");
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
+      currentUserInfo = <String>[] as DocumentSnapshot<Map<String, dynamic>>;
+    }
+    final currentUserData = await collection.doc(currentUser?.uid).get();
+    currentUserInfo = currentUserData;
+  }
+
+  DocumentSnapshot<Map<String, dynamic>>? currentUserInfo;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? course;
+  String? period;
+  String? contact;
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _courseController = TextEditingController();
+  final TextEditingController _periodController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _contactController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCurrentUserData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,42 +99,80 @@ class FullRegistrationPageStl extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomTextField(
-                              hint: "Nome completo",
-                              action: () {},
-                              errorText: "Campo Obrigatório!",
-                              obscure: false),
+                            onChanged: (text) {
+                              firstName = text;
+                            },
+                            hint: "Primeiro Nome",
+                            action: () {},
+                            errorText: "Campo Obrigatório!",
+                            obscure: false,
+                            controller: _firstNameController,
+                          ),
                           const SizedBox(
                             height: 14,
                           ),
                           CustomTextField(
-                              hint: "Curso",
-                              action: () {},
-                              errorText: "Campo Obrigatório!",
-                              obscure: false),
+                            onChanged: (text) {
+                              lastName = text;
+                            },
+                            hint: "Último Nome",
+                            action: () {},
+                            errorText: "Campo Obrigatório!",
+                            obscure: false,
+                            controller: _lastNameController,
+                          ),
                           const SizedBox(
                             height: 14,
                           ),
                           CustomTextField(
-                              hint: "Periodo",
-                              action: () {},
-                              errorText: "Campo Obrigatório!",
-                              obscure: false),
+                            onChanged: (text) {
+                              course = text;
+                            },
+                            hint: "Curso",
+                            action: () {},
+                            errorText: "Campo Obrigatório!",
+                            obscure: false,
+                            controller: _courseController,
+                          ),
                           const SizedBox(
                             height: 14,
                           ),
                           CustomTextField(
-                              hint: "Email",
-                              action: () {},
-                              errorText: "Campo Obrigatório!",
-                              obscure: false),
+                            onChanged: (text) {
+                              period = text;
+                            },
+                            hint: "Periodo",
+                            action: () {},
+                            errorText: "Campo Obrigatório!",
+                            obscure: false,
+                            controller: _periodController,
+                          ),
                           const SizedBox(
                             height: 14,
                           ),
                           CustomTextField(
-                              hint: "Numero do WhatsApp",
-                              action: () {},
-                              errorText: "Campo Obrigatório!",
-                              obscure: false),
+                            onChanged: (text) {
+                              email = text;
+                            },
+                            hint: "Email",
+                            action: () {},
+                            errorText: "Campo Obrigatório!",
+                            obscure: false,
+                            controller: _emailController,
+                          ),
+                          const SizedBox(
+                            height: 14,
+                          ),
+                          CustomTextField(
+                            onChanged: (text) {
+                              contact = text;
+                            },
+                            hint: "Numero do WhatsApp",
+                            action: () {},
+                            errorText: "Campo Obrigatório!",
+                            obscure: false,
+                            controller: _contactController,
+                          ),
                           const SizedBox(
                             height: 14,
                           ),
@@ -119,25 +195,40 @@ class FullRegistrationPageStl extends StatelessWidget {
                           const SizedBox(
                             height: 14,
                           ),
-                          CustomTextField(
-                              hint: "Habilidades",
-                              action: () {},
-                              errorText: "Campo Obrigatório!",
-                              obscure: false),
-                          // Text("Ao clicar em 'Concordar e Continuar'",
-                          //     style: Theme.of(context)
-                          //         .textTheme
-                          //         .titleSmall
-                          //         ?.copyWith(
-                          //             color: Theme.of(context).canvasColor)),
-                          // Text(
-                          //   "você concorda com os Termos de Serviço e Politica de Privacidade ",
-                          //   style: Theme.of(context)
-                          //       .textTheme
-                          //       .titleSmall
-                          //       ?.copyWith(
-                          //           color: Theme.of(context).primaryColor),
-                          // ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: CustomTextField(
+                                    hint: "Habilidades",
+                                    action: () {},
+                                    errorText: "Campo Obrigatório!",
+                                    obscure: false),
+                              ),
+                              const SizedBox(
+                                width: 14,
+                              ),
+                              Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                      color: HelpTheme.helpYellow,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                    width: 60,
+                                    height: 60,
+                                    child: IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                          Icons.add,
+                                          color: HelpTheme.helpButtonText,
+                                          size: 32,
+                                        )),
+                                  ))
+                            ],
+                          ),
                           const SizedBox(
                             height: 24,
                           ),

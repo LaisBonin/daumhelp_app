@@ -5,6 +5,8 @@ import 'package:daumhelp_app/widgets/dialog_box.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:flutter/material.dart';
 
+import 'fullregistration_page_stl.dart';
+
 class SettingsDrawer extends StatelessWidget {
   const SettingsDrawer({Key? key}) : super(key: key);
 
@@ -47,7 +49,13 @@ class SettingsDrawer extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(12.0, 10.0, 12.0, 10.0),
               child: DrawerButton(
                 title: "Meu Perfil",
-                action: () {},
+                action: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              FullRegistrationPageStl()));
+                },
                 textStyle: Theme.of(context)
                     .textTheme
                     .titleSmall

@@ -1,3 +1,4 @@
+import 'package:daumhelp_app/pages/onboarding_page.dart';
 import 'package:daumhelp_app/pages/profile_page.dart';
 import 'package:daumhelp_app/user.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
@@ -73,7 +74,12 @@ class _SubjectPageState extends State<SubjectPage> {
                 height: 16,
               ),
               YellowButtonLarge(
-                action: () {},
+                action: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const OnBoarding()));
+                },
                 title: 'Candidatar-se',
               ),
               FutureBuilder<List<User>>(
