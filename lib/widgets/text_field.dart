@@ -6,6 +6,7 @@ class CustomTextField extends StatefulWidget {
   final String hint;
   final Function action;
   final String errorText;
+  final bool showErrorText;
   final bool obscure;
   final Function(String)? onChanged;
   final TextEditingController? controller;
@@ -20,6 +21,7 @@ class CustomTextField extends StatefulWidget {
     required this.action,
     required this.errorText,
     required this.obscure,
+    required this.showErrorText,
     this.onChanged,
     this.controller,
     this.readOnly = false,
@@ -52,6 +54,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 .titleSmall
                 ?.copyWith(color: Theme.of(context).backgroundColor),
             decoration: InputDecoration(
+              errorText: widget.showErrorText ? widget.errorText : null,
               filled: true,
               fillColor: Theme.of(context).canvasColor,
               border: const OutlineInputBorder(

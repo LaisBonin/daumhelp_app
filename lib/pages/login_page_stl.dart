@@ -8,13 +8,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPageStl extends StatelessWidget {
+class LoginPageStl extends StatefulWidget {
   const LoginPageStl({Key? key}) : super(key: key);
 
   @override
+  State<LoginPageStl> createState() => _LoginPageStlState();
+}
+
+class _LoginPageStlState extends State<LoginPageStl> {
+  String email = "";
+  String password = "";
+  bool emailError = false;
+  bool passError = false;
+  String passErrorText = "Senha Incorreta!";
+  
+  @override
   Widget build(BuildContext context) {
-    String email = "";
-    String password = "";
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -60,10 +69,14 @@ class LoginPageStl extends StatelessWidget {
                           CustomTextField(
                               onChanged: (text) {
                                 email = text;
+                                setState(() {
+                                  emailError = false;
+                                });
                               },
                               hint: "Email",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: emailError,
                               obscure: false),
                           const SizedBox(
                             height: 14,
@@ -71,10 +84,14 @@ class LoginPageStl extends StatelessWidget {
                           CustomTextField(
                               onChanged: (text) {
                                 password = text;
+                                setState(() {
+                                  passError = false;
+                                });
                               },
                               hint: "Senha",
                               action: () {},
-                              errorText: "Campo Obrigatório!",
+                              errorText: passErrorText,
+                              showErrorText: passError,
                               obscure: true),
                           const SizedBox(
                             height: 14,
@@ -82,61 +99,68 @@ class LoginPageStl extends StatelessWidget {
                           YellowButtonLarge(
                               title: "Continuar",
                               action: () async {
-                                try {
-                                  UserCredential userCredential =
-                                      await FirebaseAuth
-                                          .instance
-                                          .signInWithEmailAndPassword(
-                                              email: email, password: password);
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          title: const Text("LOGADO"),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () => Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const SubjectListPage(),
-                                                    )),
-                                                child: const Text("OK"))
-                                          ],
-                                        );
-                                      });
-                                } on FirebaseAuthException catch (e) {
-                                  if (e.code == 'user-not-found') {
+                                var isCredentialValid = true;
+                                // print(emailError);
+                                if (email.isEmpty || email == "") {
+                                  emailError = true;
+                                  isCredentialValid = false;
+                                  setState(() {});
+                                }
+
+                                if (password.isEmpty || password == "") {
+                                  passError = true;
+                                  isCredentialValid = false;
+                                  setState(() {});
+                                }
+
+                                if (isCredentialValid) {
+                                  try {
+                                    UserCredential userCredential =
+                                        await FirebaseAuth.instance
+                                            .signInWithEmailAndPassword(
+                                                email: email,
+                                                password: password);
                                     showDialog(
                                         context: context,
                                         builder: (context) {
                                           return AlertDialog(
-                                            title: const Text(
-                                                "NÃO EXISTE UMA CONTA COM ESSE EMAIL"),
+                                            title: const Text("LOGADO"),
                                             actions: [
                                               TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    context, "OK"),
-                                                child: const Text("OK"),
-                                              )
+                                                  onPressed: () =>
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const SubjectListPage(),
+                                                          )),
+                                                  child: const Text("OK"))
                                             ],
                                           );
                                         });
-                                  } else if (e.code == 'wrong-password') {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            title: const Text("SENHA"),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    context, "OK"),
-                                                child: const Text("OK"),
-                                              )
-                                            ],
-                                          );
-                                        });
+                                  } on FirebaseAuthException catch (e) {
+                                    if (e.code == 'user-not-found') {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: const Text(
+                                                  "NÃO EXISTE UMA CONTA COM ESSE EMAIL"),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          context, "OK"),
+                                                  child: const Text("OK"),
+                                                )
+                                              ],
+                                            );
+                                          });
+                                    } else if (e.code == 'wrong-password') {
+                                      passError = true;
+                                      isCredentialValid = false;
+                                      setState(() {});
+                                    }
                                   }
                                 }
                               }),

@@ -60,18 +60,21 @@ class NewPasswordStl extends StatelessWidget {
                               hint: "Senha atual",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: false,
                               obscure: false),
                           const SizedBox(height: 14),
                           CustomTextField(
                               hint: "Nova senha",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: false,
                               obscure: false),
                           const SizedBox(height: 14),
                           CustomTextField(
                               hint: "Confirme a senha",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: false,
                               obscure: false),
                           const SizedBox(
                             height: 50,

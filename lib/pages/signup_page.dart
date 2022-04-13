@@ -78,7 +78,9 @@ class SignUpPage extends StatelessWidget {
                               hint: "Email",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: false,
                               obscure: false),
+                             
                           const SizedBox(
                             height: 14,
                           ),
@@ -89,6 +91,7 @@ class SignUpPage extends StatelessWidget {
                               hint: "Senha",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: false,
                               obscure: true),
                           const SizedBox(
                             height: 14,
@@ -100,6 +103,7 @@ class SignUpPage extends StatelessWidget {
                               hint: "Confirme a senha",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: false,
                               obscure: true),
                           const SizedBox(
                             height: 22,

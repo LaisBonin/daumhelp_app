@@ -91,7 +91,9 @@ class ForgotPasswordPageStl extends StatelessWidget {
                               hint: "Email",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: false,
                               obscure: false),
+                        
                           const SizedBox(
                             height: 14,
                           ),
