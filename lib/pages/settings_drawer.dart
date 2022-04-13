@@ -1,7 +1,7 @@
 import 'package:daumhelp_app/pages/my_applications_page.dart';
+import 'package:daumhelp_app/pages/profile_page.dart';
 import 'package:daumhelp_app/widgets/button_drawer.dart';
 import 'package:daumhelp_app/widgets/dialog_box.dart';
-
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:flutter/material.dart';
 
@@ -48,6 +48,12 @@ class SettingsDrawer extends StatelessWidget {
               child: DrawerButton(
                 title: "Meu Perfil",
                 action: () {},
+                // action:  () => Navigator.push(
+                //                 context,
+                //                 MaterialPageRoute(
+                //                     builder: (context) =>
+                //                         ProfilePage()
+                //                         )),
                 textStyle: Theme.of(context)
                     .textTheme
                     .titleSmall

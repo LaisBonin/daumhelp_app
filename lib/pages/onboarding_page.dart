@@ -1,4 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:daumhelp_app/pages/fullregistration_page_stl.dart';
+import 'package:daumhelp_app/pages/update_profile_page_stl.dart';
 import 'package:daumhelp_app/widgets/onboarding1.dart';
 import 'package:daumhelp_app/widgets/onboarding2.dart';
 import 'package:daumhelp_app/widgets/onboarding3.dart';
@@ -126,7 +128,12 @@ class _OnBoardingState extends State<OnBoarding> {
                 Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: YellowButtonLarge(
-                        title: "Candidatar-se", action: () {})),
+                        title: "Candidatar-se", action:  () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const UpdateProfilePageStl()
+                                        )),)),
                 const SizedBox(
                   height: 15,
                 ),

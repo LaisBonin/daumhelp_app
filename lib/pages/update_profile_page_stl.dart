@@ -133,7 +133,7 @@ class UpdateProfilePageStl extends StatelessWidget {
                           const SizedBox(
                             height: 32,
                           ),
-                          YellowButtonLarge(title: "Atualizar", action: () {}),
+                          YellowButtonLarge(title: "Continuar", action: () {}),
                           const SizedBox(
                             height: 15,
                           ),
