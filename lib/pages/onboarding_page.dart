@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-
+import 'package:daumhelp_app/pages/full_registration_page.dart';
 import 'package:daumhelp_app/widgets/onboarding1.dart';
 import 'package:daumhelp_app/widgets/onboarding2.dart';
 import 'package:daumhelp_app/widgets/onboarding3.dart';
@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import '../widgets/button_large.dart';
-import 'fullregistration_page_stl.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({Key? key}) : super(key: key);
