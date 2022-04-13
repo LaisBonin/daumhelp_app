@@ -1,10 +1,9 @@
 import 'package:daumhelp_app/pages/my_applications_page.dart';
+import 'package:daumhelp_app/pages/full_registration_page.dart';
 import 'package:daumhelp_app/widgets/button_drawer.dart';
 import 'package:daumhelp_app/widgets/dialog_box.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:flutter/material.dart';
-
-import 'fullregistration_page_stl.dart';
 
 class SettingsDrawer extends StatelessWidget {
   const SettingsDrawer({Key? key}) : super(key: key);

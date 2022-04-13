@@ -4,7 +4,6 @@ import 'package:daumhelp_app/models/user.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/profile_card.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
-import 'package:daumhelp_app/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import '../widgets/theme_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

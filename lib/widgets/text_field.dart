@@ -1,5 +1,6 @@
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextField extends StatefulWidget {
   final String hint;
@@ -9,6 +10,10 @@ class CustomTextField extends StatefulWidget {
   final bool obscure;
   final Function(String)? onChanged;
   final TextEditingController? controller;
+  final bool readOnly;
+  final TextInputType keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final int? maxLength;
 
   const CustomTextField({
     Key? key,
@@ -19,6 +24,10 @@ class CustomTextField extends StatefulWidget {
     required this.showErrorText,
     this.onChanged,
     this.controller,
+    this.readOnly = false,
+    this.keyboardType = TextInputType.text,
+    this.inputFormatters,
+    this.maxLength,
   }) : super(key: key);
 
   @override
@@ -34,6 +43,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
       child: Column(
         children: [
           TextField(
+            inputFormatters: widget.inputFormatters,
+            keyboardType: widget.keyboardType,
+            readOnly: widget.readOnly,
             controller: widget.controller,
             onChanged: widget.onChanged,
             obscureText: showPassword == false ? widget.obscure : false,

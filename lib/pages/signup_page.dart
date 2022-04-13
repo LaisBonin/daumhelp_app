@@ -12,7 +12,6 @@ import 'package:email_validator/email_validator.dart';
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
-
   bool _emailValidator(String email) {
     return EmailValidator.validate(email);
   }
@@ -158,10 +157,19 @@ class SignUpPage extends StatelessWidget {
                                     FirebaseFirestore.instance
                                         .collection("users")
                                         .doc(userCredential.user!.uid)
-                                        .set({
-                                      "id": userCredential.user!.uid,
-                                      "email": email,
-                                    });
+                                        .set(
+                                      {
+                                        "id": userCredential.user!.uid,
+                                        "email": email,
+                                        "name": "",
+                                        "lastname": "",
+                                        "curso": "",
+                                        "period": "",
+                                        "contact": "",
+                                        "applies" : [""],
+                                        "skills" : [""]
+                                      },
+                                    );
                                     showDialog(
                                         context: context,
                                         builder: (context) {

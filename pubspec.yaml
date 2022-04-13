@@ -43,6 +43,7 @@ dependencies:
   firebase_auth: ^3.3.13
   email_validator: ^2.0.1
   carousel_slider: ^4.0.0
+  flutter_multi_formatter: ^2.5.1
 
 
 dev_dependencies:
