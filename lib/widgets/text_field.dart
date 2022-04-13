@@ -7,6 +7,7 @@ class CustomTextField extends StatefulWidget {
   final String errorText;
   final bool obscure;
   final Function(String)? onChanged;
+  final TextEditingController? controller;
 
   const CustomTextField({
     Key? key,
@@ -15,6 +16,7 @@ class CustomTextField extends StatefulWidget {
     required this.errorText,
     required this.obscure,
     this.onChanged,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -30,6 +32,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       child: Column(
         children: [
           TextField(
+            controller: widget.controller,
             onChanged: widget.onChanged,
             obscureText: showPassword == false ? widget.obscure : false,
             style: Theme.of(context)

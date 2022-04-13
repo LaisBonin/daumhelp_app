@@ -74,10 +74,12 @@ class _SubjectPageState extends State<SubjectPage> {
                 height: 16,
               ),
               YellowButtonLarge(
-                action: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const OnBoarding())),
+                action: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const OnBoarding()));
+                },
                 title: 'Candidatar-se',
               ),
               FutureBuilder<List<User>>(

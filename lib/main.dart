@@ -1,8 +1,4 @@
 import 'package:daumhelp_app/pages/login_page_stl.dart';
-import 'package:daumhelp_app/pages/onboarding_page.dart';
-import 'package:daumhelp_app/pages/signup_page.dart';
-import 'package:daumhelp_app/pages/subject_list_page.dart';
-import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -39,32 +35,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          width: double.infinity,
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.bottomRight,
-                  end: Alignment.topLeft,
-                  colors: [HelpTheme.helpDarkGrey, HelpTheme.helpButtonText])),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              YellowButtonLarge(
-                  title: "Continuar",
-                  action: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SubjectListPage(),
-                      ),
-                    );
-                  }),
-            ],
-          ),
-        ),
-      ),
-    );
+    return Container();
   }
 }

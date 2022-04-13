@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import '../widgets/button_large.dart';
+import 'fullregistration_page_stl.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({Key? key}) : super(key: key);
@@ -128,12 +129,13 @@ class _OnBoardingState extends State<OnBoarding> {
                 Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: YellowButtonLarge(
-                        title: "Candidatar-se", action:  () => Navigator.push(
+                        title: "Candidatar-se", action: () {
+                          Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const UpdateProfilePageStl()
-                                        )),)),
+                                  builder: (context) => FullRegistrationPageStl()));
+                        })),
+
                 const SizedBox(
                   height: 15,
                 ),
