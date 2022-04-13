@@ -69,7 +69,7 @@ class _SubjectPageState extends State<SubjectPage> {
               const SizedBox(
                 height: 16,
               ),
-              const SearchBar(),
+              // const SearchBar(),
               const SizedBox(
                 height: 16,
               ),
