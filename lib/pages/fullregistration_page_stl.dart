@@ -245,9 +245,6 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
             ),
           ),
         ),
-
-        // ),
-        // ),
       ),
     );
   }

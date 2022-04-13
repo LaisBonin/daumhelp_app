@@ -1,5 +1,4 @@
 import 'package:daumhelp_app/pages/my_applications_page.dart';
-import 'package:daumhelp_app/pages/profile_page.dart';
 import 'package:daumhelp_app/widgets/button_drawer.dart';
 import 'package:daumhelp_app/widgets/dialog_box.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';

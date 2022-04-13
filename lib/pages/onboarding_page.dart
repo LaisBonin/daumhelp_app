@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:daumhelp_app/pages/fullregistration_page_stl.dart';
-import 'package:daumhelp_app/pages/update_profile_page_stl.dart';
+
 import 'package:daumhelp_app/widgets/onboarding1.dart';
 import 'package:daumhelp_app/widgets/onboarding2.dart';
 import 'package:daumhelp_app/widgets/onboarding3.dart';
@@ -81,7 +80,6 @@ class _OnBoardingState extends State<OnBoarding> {
                         options: CarouselOptions(
                           enlargeCenterPage: true,
                           height: 477.0,
-                          // aspectRatio: 2.0,
                           viewportFraction: 1.0,
                           onPageChanged: (index, reason) {
                             setState(() {

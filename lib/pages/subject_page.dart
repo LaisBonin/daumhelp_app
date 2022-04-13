@@ -1,6 +1,6 @@
 import 'package:daumhelp_app/pages/onboarding_page.dart';
 import 'package:daumhelp_app/pages/profile_page.dart';
-import 'package:daumhelp_app/user.dart';
+import 'package:daumhelp_app/models/user.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/profile_card.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
