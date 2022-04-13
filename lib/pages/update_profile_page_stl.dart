@@ -60,18 +60,21 @@ class UpdateProfilePageStl extends StatelessWidget {
                               hint: "Primeiro nome",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: false,
                               obscure: false),
                           const SizedBox(height: 14),
                           CustomTextField(
                               hint: "Ultimo Nome",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: false,
                               obscure: false),
                           const SizedBox(height: 14),
                           CustomTextField(
                               hint: "Curso",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: false,
                               obscure: false),
                           const SizedBox(
                             height: 14,
@@ -80,6 +83,7 @@ class UpdateProfilePageStl extends StatelessWidget {
                               hint: "Periodo",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: false,
                               obscure: false),
                           const SizedBox(
                             height: 14,
@@ -88,6 +92,7 @@ class UpdateProfilePageStl extends StatelessWidget {
                               hint: "Número do WhatsApp",
                               action: () {},
                               errorText: "Campo Obrigatório!",
+                              showErrorText: false,
                               obscure: false),
                           const SizedBox(
                             height: 14,
@@ -100,6 +105,7 @@ class UpdateProfilePageStl extends StatelessWidget {
                                     hint: "Habilidades",
                                     action: () {},
                                     errorText: "Campo Obrigatório!",
+                                    showErrorText: false,
                                     obscure: false),
                               ),
                               const SizedBox(
