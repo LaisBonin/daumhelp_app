@@ -1,6 +1,6 @@
 import 'package:daumhelp_app/widgets/full_profile_card.dart';
 import 'package:flutter/material.dart';
-import '../user.dart';
+import '../models/user.dart';
 import '../widgets/theme_data.dart';
 
 class ProfilePage extends StatelessWidget {

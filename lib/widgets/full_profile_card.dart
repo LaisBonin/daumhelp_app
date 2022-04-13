@@ -4,7 +4,7 @@ import 'package:daumhelp_app/widgets/skill_dot.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 
-import '../user.dart';
+import '../models/user.dart';
 
 class FullProfileCard extends StatelessWidget {
   final User user;

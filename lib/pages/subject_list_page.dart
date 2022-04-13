@@ -1,7 +1,7 @@
 import 'package:daumhelp_app/pages/settings_drawer.dart';
 import 'package:daumhelp_app/pages/subject_page.dart';
 import 'package:flutter/material.dart';
-import '../subject_icon_selector.dart';
+import '../models/subject_icon_selector.dart';
 import '../widgets/subject_listtile.dart';
 import '../widgets/theme_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
