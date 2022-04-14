@@ -20,20 +20,12 @@ class SubjectPage extends StatefulWidget {
 }
 
 class _SubjectPageState extends State<SubjectPage> {
-  List<UserModel> userList = [];
-
+  
   Future<List<UserModel>> getUsersList() async {
     var collection = FirebaseFirestore.instance.collection("users");
-    await collection
-        .get()
-        .then((QuerySnapshot<Map<String, dynamic>> queryList) {
-      for (var doc in queryList.docs) {
-        final user = UserModel().fromMap(doc.data());
-        if (!userList.contains(user)) {
-          userList.add(user);
-        }
-      }
-    });
+    final query = await collection.get();
+    final userList =
+        query.docs.map((e) => UserModel().fromMap(e.data())).toList();
     return userList;
   }
 
@@ -117,12 +109,14 @@ class _SubjectPageState extends State<SubjectPage> {
                                   });
                             });
                       } else {
-                        FirebaseFirestore.instance
+                        await FirebaseFirestore.instance
                             .collection("users")
                             .doc(userCredential.uid)
                             .update({
                           'applies': FieldValue.arrayUnion(
                               [widget.selectedSubjectName])
+                        }).then((value) {
+                          setState(() {});
                         });
                         showDialog(
                             context: context,
@@ -133,9 +127,7 @@ class _SubjectPageState extends State<SubjectPage> {
                                   buttonAction: () {
                                     Navigator.pop(context);
                                   });
-                            }).then((value) {
-                          setState(() {});
-                        });
+                            });
                       }
                     }
                   },
@@ -144,9 +136,7 @@ class _SubjectPageState extends State<SubjectPage> {
                 FutureBuilder<List<UserModel>>(
                   future: getUsersList(),
                   builder: ((context, snapshot) {
-                    if(snapshot.connectionState == ConnectionState.done) {
-                      
-                    }
+                    if (snapshot.connectionState == ConnectionState.done) {}
                     if (!snapshot.hasData && !snapshot.hasError) {
                       return Center(
                           child: CircularProgressIndicator(
@@ -161,21 +151,20 @@ class _SubjectPageState extends State<SubjectPage> {
                       return ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: userList.length,
+                        itemCount: snapshot.data!.length,
                         itemBuilder: ((context, index) {
-                          if (userList[index]
-                              .applies!
+                          if (snapshot.data![index].applies!
                               .contains(widget.selectedSubjectName)) {
                             return ProfileCard(
-                                profileName: userList[index].name!,
-                                profileCourse: userList[index].course!,
-                                profilePeriod: userList[index].period!,
+                                profileName: snapshot.data![index].name!,
+                                profileCourse: snapshot.data![index].course!,
+                                profilePeriod: snapshot.data![index].period!,
                                 cardAction: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => ProfilePage(
-                                        user: userList[index],
+                                        user: snapshot.data![index],
                                       ),
                                     ),
                                   );

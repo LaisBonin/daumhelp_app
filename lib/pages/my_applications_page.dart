@@ -6,11 +6,16 @@ import 'package:flutter/material.dart';
 import '../widgets/exit_dialog.dart';
 import '../widgets/theme_data.dart';
 
-class MyApplicationsPage extends StatelessWidget {
+class MyApplicationsPage extends StatefulWidget {
   const MyApplicationsPage({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<MyApplicationsPage> createState() => _MyApplicationsPageState();
+}
+
+class _MyApplicationsPageState extends State<MyApplicationsPage> {
   Future<List> fetchAppliedSubjects() async {
     final collection = FirebaseFirestore.instance.collection("users");
     final currentUser = FirebaseAuth.instance.currentUser;
@@ -98,33 +103,37 @@ class MyApplicationsPage extends StatelessWidget {
                                     context: context,
                                     builder: (context) {
                                       return ExitDialog(
-                                        dialogTitle: "Deseja remover candidatura em " +
-                                        snapshot.data![index].toString() +
-                                        "?",
+                                        dialogTitle:
+                                            "Deseja remover candidatura em " +
+                                                snapshot.data![index]
+                                                    .toString() +
+                                                "?",
                                         leftButtonAction: () async {
-                                  final userCredential =
-                                      FirebaseAuth.instance.currentUser;
-                                  final infoCurrentUser =
-                                      await FirebaseFirestore.instance
-                                          .collection("users")
-                                          .doc(userCredential!.uid)
-                                          .get();
-                                  FirebaseFirestore.instance
-                                      .collection("users")
-                                      .doc(userCredential.uid)
-                                      .update({
-                                    'applies': FieldValue.arrayRemove(
-                                        [snapshot.data![index]])
-                                  });
-                                  Navigator.of(context).pop();
-                                },
+                                          final userCredential =
+                                              FirebaseAuth.instance.currentUser;
+                                          final infoCurrentUser =
+                                              await FirebaseFirestore.instance
+                                                  .collection("users")
+                                                  .doc(userCredential!.uid)
+                                                  .get();
+                                          FirebaseFirestore.instance
+                                              .collection("users")
+                                              .doc(userCredential.uid)
+                                              .update({
+                                            'applies': FieldValue.arrayRemove(
+                                                [snapshot.data![index]])
+                                          });
+                                          Navigator.of(context).pop();
+                                        },
                                         leftButtonTitle: "Remover",
                                         rightButtonAction: () {
-                                  Navigator.of(context).pop();
-                                },
+                                          Navigator.of(context).pop();
+                                        },
                                         rightButtonTitle: "Voltar",
                                       );
-                                    });
+                                    }).then((value) {
+                                  setState(() {});
+                                });
                               });
                         }),
                       );
