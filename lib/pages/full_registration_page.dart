@@ -9,9 +9,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:daumhelp_app/widgets/button_dialogbox.dart';
 
 class FullRegistrationPageStl extends StatefulWidget {
-  FullRegistrationPageStl({Key? key}) : super(key: key);
+  const FullRegistrationPageStl({Key? key}) : super(key: key);
 
   @override
   State<FullRegistrationPageStl> createState() =>
@@ -31,12 +32,12 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
 
   DocumentSnapshot<Map<String, dynamic>>? currentUserInfo;
 
-  String? firstName = "";
-  String? lastName = "";
-  String? email = "";
-  String? course = "";
-  String? period = "";
-  String? contact = "";
+  String firstName = "";
+  String lastName = "";
+  String email = "";
+  String course = "";
+  String period = "";
+  String contact = "";
   List? currentSkills;
 
   String firstNameErrorText = "Campo obrigatório!";
@@ -134,12 +135,7 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                     showErrorText: firstNameError,
                                     obscure: false,
                                     controller: TextEditingController(
-                                        text: user!
-                                                .data()
-                                                .toString()
-                                                .contains("name")
-                                            ? user["name"]
-                                            : ""),
+                                        text: user!["name"]),
                                   ),
                                   const SizedBox(
                                     height: 14,
@@ -158,12 +154,7 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                     showErrorText: lastNameError,
                                     obscure: false,
                                     controller: TextEditingController(
-                                        text: user
-                                                .data()
-                                                .toString()
-                                                .contains("lastname")
-                                            ? user["lastname"]
-                                            : ""),
+                                        text: user["lastname"]),
                                   ),
                                   const SizedBox(
                                     height: 14,
@@ -181,12 +172,7 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                     showErrorText: courseError,
                                     obscure: false,
                                     controller: TextEditingController(
-                                        text: user
-                                                .data()
-                                                .toString()
-                                                .contains("curso")
-                                            ? user["curso"]
-                                            : ""),
+                                        text: user["curso"]),
                                   ),
                                   const SizedBox(
                                     height: 14,
@@ -208,12 +194,7 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                     showErrorText: periodError,
                                     obscure: false,
                                     controller: TextEditingController(
-                                        text: user
-                                                .data()
-                                                .toString()
-                                                .contains("period")
-                                            ? user["period"]
-                                            : ""),
+                                        text: user["period"]),
                                   ),
                                   const SizedBox(
                                     height: 14,
@@ -233,12 +214,7 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                     showErrorText: emailError,
                                     obscure: false,
                                     controller: TextEditingController(
-                                        text: user
-                                                .data()
-                                                .toString()
-                                                .contains("email")
-                                            ? user["email"]
-                                            : ""),
+                                        text: user["email"]),
                                   ),
                                   const SizedBox(
                                     height: 14,
@@ -275,7 +251,7 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                NewPasswordStl())),
+                                                const NewPasswordStl())),
                                     child: Text(
                                       "Alterar senha",
                                       style: Theme.of(context)
@@ -350,12 +326,12 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                         //     .hasMatch(email);
                                         // if (email.isEmpty || email == "") {
                                         //   emailError = true;
-                                        //   isValid = false;
+
                                         //   emailErrorText = "Campo obrigatório!";
                                         //   setState(() {});
                                         // } else if (emailValid == false) {
                                         //   emailError = true;
-                                        //   isValid = false;
+
                                         //   emailErrorText =
                                         //       "Digite um email válido!";
                                         //   setState(() {});
@@ -365,7 +341,7 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                         //   firstNameError = true;
                                         //   firstNameErrorText =
                                         //       "Campo obrigatório!";
-                                        //   isValid = false;
+
                                         //   setState(() {});
                                         // }
 
@@ -374,28 +350,27 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                         //   lastNameError = true;
                                         //   lastNameErrorText =
                                         //       "Campo obrigatório!";
-                                        //   isValid = false;
+
                                         //   setState(() {});
                                         // }
                                         // if (course.isEmpty || course == "") {
                                         //   courseError = true;
                                         //   courseErrorText =
                                         //       "Campo obrigatório!";
-                                        //   isValid = false;
+
                                         //   setState(() {});
                                         // }
                                         // if (period.isEmpty || period == "") {
                                         //   periodError = true;
                                         //   periodErrorText =
                                         //       "Campo obrigatório!";
-                                        //   isValid = false;
+
                                         //   setState(() {});
                                         // }
                                         // if (contact.isEmpty || contact == "") {
                                         //   contactError = true;
                                         //   contactErrorText =
                                         //       "Campo obrigatório!";
-                                        //   isValid = false;
                                         //   setState(() {});
                                         // }
                                         if (firstName == "" ||
@@ -408,15 +383,23 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                               context: context,
                                               builder: (context) {
                                                 return AlertDialog(
-                                                  title: const Text(
-                                                      "PREENCHA TODOS OS CAMPOS"),
+                                                  // ignore: prefer_const_constructors
+                                                  title: Text(
+                                                      "Preencha todos os campos!"),
                                                   actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              context, "OK"),
-                                                      child: const Text("OK"),
-                                                    )
+                                                    DialogButton(
+                                                        title: "OK",
+                                                        color: Theme.of(context)
+                                                            .primaryColor,
+                                                        textStyle: Theme.of(
+                                                                context)
+                                                            .textTheme
+                                                            .titleSmall
+                                                            ?.copyWith(
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .shadowColor),
+                                                        action: () {}),
                                                   ],
                                                 );
                                               });
@@ -425,20 +408,29 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                               context: context,
                                               builder: (context) {
                                                 return AlertDialog(
-                                                  title: const Text(
+                                                  // ignore: prefer_const_constructors
+                                                  title: Text(
                                                       "DADOS ATUALIZADOS COM SUCESSO"),
                                                   actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              const SubjectListPage(),
-                                                        ),
-                                                      ),
-                                                      child: const Text("OK"),
-                                                    )
+                                                    DialogButton(
+                                                        title: "OK",
+                                                        color: Theme.of(context)
+                                                            .primaryColor,
+                                                        textStyle: Theme.of(
+                                                                context)
+                                                            .textTheme
+                                                            .titleSmall
+                                                            ?.copyWith(
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .shadowColor),
+                                                        action: () {
+                                                          Navigator.of(context).pop(
+                                                              MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const SubjectListPage(),
+                                                          ));
+                                                        }),
                                                   ],
                                                 );
                                               });
