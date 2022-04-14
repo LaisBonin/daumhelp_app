@@ -166,8 +166,8 @@ class SignUpPage extends StatelessWidget {
                                         "curso": "",
                                         "period": "",
                                         "contact": "",
-                                        "applies" : [""],
-                                        "skills" : [""]
+                                        "applies" : [],
+                                        "skills" : []
                                       },
                                     );
                                     showDialog(
