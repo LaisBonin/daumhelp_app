@@ -52,7 +52,7 @@ class SettingsDrawer extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              FullRegistrationPageStl()));
+                              const FullRegistrationPageStl()));
                 },
                 textStyle: Theme.of(context)
                     .textTheme
@@ -85,7 +85,7 @@ class SettingsDrawer extends StatelessWidget {
                       .titleSmall
                       ?.copyWith(color: Theme.of(context).errorColor),
                   action: () {
-                    exitDialog(context);
+                    exitDialog(context, "Sair", "Voltar");
                   }),
             )
           ],

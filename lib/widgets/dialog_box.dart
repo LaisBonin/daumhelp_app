@@ -2,7 +2,7 @@ import 'package:daumhelp_app/pages/login_page_stl.dart';
 import 'package:daumhelp_app/widgets/button_dialogbox.dart';
 import 'package:flutter/material.dart';
 
-exitDialog(BuildContext context) {
+exitDialog(BuildContext context, String leftButtonTitle, String rightButtonTitle) {
   // exibe o diálogo
   showDialog(
       context: context,
@@ -32,7 +32,7 @@ exitDialog(BuildContext context) {
                     Column(
                       children: [
                         DialogButton(
-                            title: "Sair",
+                            title: leftButtonTitle,
                             color: Theme.of(context).errorColor,
                             textStyle: Theme.of(context)
                                 .textTheme
@@ -52,7 +52,7 @@ exitDialog(BuildContext context) {
                     Column(
                       children: [
                         DialogButton(
-                            title: "Voltar",
+                            title: rightButtonTitle,
                             color: Theme.of(context).primaryColor,
                             textStyle: Theme.of(context)
                                 .textTheme

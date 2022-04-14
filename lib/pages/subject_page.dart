@@ -100,49 +100,51 @@ class _SubjectPageState extends State<SubjectPage> {
                           );
                         });
                   } else {
-                    if (infoCurrentUser["applies"].toString().contains(widget.selectedSubjectName)) {
+                    if (infoCurrentUser["applies"]
+                        .toString()
+                        .contains(widget.selectedSubjectName)) {
                       showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text("VOCÊ JA SE CANDIDATOU PARA ESTA MATÉRIA"),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  setState(() {
-                                  });
-                                },                                  
-                                child: const Text("OK"),
-                              )
-                            ],
-                          );
-                        });
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text(
+                                  "VOCÊ JA SE CANDIDATOU PARA ESTA MATÉRIA"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    setState(() {});
+                                  },
+                                  child: const Text("OK"),
+                                )
+                              ],
+                            );
+                          });
                     } else {
-                    FirebaseFirestore.instance
-                        .collection("users")
-                        .doc(userCredential.uid)
-                        .update({
-                      'applies':
-                          FieldValue.arrayUnion([widget.selectedSubjectName])
-                    });
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text("CANDIDATURA FEITA COM SUCESSO"),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  setState(() {
-                                  });
-                                },                                  
-                                child: const Text("OK"),
-                              )
-                            ],
-                          );
-                        });
+                      FirebaseFirestore.instance
+                          .collection("users")
+                          .doc(userCredential.uid)
+                          .update({
+                        'applies':
+                            FieldValue.arrayUnion([widget.selectedSubjectName])
+                      });
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title:
+                                  const Text("CANDIDATURA FEITA COM SUCESSO"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    setState(() {});
+                                  },
+                                  child: const Text("OK"),
+                                )
+                              ],
+                            );
+                          });
                     }
                   }
                 },

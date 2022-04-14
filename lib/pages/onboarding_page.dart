@@ -130,7 +130,7 @@ class _OnBoardingState extends State<OnBoarding> {
                           Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => FullRegistrationPageStl()));
+                                  builder: (context) => const FullRegistrationPageStl()));
                         })),
                 const SizedBox(
                   height: 15,
