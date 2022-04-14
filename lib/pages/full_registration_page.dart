@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daumhelp_app/pages/newpass_page_stl.dart';
 import 'package:daumhelp_app/pages/subject_list_page.dart';
-import 'package:daumhelp_app/pages/subject_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
