@@ -4,7 +4,7 @@ import '../models/user.dart';
 import '../widgets/theme_data.dart';
 
 class ProfilePage extends StatelessWidget {
-  final User user;
+  final UserModel user;
 
   const ProfilePage({
     Key? key,

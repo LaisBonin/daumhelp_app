@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../models/user.dart';
 
 class FullProfileCard extends StatelessWidget {
-  final User user;
+  final UserModel user;
   final Function() cardAction;
 
   const FullProfileCard({
@@ -123,7 +123,7 @@ class _VideoDescription extends StatelessWidget {
           ),
           const Padding(padding: EdgeInsets.symmetric(vertical: 1.0)),
           Text(
-            profilePeriod + " Período",
+            profilePeriod + "º Período",
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ],

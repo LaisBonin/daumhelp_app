@@ -4,6 +4,7 @@ import 'package:daumhelp_app/models/user.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/profile_card.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../widgets/theme_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,15 +19,15 @@ class SubjectPage extends StatefulWidget {
 }
 
 class _SubjectPageState extends State<SubjectPage> {
-  List<User> userList = [];
+  List<UserModel> userList = [];
 
-  Future<List<User>> getUsersList() async {
+  Future<List<UserModel>> getUsersList() async {
     var collection = FirebaseFirestore.instance.collection("users");
     await collection
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> queryList) {
       for (var doc in queryList.docs) {
-        final user = User().fromMap(doc.data());
+        final user = UserModel().fromMap(doc.data());
         userList.add(user);
       }
     });
@@ -73,15 +74,81 @@ class _SubjectPageState extends State<SubjectPage> {
                 height: 16,
               ),
               YellowButtonLarge(
-                action: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const OnBoarding()));
+                action: () async {
+                  final userCredential = FirebaseAuth.instance.currentUser;
+                  final infoCurrentUser = await FirebaseFirestore.instance
+                      .collection("users")
+                      .doc(userCredential!.uid)
+                      .get();
+                  if (infoCurrentUser["name"] == "") {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text(
+                                "Você ainda não completou seu registro, complete antes de se candidatar"),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const OnBoarding(),
+                                    )),
+                                child: const Text("OK"),
+                              )
+                            ],
+                          );
+                        });
+                  } else {
+                    if (infoCurrentUser["applies"].toString().contains(widget.selectedSubjectName)) {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text("VOCÊ JA SE CANDIDATOU PARA ESTA MATÉRIA"),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  setState(() {
+                                  });
+                                },                                  
+                                child: const Text("OK"),
+                              )
+                            ],
+                          );
+                        });
+                    } else {
+                    FirebaseFirestore.instance
+                        .collection("users")
+                        .doc(userCredential.uid)
+                        .update({
+                      'applies':
+                          FieldValue.arrayUnion([widget.selectedSubjectName])
+                    });
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text("CANDIDATURA FEITA COM SUCESSO"),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  setState(() {
+                                  });
+                                },                                  
+                                child: const Text("OK"),
+                              )
+                            ],
+                          );
+                        });
+                    }
+                  }
                 },
                 title: 'Candidatar-se',
               ),
-              FutureBuilder<List<User>>(
+              FutureBuilder<List<UserModel>>(
                 future: getUsersList(),
                 builder: ((context, snapshot) {
                   if (!snapshot.hasData && !snapshot.hasError) {

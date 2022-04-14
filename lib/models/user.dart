@@ -1,4 +1,4 @@
-class User {
+class UserModel {
   String? name;
   String? lastname;
   String? course;
@@ -9,7 +9,7 @@ class User {
   List? applies;
   List? skills;
 
-  User(
+  UserModel(
       {this.lastname,
       this.period,
       this.contact,
@@ -20,8 +20,8 @@ class User {
       this.name,
       this.course});
 
-  User fromMap(Map<String, dynamic> map) {
-    return User(
+  UserModel fromMap(Map<String, dynamic> map) {
+    return UserModel(
       name: map["name"] ?? "",
       lastname: map["lastname"] ?? "",
       course: map["curso"] ?? "",
