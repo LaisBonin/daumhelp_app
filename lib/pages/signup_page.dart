@@ -198,8 +198,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                         "curso": "",
                                         "period": "",
                                         "contact": "",
-                                        "applies": [""],
-                                        "skills": [""]
+                                        "applies" : [],
+                                        "skills" : []
                                       },
                                     );
                                     Navigator.push(

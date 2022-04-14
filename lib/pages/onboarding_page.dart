@@ -132,7 +132,6 @@ class _OnBoardingState extends State<OnBoarding> {
                                 MaterialPageRoute(
                                   builder: (context) => FullRegistrationPageStl()));
                         })),
-
                 const SizedBox(
                   height: 15,
                 ),

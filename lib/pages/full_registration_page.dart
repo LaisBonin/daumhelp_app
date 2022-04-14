@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daumhelp_app/pages/newpass_page_stl.dart';
+import 'package:daumhelp_app/pages/subject_list_page.dart';
+import 'package:daumhelp_app/pages/subject_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
@@ -8,7 +10,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import '../widgets/skill_dot.dart';
 
 class FullRegistrationPageStl extends StatefulWidget {
   FullRegistrationPageStl({Key? key}) : super(key: key);
@@ -116,7 +117,6 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                               course = snapshot.data!["curso"];
                               period = snapshot.data!["period"];
                               contact = snapshot.data!["contact"];
-
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -276,7 +276,7 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const NewPasswordStl())),
+                                                NewPasswordStl())),
                                     child: Text(
                                       "Alterar senha",
                                       style: Theme.of(context)
@@ -297,11 +297,12 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                       Expanded(
                                         flex: 3,
                                         child: CustomTextField(
-                                            hint: "Habilidades",
-                                            action: () {},
-                                            errorText: "Campo Obrigatório!",
-                                            showErrorText: false,
-                                            obscure: false),
+                                          hint: "Habilidades",
+                                          action: () {},
+                                          errorText: "Campo Obrigatório!",
+                                          obscure: false,
+                                          showErrorText: false,
+                                        ),
                                       ),
                                       const SizedBox(
                                         width: 14,
@@ -345,8 +346,6 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                   YellowButtonLarge(
                                       title: "Atualizar",
                                       action: () {
-                                        bool isValid = true;
-
                                         // bool emailValid = RegExp(
                                         //         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                         //     .hasMatch(email);
@@ -400,8 +399,50 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                         //   isValid = false;
                                         //   setState(() {});
                                         // }
-
-                                        if (isValid == true) {
+                                        if (firstName == "" ||
+                                            lastName == "" ||
+                                            course == "" ||
+                                            period == "" ||
+                                            email == "" ||
+                                            contact == "") {
+                                          return showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                      "PREENCHA TODOS OS CAMPOS"),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              context, "OK"),
+                                                      child: const Text("OK"),
+                                                    )
+                                                  ],
+                                                );
+                                              });
+                                        } else {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                      "DADOS ATUALIZADOS COM SUCESSO"),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              const SubjectListPage(),
+                                                        ),
+                                                      ),
+                                                      child: const Text("OK"),
+                                                    )
+                                                  ],
+                                                );
+                                              });
                                           var collection = FirebaseFirestore
                                               .instance
                                               .collection("users");

@@ -2,6 +2,7 @@ import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NewPasswordStl extends StatefulWidget {
@@ -12,9 +13,6 @@ class NewPasswordStl extends StatefulWidget {
 }
 
 class _NewPasswordStlState extends State<NewPasswordStl> {
-  String password = "";
-  String passErrorText = "Senha Incorreta!";
-  bool passError = false;
 
   String passNew = "";
   String passNewErrorText = "Senha Incorreta!";
@@ -73,19 +71,13 @@ class _NewPasswordStlState extends State<NewPasswordStl> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomTextField(
-                              onChanged: (text) {
-                                password = text;
-                                setState(() {
-                                  passError = false;
-                                });
-                              },
-                              hint: "Senha Atual",
-                              action: () {},
-                              errorText: passErrorText,
-                              showErrorText: passError,
-                              obscure: true),
-                          const SizedBox(height: 14),
+                          // CustomTextField(
+                          //     hint: "Senha atual",
+                          //     action: () {},
+                          //     errorText: "Campo Obrigatório!",
+                          //     showErrorText: false,
+                          //     obscure: false),
+                          // const SizedBox(height: 14),
                           CustomTextField(
                               onChanged: (text) {
                                 passNew = text;
@@ -114,15 +106,10 @@ class _NewPasswordStlState extends State<NewPasswordStl> {
                           const SizedBox(
                             height: 50,
                           ),
+
                           YellowButtonLarge(
                               title: "Atualizar",
                               action: () {
-                                if (password.isEmpty || password == "") {
-                                  passError = true;
-                                  passErrorText = "Campo obrigatório!";
-
-                                  setState(() {});
-                                }
 
                                 if (passNew.isEmpty || passNew == "") {
                                   passNewError = true;
@@ -146,6 +133,44 @@ class _NewPasswordStlState extends State<NewPasswordStl> {
                                 }
 
                               }),
+
+                          YellowButtonLarge(title: "Atualizar", action: () {
+                              if (passNew == passNewConfirm) {
+                              FirebaseAuth.instance.currentUser!.updatePassword(passNew);
+                              showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: const Text(
+                                            "SENHA ALTERADA"),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, "OK"),
+                                            child: const Text("OK"),
+                                          )
+                                        ],
+                                      );
+                                    });
+                            } else {
+                              showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: const Text(
+                                            "SENHAS NÃO SÃO IGUAIS"),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, "OK"),
+                                            child: const Text("OK"),
+                                          )
+                                        ],
+                                      );
+                                    });
+                            }                              
+                          }),
+
                           const SizedBox(
                             height: 15,
                           ),
@@ -158,9 +183,6 @@ class _NewPasswordStlState extends State<NewPasswordStl> {
             ),
           ),
         ),
-
-        // ),
-        // ),
       ),
     );
   }

@@ -100,7 +100,7 @@ class _VideoDescription extends StatelessWidget {
           ),
           const Padding(padding: EdgeInsets.symmetric(vertical: 1.0)),
           Text(
-            profilePeriod + " Período",
+            profilePeriod + "º Período",
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
