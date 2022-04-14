@@ -104,6 +104,7 @@ class FullRegistrationPageStl extends StatelessWidget {
                                     hint: "Primeiro Nome",
                                     action: () {},
                                     errorText: "Campo Obrigatório!",
+                                    showErrorText: false,
                                     obscure: false,
                                     controller: TextEditingController(
                                         text: user!
@@ -124,6 +125,7 @@ class FullRegistrationPageStl extends StatelessWidget {
                                     hint: "Último Nome",
                                     action: () {},
                                     errorText: "Campo Obrigatório!",
+                                    showErrorText: false,
                                     obscure: false,
                                     controller: TextEditingController(
                                         text: user
@@ -143,6 +145,7 @@ class FullRegistrationPageStl extends StatelessWidget {
                                     hint: "Curso",
                                     action: () {},
                                     errorText: "Campo Obrigatório!",
+                                    showErrorText: false,
                                     obscure: false,
                                     controller: TextEditingController(
                                         text: user
@@ -166,6 +169,7 @@ class FullRegistrationPageStl extends StatelessWidget {
                                     hint: "Periodo",
                                     action: () {},
                                     errorText: "Campo Obrigatório!",
+                                    showErrorText: false,
                                     obscure: false,
                                     controller: TextEditingController(
                                         text: user
@@ -187,6 +191,7 @@ class FullRegistrationPageStl extends StatelessWidget {
                                     hint: "Email",
                                     action: () {},
                                     errorText: "Campo Obrigatório!",
+                                    showErrorText: false,
                                     obscure: false,
                                     controller: TextEditingController(
                                         text: user
@@ -210,6 +215,7 @@ class FullRegistrationPageStl extends StatelessWidget {
                                     hint: "Numero do WhatsApp",
                                     action: () {},
                                     errorText: "Campo Obrigatório!",
+                                    showErrorText: false,
                                     obscure: false,
                                     controller: TextEditingController(
                                         text: user
@@ -251,6 +257,7 @@ class FullRegistrationPageStl extends StatelessWidget {
                                             hint: "Habilidades",
                                             action: () {},
                                             errorText: "Campo Obrigatório!",
+                                    showErrorText: false,
                                             obscure: false),
                                       ),
                                       const SizedBox(
