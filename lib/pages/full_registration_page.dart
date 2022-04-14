@@ -159,7 +159,7 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                     showErrorText: lastNameError,
                                     obscure: false,
                                     controller: TextEditingController(
-                                        text: user!
+                                        text: user
                                                 .data()
                                                 .toString()
                                                 .contains("lastname")
