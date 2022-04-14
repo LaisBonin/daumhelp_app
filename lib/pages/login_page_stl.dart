@@ -21,7 +21,8 @@ class _LoginPageStlState extends State<LoginPageStl> {
   bool emailError = false;
   bool passError = false;
   String passErrorText = "Senha Incorreta!";
-  
+  String emailErrorText = "Campo obrigatório!";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +76,7 @@ class _LoginPageStlState extends State<LoginPageStl> {
                               },
                               hint: "Email",
                               action: () {},
-                              errorText: "Campo Obrigatório!",
+                              errorText: emailErrorText,
                               showErrorText: emailError,
                               obscure: false),
                           const SizedBox(
@@ -101,14 +102,24 @@ class _LoginPageStlState extends State<LoginPageStl> {
                               action: () async {
                                 var isCredentialValid = true;
                                 // print(emailError);
+                                bool emailValid = RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(email);
                                 if (email.isEmpty || email == "") {
                                   emailError = true;
                                   isCredentialValid = false;
+                                  emailErrorText = "Campo obrigatório!";
+                                  setState(() {});
+                                } else if (emailValid == false) {
+                                  emailError = true;
+                                  isCredentialValid = false;
+                                  emailErrorText = "Digite um email válido!";
                                   setState(() {});
                                 }
 
                                 if (password.isEmpty || password == "") {
                                   passError = true;
+                                  passErrorText = "Campo obrigatório!";
                                   isCredentialValid = false;
                                   setState(() {});
                                 }
@@ -120,44 +131,22 @@ class _LoginPageStlState extends State<LoginPageStl> {
                                             .signInWithEmailAndPassword(
                                                 email: email,
                                                 password: password);
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            title: const Text("LOGADO"),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const SubjectListPage(),
-                                                          )),
-                                                  child: const Text("OK"))
-                                            ],
-                                          );
-                                        });
+
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SubjectListPage(),
+                                        ));
                                   } on FirebaseAuthException catch (e) {
                                     if (e.code == 'user-not-found') {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: const Text(
-                                                  "NÃO EXISTE UMA CONTA COM ESSE EMAIL"),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          context, "OK"),
-                                                  child: const Text("OK"),
-                                                )
-                                              ],
-                                            );
-                                          });
+                                      emailError = true;
+                                      isCredentialValid = false;
+                                      emailErrorText = "Usuário não existe!";
+                                      setState(() {});
                                     } else if (e.code == 'wrong-password') {
                                       passError = true;
+                                      passErrorText = "Senha Incorreta!";
                                       isCredentialValid = false;
                                       setState(() {});
                                     }

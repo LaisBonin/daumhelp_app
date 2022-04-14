@@ -4,8 +4,25 @@ import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
-class NewPasswordStl extends StatelessWidget {
+class NewPasswordStl extends StatefulWidget {
   const NewPasswordStl({Key? key}) : super(key: key);
+
+  @override
+  State<NewPasswordStl> createState() => _NewPasswordStlState();
+}
+
+class _NewPasswordStlState extends State<NewPasswordStl> {
+  String password = "";
+  String passErrorText = "Senha Incorreta!";
+  bool passError = false;
+
+  String passNew = "";
+  String passNewErrorText = "Senha Incorreta!";
+  bool passNewError = false;
+
+  String passNewConfirm = "";
+  String passNewConfirmErrorText = "Senha Incorreta!";
+  bool passNewConfirmError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -57,29 +74,78 @@ class NewPasswordStl extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomTextField(
-                              hint: "Senha atual",
+                              onChanged: (text) {
+                                password = text;
+                                setState(() {
+                                  passError = false;
+                                });
+                              },
+                              hint: "Senha Atual",
                               action: () {},
-                              errorText: "Campo Obrigatório!",
-                              showErrorText: false,
-                              obscure: false),
+                              errorText: passErrorText,
+                              showErrorText: passError,
+                              obscure: true),
                           const SizedBox(height: 14),
                           CustomTextField(
-                              hint: "Nova senha",
+                              onChanged: (text) {
+                                passNew = text;
+                                setState(() {
+                                  passNewError = false;
+                                });
+                              },
+                              hint: "Nova Senha",
                               action: () {},
-                              errorText: "Campo Obrigatório!",
-                              showErrorText: false,
-                              obscure: false),
+                              errorText: passNewErrorText,
+                              showErrorText: passNewError,
+                              obscure: true),
                           const SizedBox(height: 14),
                           CustomTextField(
+                              onChanged: (text) {
+                                passNewConfirm = text;
+                                setState(() {
+                                  passNewConfirmError = false;
+                                });
+                              },
                               hint: "Confirme a senha",
                               action: () {},
-                              errorText: "Campo Obrigatório!",
-                              showErrorText: false,
-                              obscure: false),
+                              errorText: passNewConfirmErrorText,
+                              showErrorText: passNewConfirmError,
+                              obscure: true),
                           const SizedBox(
                             height: 50,
                           ),
-                          YellowButtonLarge(title: "Atualizar", action: () {}),
+                          YellowButtonLarge(
+                              title: "Atualizar",
+                              action: () {
+                                if (password.isEmpty || password == "") {
+                                  passError = true;
+                                  passErrorText = "Campo obrigatório!";
+
+                                  setState(() {});
+                                }
+
+                                if (passNew.isEmpty || passNew == "") {
+                                  passNewError = true;
+                                  passNewErrorText = "Campo obrigatório!";
+
+                                  setState(() {});
+                                }
+
+                                if (passNewConfirm.isEmpty ||
+                                    passNewConfirm == "") {
+                                  passNewConfirmError = true;
+                                  passNewConfirmErrorText =
+                                      "Campo obrigatório!";
+                                  setState(() {});
+                                }
+                                if (passNew != passNewConfirm) {
+                                  passNewConfirmError = true;
+                                  passNewConfirmErrorText =
+                                      "Senhas não conferem!";
+                                  setState(() {});
+                                }
+
+                              }),
                           const SizedBox(
                             height: 15,
                           ),
