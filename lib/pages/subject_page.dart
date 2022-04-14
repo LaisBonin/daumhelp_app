@@ -6,6 +6,7 @@ import 'package:daumhelp_app/widgets/profile_card.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../widgets/inform_dialog.dart';
 import '../widgets/theme_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -19,20 +20,12 @@ class SubjectPage extends StatefulWidget {
 }
 
 class _SubjectPageState extends State<SubjectPage> {
-  List<UserModel> userList = [];
-
+  
   Future<List<UserModel>> getUsersList() async {
     var collection = FirebaseFirestore.instance.collection("users");
-    await collection
-        .get()
-        .then((QuerySnapshot<Map<String, dynamic>> queryList) {
-      for (var doc in queryList.docs) {
-        final user = UserModel().fromMap(doc.data());
-        if (!userList.contains(user)) {
-          userList.add(user);
-        }
-      }
-    });
+    final query = await collection.get();
+    final userList =
+        query.docs.map((e) => UserModel().fromMap(e.data())).toList();
     return userList;
   }
 
@@ -87,21 +80,18 @@ class _SubjectPageState extends State<SubjectPage> {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return AlertDialog(
-                              title: const Text(
-                                  "Você ainda não completou seu registro, complete antes de se candidatar"),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.push(
+                            return InformDialog(
+                                dialogTitle:
+                                    "Você ainda não completou seu registro, complete antes de se candidatar",
+                                buttonTitle: "Completar",
+                                buttonAction: () {
+                                  Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             const OnBoarding(),
-                                      )),
-                                  child: const Text("OK"),
-                                )
-                              ],
-                            );
+                                      ));
+                                });
                           });
                     } else {
                       if (infoCurrentUser["applies"]
@@ -110,44 +100,33 @@ class _SubjectPageState extends State<SubjectPage> {
                         showDialog(
                             context: context,
                             builder: (context) {
-                              return AlertDialog(
-                                title: const Text(
-                                    "VOCÊ JA SE CANDIDATOU PARA ESTA MATÉRIA"),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text("OK"),
-                                  )
-                                ],
-                              );
+                              return InformDialog(
+                                  dialogTitle:
+                                      "Você já se candidatou para esta matéria",
+                                  buttonTitle: "Voltar",
+                                  buttonAction: () {
+                                    Navigator.pop(context);
+                                  });
                             });
                       } else {
-                        FirebaseFirestore.instance
+                        await FirebaseFirestore.instance
                             .collection("users")
                             .doc(userCredential.uid)
                             .update({
                           'applies': FieldValue.arrayUnion(
                               [widget.selectedSubjectName])
+                        }).then((value) {
+                          setState(() {});
                         });
                         showDialog(
                             context: context,
                             builder: (context) {
-                              return AlertDialog(
-                                title:
-                                    const Text("CANDIDATURA FEITA COM SUCESSO"),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        Navigator.pop(context);
-                                      });
-                                    },
-                                    child: const Text("OK"),
-                                  )
-                                ],
-                              );
+                              return InformDialog(
+                                  dialogTitle: "Candidatura feita com sucesso!",
+                                  buttonTitle: "Voltar",
+                                  buttonAction: () {
+                                    Navigator.pop(context);
+                                  });
                             });
                       }
                     }
@@ -157,6 +136,7 @@ class _SubjectPageState extends State<SubjectPage> {
                 FutureBuilder<List<UserModel>>(
                   future: getUsersList(),
                   builder: ((context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {}
                     if (!snapshot.hasData && !snapshot.hasError) {
                       return Center(
                           child: CircularProgressIndicator(
@@ -171,21 +151,20 @@ class _SubjectPageState extends State<SubjectPage> {
                       return ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: userList.length,
+                        itemCount: snapshot.data!.length,
                         itemBuilder: ((context, index) {
-                          if (userList[index]
-                              .applies!
+                          if (snapshot.data![index].applies!
                               .contains(widget.selectedSubjectName)) {
                             return ProfileCard(
-                                profileName: userList[index].name!,
-                                profileCourse: userList[index].course!,
-                                profilePeriod: userList[index].period!,
+                                profileName: snapshot.data![index].name!,
+                                profileCourse: snapshot.data![index].course!,
+                                profilePeriod: snapshot.data![index].period!,
                                 cardAction: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => ProfilePage(
-                                        user: userList[index],
+                                        user: snapshot.data![index],
                                       ),
                                     ),
                                   );

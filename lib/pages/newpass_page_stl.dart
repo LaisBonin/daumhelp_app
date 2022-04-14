@@ -5,6 +5,8 @@ import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/inform_dialog.dart';
+
 class NewPasswordStl extends StatefulWidget {
   const NewPasswordStl({Key? key}) : super(key: key);
 
@@ -13,7 +15,6 @@ class NewPasswordStl extends StatefulWidget {
 }
 
 class _NewPasswordStlState extends State<NewPasswordStl> {
-
   String passNew = "";
   String passNewErrorText = "Senha Incorreta!";
   bool passNewError = false;
@@ -106,43 +107,47 @@ class _NewPasswordStlState extends State<NewPasswordStl> {
                           const SizedBox(
                             height: 50,
                           ),
-
                           YellowButtonLarge(
-                              title: "Atualizar",
-                              action: () {
-
-                                if (passNew.isEmpty || passNew == "") {
-                                  passNewError = true;
-                                  passNewErrorText = "Campo obrigatório!";
-
-                                  setState(() {});
-                                }
-
-                                if (passNewConfirm.isEmpty ||
-                                    passNewConfirm == "") {
-                                  passNewConfirmError = true;
-                                  passNewConfirmErrorText =
-                                      "Campo obrigatório!";
-                                  setState(() {});
-                                }
-                                if (passNew != passNewConfirm) {
-                                  passNewConfirmError = true;
-                                  passNewConfirmErrorText =
-                                      "Senhas não conferem!";
-                                  setState(() {});
-                                }
-
-                              }),
-
-                          YellowButtonLarge(title: "Atualizar", action: () {
-                              if (passNew == passNewConfirm) {
-                              FirebaseAuth.instance.currentUser!.updatePassword(passNew);
-                              showDialog(
+                            title: "Atualizar",
+                            action: () {
+                              if (passNew.isEmpty || passNew == "") {
+                                passNewError = true;
+                                passNewErrorText = "Campo obrigatório!";
+                                setState(() {});
+                              } else if (passNewConfirm.isEmpty ||
+                                  passNewConfirm == "") {
+                                passNewConfirmError = true;
+                                passNewConfirmErrorText = "Campo obrigatório!";
+                                setState(() {});
+                              } else if (passNew != passNewConfirm) {
+                                passNewConfirmError = true;
+                                passNewConfirmErrorText =
+                                    "Senhas não conferem!";
+                                setState(() {});
+                              } else {
+                                if (passNew == passNewConfirm) {
+                                  FirebaseAuth.instance.currentUser!
+                                      .updatePassword(passNew);
+                                  showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return InformDialog(
+                                                dialogTitle:
+                                                    "Senha alterada com sucesso!",
+                                                buttonTitle: "Voltar",
+                                                buttonAction: () {
+                                                  Navigator.pop(context);
+                                                });
+                                          })
+                                      .then(
+                                          (value) => {Navigator.pop(context)});
+                                } else {
+                                  showDialog(
                                     context: context,
                                     builder: (context) {
                                       return AlertDialog(
-                                        title: const Text(
-                                            "SENHA ALTERADA"),
+                                        title:
+                                            const Text("SENHAS NÃO SÃO IGUAIS"),
                                         actions: [
                                           TextButton(
                                             onPressed: () =>
@@ -151,25 +156,12 @@ class _NewPasswordStlState extends State<NewPasswordStl> {
                                           )
                                         ],
                                       );
-                                    });
-                            } else {
-                              showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: const Text(
-                                            "SENHAS NÃO SÃO IGUAIS"),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () =>
-                                                Navigator.pop(context, "OK"),
-                                            child: const Text("OK"),
-                                          )
-                                        ],
-                                      );
-                                    });
-                            }                              
-                          }),
+                                    },
+                                  );
+                                }
+                              }
+                            },
+                          ),
 
                           const SizedBox(
                             height: 15,

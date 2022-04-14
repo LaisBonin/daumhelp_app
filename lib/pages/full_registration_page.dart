@@ -9,7 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:daumhelp_app/widgets/button_dialogbox.dart';
+
+import '../widgets/inform_dialog.dart';
 
 class FullRegistrationPageStl extends StatefulWidget {
   const FullRegistrationPageStl({Key? key}) : super(key: key);
@@ -379,60 +380,32 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                             period == "" ||
                                             email == "" ||
                                             contact == "") {
-                                          return showDialog(
+                                          showDialog(
                                               context: context,
                                               builder: (context) {
-                                                return AlertDialog(
-                                                  // ignore: prefer_const_constructors
-                                                  title: Text(
-                                                      "Preencha todos os campos!"),
-                                                  actions: [
-                                                    DialogButton(
-                                                        title: "OK",
-                                                        color: Theme.of(context)
-                                                            .primaryColor,
-                                                        textStyle: Theme.of(
-                                                                context)
-                                                            .textTheme
-                                                            .titleSmall
-                                                            ?.copyWith(
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .shadowColor),
-                                                        action: () {}),
-                                                  ],
-                                                );
+                                                return InformDialog(
+                                                    dialogTitle:
+                                                        "Preencha todos os campos",
+                                                    buttonTitle: "Voltar",
+                                                    buttonAction: () {
+                                                      Navigator.pop(context);
+                                                    });
                                               });
                                         } else {
                                           showDialog(
                                               context: context,
                                               builder: (context) {
-                                                return AlertDialog(
-                                                  // ignore: prefer_const_constructors
-                                                  title: Text(
-                                                      "DADOS ATUALIZADOS COM SUCESSO"),
-                                                  actions: [
-                                                    DialogButton(
-                                                        title: "OK",
-                                                        color: Theme.of(context)
-                                                            .primaryColor,
-                                                        textStyle: Theme.of(
-                                                                context)
-                                                            .textTheme
-                                                            .titleSmall
-                                                            ?.copyWith(
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .shadowColor),
-                                                        action: () {
-                                                          Navigator.of(context).pop(
-                                                              MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const SubjectListPage(),
-                                                          ));
-                                                        }),
-                                                  ],
-                                                );
+                                                return InformDialog(
+                                                    dialogTitle:
+                                                        "Dados atualizados com sucesso!",
+                                                    buttonTitle: "Voltar",
+                                                    buttonAction: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  const SubjectListPage()));
+                                                    });
                                               });
                                           var collection = FirebaseFirestore
                                               .instance

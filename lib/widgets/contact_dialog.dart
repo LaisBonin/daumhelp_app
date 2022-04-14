@@ -60,8 +60,9 @@ contactDialog(
                   YellowButtonLarge(
                       title: "Mandar uma mensagem",
                       action: () async {
+                        int intValue = int.parse(contactNumber.replaceAll(RegExp('[^0-9]'), ''));
                         String url =
-                            "https://api.whatsapp.com/send?phone=$contactNumber&text=Ol%C3%A1!%20Vi%20seu%20perfil%20no%20D%C3%A1%20um%20Help!%20e%20gostaria%20de%20uma%20monitoria,%20poderia%20me%20ajudar?";
+                            "https://api.whatsapp.com/send?phone=+55$intValue&text=Ol%C3%A1!%20Vi%20seu%20perfil%20no%20D%C3%A1%20um%20Help!%20e%20gostaria%20de%20uma%20monitoria,%20poderia%20me%20ajudar?";
                         await launchURL(url);
                       })
                 ],

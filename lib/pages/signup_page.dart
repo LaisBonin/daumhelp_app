@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daumhelp_app/pages/subject_list_page.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
+import 'package:daumhelp_app/widgets/inform_dialog.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/text_field.dart';
@@ -8,7 +9,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:email_validator/email_validator.dart';
-
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -199,16 +199,25 @@ class _SignUpPageState extends State<SignUpPage> {
                                         "curso": "",
                                         "period": "",
                                         "contact": "",
-                                        "applies" : [],
-                                        "skills" : []
+                                        "applies": [],
+                                        "skills": []
                                       },
                                     );
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SubjectListPage(),
-                                        ));
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return InformDialog(
+                                              dialogTitle:
+                                                  "Conta criada com sucesso",
+                                              buttonTitle: "Voltar",
+                                              buttonAction: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const SubjectListPage()));
+                                              });
+                                        });
                                   } on FirebaseAuthException catch (e) {
                                     if (e.code == 'weak-password') {
                                       passError = true;

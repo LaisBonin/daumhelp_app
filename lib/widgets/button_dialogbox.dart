@@ -17,8 +17,6 @@ class DialogButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 38,
-      width: 103,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             primary: color,
