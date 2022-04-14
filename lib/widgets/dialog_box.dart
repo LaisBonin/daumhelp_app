@@ -2,8 +2,8 @@ import 'package:daumhelp_app/pages/login_page_stl.dart';
 import 'package:daumhelp_app/widgets/button_dialogbox.dart';
 import 'package:flutter/material.dart';
 
-exitDialog(BuildContext context, String leftButtonTitle, String rightButtonTitle) {
-  // exibe o diálogo
+exitDialog(BuildContext context, String leftButtonTitle, String rightButtonTitle, Function() leftButtonAction, Function() rightButtonAction) {
+
   showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -39,11 +39,7 @@ exitDialog(BuildContext context, String leftButtonTitle, String rightButtonTitle
                                 .titleSmall
                                 ?.copyWith(
                                     color: Theme.of(context).canvasColor),
-                            action: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const LoginPageStl())))
+                            action: leftButtonAction)
                       ],
                     ),
                     const SizedBox(
@@ -59,9 +55,7 @@ exitDialog(BuildContext context, String leftButtonTitle, String rightButtonTitle
                                 .titleSmall
                                 ?.copyWith(
                                     color: Theme.of(context).shadowColor),
-                            action: () {
-                              Navigator.of(context).pop();
-                            })
+                            action: rightButtonAction)
                       ],
                     ),
                   ],

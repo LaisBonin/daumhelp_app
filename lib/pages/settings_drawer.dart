@@ -1,8 +1,12 @@
+import 'package:daumhelp_app/pages/login_page_stl.dart';
 import 'package:daumhelp_app/pages/my_applications_page.dart';
 import 'package:daumhelp_app/pages/full_registration_page.dart';
 import 'package:daumhelp_app/widgets/button_drawer.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/dialog_box.dart';
+import 'forgot_password_page_stl.dart';
 
 class SettingsDrawer extends StatelessWidget {
   const SettingsDrawer({Key? key}) : super(key: key);
@@ -84,7 +88,19 @@ class SettingsDrawer extends StatelessWidget {
                       .titleSmall
                       ?.copyWith(color: Theme.of(context).errorColor),
                   action: () {
-                    exitDialog(context, "Sair", "Voltar");
+                    exitDialog(
+                        context,
+                        "Sair",
+                        "Voltar",
+                        (() => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const LoginPageStl(),
+                              ),
+                            )), () {
+                      Navigator.of(context).pop();
+                    });
                   }),
             )
           ],
