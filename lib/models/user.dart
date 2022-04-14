@@ -1,4 +1,8 @@
-class UserModel {
+
+
+import 'package:equatable/equatable.dart';
+
+class UserModel extends Equatable {
   String? name;
   String? lastname;
   String? course;
@@ -33,4 +37,7 @@ class UserModel {
       skills: map["skills"] ?? <String>[],
     );
   }
+
+  @override
+  List<Object?> get props => [id];
 }

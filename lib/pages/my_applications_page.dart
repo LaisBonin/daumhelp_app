@@ -87,8 +87,26 @@ class MyApplicationsPage extends StatelessWidget {
                         itemBuilder: ((context, index) {
                           return SubjectListTile(
                               subjectName: snapshot.data![index],
-                              subjectIcon: const Icon(null),
-                              subjectAction: () {});
+                              subjectIcon: Icon(Icons.delete_rounded,
+                                  color: Theme.of(context).primaryColor),
+                              subjectAction: () async {
+
+                                
+                                final userCredential =
+                                    FirebaseAuth.instance.currentUser;
+                                final infoCurrentUser = await FirebaseFirestore
+                                    .instance
+                                    .collection("users")
+                                    .doc(userCredential!.uid)
+                                    .get();
+                                FirebaseFirestore.instance
+                                    .collection("users")
+                                    .doc(userCredential.uid)
+                                    .update({
+                                  'applies': FieldValue.arrayRemove(
+                                      [snapshot.data![index]])
+                                });
+                              });
                         }),
                       );
                     } else {
