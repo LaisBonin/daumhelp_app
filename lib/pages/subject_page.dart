@@ -6,6 +6,7 @@ import 'package:daumhelp_app/widgets/profile_card.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../widgets/inform_dialog.dart';
 import '../widgets/theme_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -87,21 +88,18 @@ class _SubjectPageState extends State<SubjectPage> {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return AlertDialog(
-                              title: const Text(
-                                  "Você ainda não completou seu registro, complete antes de se candidatar"),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.push(
+                            return InformDialog(
+                                dialogTitle:
+                                    "Você ainda não completou seu registro, complete antes de se candidatar",
+                                buttonTitle: "Completar",
+                                buttonAction: () {
+                                  Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             const OnBoarding(),
-                                      )),
-                                  child: const Text("OK"),
-                                )
-                              ],
-                            );
+                                      ));
+                                });
                           });
                     } else {
                       if (infoCurrentUser["applies"]
@@ -110,18 +108,13 @@ class _SubjectPageState extends State<SubjectPage> {
                         showDialog(
                             context: context,
                             builder: (context) {
-                              return AlertDialog(
-                                title: const Text(
-                                    "VOCÊ JA SE CANDIDATOU PARA ESTA MATÉRIA"),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text("OK"),
-                                  )
-                                ],
-                              );
+                              return InformDialog(
+                                  dialogTitle:
+                                      "Você já se candidatou para esta matéria",
+                                  buttonTitle: "Voltar",
+                                  buttonAction: () {
+                                    Navigator.pop(context);
+                                  });
                             });
                       } else {
                         FirebaseFirestore.instance
@@ -134,21 +127,15 @@ class _SubjectPageState extends State<SubjectPage> {
                         showDialog(
                             context: context,
                             builder: (context) {
-                              return AlertDialog(
-                                title:
-                                    const Text("CANDIDATURA FEITA COM SUCESSO"),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        Navigator.pop(context);
-                                      });
-                                    },
-                                    child: const Text("OK"),
-                                  )
-                                ],
-                              );
-                            });
+                              return InformDialog(
+                                  dialogTitle: "Candidatura feita com sucesso!",
+                                  buttonTitle: "Voltar",
+                                  buttonAction: () {
+                                    Navigator.pop(context);
+                                  });
+                            }).then((value) {
+                          setState(() {});
+                        });
                       }
                     }
                   },
@@ -157,6 +144,9 @@ class _SubjectPageState extends State<SubjectPage> {
                 FutureBuilder<List<UserModel>>(
                   future: getUsersList(),
                   builder: ((context, snapshot) {
+                    if(snapshot.connectionState == ConnectionState.done) {
+                      
+                    }
                     if (!snapshot.hasData && !snapshot.hasError) {
                       return Center(
                           child: CircularProgressIndicator(
