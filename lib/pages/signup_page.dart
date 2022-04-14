@@ -9,19 +9,30 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:email_validator/email_validator.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   bool _emailValidator(String email) {
     return EmailValidator.validate(email);
   }
 
+  bool emailError = false;
+  bool passError = false;
+  bool passConfirmError = false;
+  String passErrorText = "Senha Incorreta!";
+  String emailErrorText = "Campo obrigatório!";
+  String passConfirmErrorText = "Senha Incorreta!";
+  String email = "";
+  String password = "";
+  String confirmpassword = "";
+
   @override
   Widget build(BuildContext context) {
-    String email = "";
-    String password = "";
-    String confirmpassword = "";
-
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -74,24 +85,29 @@ class SignUpPage extends StatelessWidget {
                           CustomTextField(
                               onChanged: (text) {
                                 email = text;
+                                setState(() {
+                                  emailError = false;
+                                });
                               },
                               hint: "Email",
                               action: () {},
-                              errorText: "Campo Obrigatório!",
-                              showErrorText: false,
+                              errorText: emailErrorText,
+                              showErrorText: emailError,
                               obscure: false),
-                             
                           const SizedBox(
                             height: 14,
                           ),
                           CustomTextField(
                               onChanged: (text) {
                                 password = text;
+                                setState(() {
+                                  passError = false;
+                                });
                               },
                               hint: "Senha",
                               action: () {},
-                              errorText: "Campo Obrigatório!",
-                              showErrorText: false,
+                              errorText: passErrorText,
+                              showErrorText: passError,
                               obscure: true),
                           const SizedBox(
                             height: 14,
@@ -99,11 +115,14 @@ class SignUpPage extends StatelessWidget {
                           CustomTextField(
                               onChanged: (text) {
                                 confirmpassword = text;
+                                setState(() {
+                                  passConfirmError = false;
+                                });
                               },
                               hint: "Confirme a senha",
                               action: () {},
-                              errorText: "Campo Obrigatório!",
-                              showErrorText: false,
+                              errorText: passConfirmErrorText,
+                              showErrorText: passConfirmError,
                               obscure: true),
                           const SizedBox(
                             height: 22,
@@ -128,26 +147,39 @@ class SignUpPage extends StatelessWidget {
                           YellowButtonLarge(
                             title: "Concordar e Continuar",
                             action: () async {
-                              final isValid = _emailValidator(email);
-                              if (email == "" ||
-                                  password == "" ||
+                              bool isValid = _emailValidator(email);
+
+                              bool emailValid = RegExp(
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(email);
+                              if (email.isEmpty || email == "") {
+                                emailError = true;
+                                isValid = false;
+                                emailErrorText = "Campo obrigatório!";
+                                setState(() {});
+                              } else if (emailValid == false) {
+                                emailError = true;
+                                isValid = false;
+                                emailErrorText = "Digite um email válido!";
+                                setState(() {});
+                              }
+
+                              if (password.isEmpty || password == "") {
+                                passError = true;
+                                passErrorText = "Campo obrigatório!";
+                                isValid = false;
+                                setState(() {});
+                              }
+
+                              if (confirmpassword.isEmpty ||
                                   confirmpassword == "") {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: const Text(
-                                            "PREENCHA TODOS OS CAMPOS"),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () =>
-                                                Navigator.pop(context, "OK"),
-                                            child: const Text("OK"),
-                                          )
-                                        ],
-                                      );
-                                    });
-                              } else if (password == confirmpassword) {
+                                passConfirmError = true;
+                                passConfirmErrorText = "Campo obrigatório!";
+                                isValid = false;
+                                setState(() {});
+                              }
+
+                              if (password == confirmpassword) {
                                 if (isValid == true) {
                                   try {
                                     final userCredential = await FirebaseAuth
@@ -170,96 +202,32 @@ class SignUpPage extends StatelessWidget {
                                         "skills" : []
                                       },
                                     );
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            title: const Text("REGISTROU"),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const SubjectListPage(),
-                                                          )),
-                                                  child: const Text("OK"))
-                                            ],
-                                          );
-                                        });
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SubjectListPage(),
+                                        ));
                                   } on FirebaseAuthException catch (e) {
                                     if (e.code == 'weak-password') {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: const Text("SENHA FRACA"),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          context, "OK"),
-                                                  child: const Text("OK"),
-                                                )
-                                              ],
-                                            );
-                                          });
+                                      passError = true;
+                                      passErrorText = "Senha fraca!";
+                                      isValid = false;
+                                      setState(() {});
                                     } else if (e.code ==
                                         'email-already-in-use') {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title:
-                                                  const Text("EMAIL JÁ EM USO"),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          context, "OK"),
-                                                  child: const Text("OK"),
-                                                )
-                                              ],
-                                            );
-                                          });
+                                      emailError = true;
+                                      isValid = false;
+                                      emailErrorText = "Email já está em uso!";
+                                      setState(() {});
                                     }
-                                  } catch (e) {
-                                    print(e);
                                   }
-                                } else {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          title:
-                                              const Text("EMAIL NÃO É VALIDO"),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () =>
-                                                  Navigator.pop(context, "OK"),
-                                              child: const Text("OK"),
-                                            )
-                                          ],
-                                        );
-                                      });
                                 }
                               } else {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title:
-                                            const Text("SENHAS NÃO CONFEREM"),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () =>
-                                                Navigator.pop(context, "OK"),
-                                            child: const Text("OK"),
-                                          )
-                                        ],
-                                      );
-                                    });
+                                passConfirmError = true;
+                                passConfirmErrorText = "Senhas não conferem!";
+                                isValid = false;
+                                setState(() {});
                               }
                             },
                           ),

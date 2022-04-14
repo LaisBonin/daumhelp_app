@@ -11,9 +11,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FullRegistrationPageStl extends StatelessWidget {
+class FullRegistrationPageStl extends StatefulWidget {
   FullRegistrationPageStl({Key? key}) : super(key: key);
 
+  @override
+  State<FullRegistrationPageStl> createState() =>
+      _FullRegistrationPageStlState();
+}
+
+class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
   Future<DocumentSnapshot<Map<String, dynamic>>> fetchCurrentUserData() async {
     final collection = FirebaseFirestore.instance.collection("users");
     final currentUser = FirebaseAuth.instance.currentUser;
@@ -25,6 +31,7 @@ class FullRegistrationPageStl extends StatelessWidget {
   }
 
   DocumentSnapshot<Map<String, dynamic>>? currentUserInfo;
+
   String? firstName = "";
   String? lastName = "";
   String? email = "";
@@ -32,6 +39,24 @@ class FullRegistrationPageStl extends StatelessWidget {
   String? period = "";
   String? contact = "";
   List? currentSkills;
+
+  String firstNameErrorText = "Campo obrigatório!";
+  bool firstNameError = false;
+
+  String lastNameErrorText = "Campo obrigatório!";
+  bool lastNameError = false;
+
+  String emailErrorText = "Campo obrigatório!";
+  bool emailError = false;
+
+  String courseErrorText = "Campo obrigatório!";
+  bool courseError = false;
+
+  String periodErrorText = "Campo obrigatório!";
+  bool periodError = false;
+
+  String contactErrorText = "Campo obrigatório!";
+  bool contactError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -100,10 +125,14 @@ class FullRegistrationPageStl extends StatelessWidget {
                                     keyboardType: TextInputType.name,
                                     onChanged: (text) {
                                       firstName = text;
+                                      // setState(() {
+                                      //   firstNameError = false;
+                                      // });
                                     },
                                     hint: "Primeiro Nome",
                                     action: () {},
-                                    errorText: "Campo Obrigatório!",
+                                    errorText: firstNameErrorText,
+                                    showErrorText: firstNameError,
                                     obscure: false,
                                     controller: TextEditingController(
                                         text: user!
@@ -112,7 +141,6 @@ class FullRegistrationPageStl extends StatelessWidget {
                                                 .contains("name")
                                             ? user["name"]
                                             : ""),
-                                    showErrorText: false,
                                   ),
                                   const SizedBox(
                                     height: 14,
@@ -121,10 +149,14 @@ class FullRegistrationPageStl extends StatelessWidget {
                                     keyboardType: TextInputType.name,
                                     onChanged: (text) {
                                       lastName = text;
+                                      // setState(() {
+                                      //   lastNameError = false;
+                                      // });
                                     },
                                     hint: "Último Nome",
                                     action: () {},
-                                    errorText: "Campo Obrigatório!",
+                                    errorText: lastNameErrorText,
+                                    showErrorText: lastNameError,
                                     obscure: false,
                                     controller: TextEditingController(
                                         text: user
@@ -133,7 +165,6 @@ class FullRegistrationPageStl extends StatelessWidget {
                                                 .contains("lastname")
                                             ? user["lastname"]
                                             : ""),
-                                    showErrorText: false,
                                   ),
                                   const SizedBox(
                                     height: 14,
@@ -141,10 +172,14 @@ class FullRegistrationPageStl extends StatelessWidget {
                                   CustomTextField(
                                     onChanged: (text) {
                                       course = text;
+                                      // setState(() {
+                                      //   courseError = false;
+                                      // });
                                     },
                                     hint: "Curso",
                                     action: () {},
-                                    errorText: "Campo Obrigatório!",
+                                    errorText: courseErrorText,
+                                    showErrorText: courseError,
                                     obscure: false,
                                     controller: TextEditingController(
                                         text: user
@@ -153,7 +188,6 @@ class FullRegistrationPageStl extends StatelessWidget {
                                                 .contains("curso")
                                             ? user["curso"]
                                             : ""),
-                                    showErrorText: false,
                                   ),
                                   const SizedBox(
                                     height: 14,
@@ -165,10 +199,14 @@ class FullRegistrationPageStl extends StatelessWidget {
                                     keyboardType: TextInputType.number,
                                     onChanged: (text) {
                                       period = text;
+                                      // setState(() {
+                                      //   periodError = false;
+                                      // });
                                     },
                                     hint: "Periodo",
                                     action: () {},
-                                    errorText: "Campo Obrigatório!",
+                                    errorText: periodErrorText,
+                                    showErrorText: periodError,
                                     obscure: false,
                                     controller: TextEditingController(
                                         text: user
@@ -177,7 +215,6 @@ class FullRegistrationPageStl extends StatelessWidget {
                                                 .contains("period")
                                             ? user["period"]
                                             : ""),
-                                    showErrorText: false,
                                   ),
                                   const SizedBox(
                                     height: 14,
@@ -187,10 +224,14 @@ class FullRegistrationPageStl extends StatelessWidget {
                                     readOnly: true,
                                     onChanged: (text) {
                                       email = text;
+                                      // setState(() {
+                                      //   emailError = false;
+                                      // });
                                     },
                                     hint: "Email",
                                     action: () {},
-                                    errorText: "Campo Obrigatório!",
+                                    errorText: emailErrorText,
+                                    showErrorText: emailError,
                                     obscure: false,
                                     controller: TextEditingController(
                                         text: user
@@ -199,7 +240,6 @@ class FullRegistrationPageStl extends StatelessWidget {
                                                 .contains("email")
                                             ? user["email"]
                                             : ""),
-                                    showErrorText: false,
                                   ),
                                   const SizedBox(
                                     height: 14,
@@ -211,10 +251,14 @@ class FullRegistrationPageStl extends StatelessWidget {
                                     keyboardType: TextInputType.phone,
                                     onChanged: (text) {
                                       contact = text;
+                                      // setState(() {
+                                      //   contactError = false;
+                                      // });
                                     },
                                     hint: "Numero do WhatsApp",
                                     action: () {},
-                                    errorText: "Campo Obrigatório!",
+                                    errorText: contactErrorText,
+                                    showErrorText: contactError,
                                     obscure: false,
                                     controller: TextEditingController(
                                         text: user
@@ -223,7 +267,6 @@ class FullRegistrationPageStl extends StatelessWidget {
                                                 .contains("contact")
                                             ? user["contact"]
                                             : ""),
-                                    showErrorText: false,
                                   ),
                                   const SizedBox(
                                     height: 14,
@@ -303,6 +346,59 @@ class FullRegistrationPageStl extends StatelessWidget {
                                   YellowButtonLarge(
                                       title: "Atualizar",
                                       action: () {
+                                        // bool emailValid = RegExp(
+                                        //         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        //     .hasMatch(email);
+                                        // if (email.isEmpty || email == "") {
+                                        //   emailError = true;
+                                        //   isValid = false;
+                                        //   emailErrorText = "Campo obrigatório!";
+                                        //   setState(() {});
+                                        // } else if (emailValid == false) {
+                                        //   emailError = true;
+                                        //   isValid = false;
+                                        //   emailErrorText =
+                                        //       "Digite um email válido!";
+                                        //   setState(() {});
+                                        // }
+
+                                        // if (firstName == "") {
+                                        //   firstNameError = true;
+                                        //   firstNameErrorText =
+                                        //       "Campo obrigatório!";
+                                        //   isValid = false;
+                                        //   setState(() {});
+                                        // }
+
+                                        // if (lastName.isEmpty ||
+                                        //     lastName == "") {
+                                        //   lastNameError = true;
+                                        //   lastNameErrorText =
+                                        //       "Campo obrigatório!";
+                                        //   isValid = false;
+                                        //   setState(() {});
+                                        // }
+                                        // if (course.isEmpty || course == "") {
+                                        //   courseError = true;
+                                        //   courseErrorText =
+                                        //       "Campo obrigatório!";
+                                        //   isValid = false;
+                                        //   setState(() {});
+                                        // }
+                                        // if (period.isEmpty || period == "") {
+                                        //   periodError = true;
+                                        //   periodErrorText =
+                                        //       "Campo obrigatório!";
+                                        //   isValid = false;
+                                        //   setState(() {});
+                                        // }
+                                        // if (contact.isEmpty || contact == "") {
+                                        //   contactError = true;
+                                        //   contactErrorText =
+                                        //       "Campo obrigatório!";
+                                        //   isValid = false;
+                                        //   setState(() {});
+                                        // }
                                         if (firstName == "" ||
                                             lastName == "" ||
                                             course == "" ||

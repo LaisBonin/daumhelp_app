@@ -4,8 +4,17 @@ import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/text_field.dart';
 
-class ForgotPasswordPageStl extends StatelessWidget {
+class ForgotPasswordPageStl extends StatefulWidget {
   const ForgotPasswordPageStl({Key? key}) : super(key: key);
+
+  @override
+  State<ForgotPasswordPageStl> createState() => _ForgotPasswordPageStlState();
+}
+
+class _ForgotPasswordPageStlState extends State<ForgotPasswordPageStl> {
+  bool emailError = false;
+  String emailErrorText = "Campo obrigatório!";
+  String email = "";
 
   @override
   Widget build(BuildContext context) {
@@ -88,18 +97,36 @@ class ForgotPasswordPageStl extends StatelessWidget {
                           ),
                           const SizedBox(height: 22),
                           CustomTextField(
+                              onChanged: (text) {
+                                email = text;
+                                setState(() {
+                                  emailError = false;
+                                });
+                              },
                               hint: "Email",
                               action: () {},
-                              errorText: "Campo Obrigatório!",
-                              showErrorText: false,
+                              errorText: emailErrorText,
+                              showErrorText: emailError,
                               obscure: false),
-                        
                           const SizedBox(
                             height: 14,
                           ),
                           YellowButtonLarge(
                               title: "Enviar email de recuperação",
-                              action: () {}),
+                              action: () async {
+                                bool emailValid = RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(email);
+                                if (email.isEmpty || email == "") {
+                                  emailError = true;
+                                  emailErrorText = "Campo obrigatório!";
+                                  setState(() {});
+                                } else if (emailValid == false) {
+                                  emailError = true;
+                                  emailErrorText = "Digite um email válido!";
+                                  setState(() {});
+                                }
+                              }),
                           const SizedBox(
                             height: 20,
                           ),

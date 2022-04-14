@@ -5,11 +5,22 @@ import 'package:daumhelp_app/widgets/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class NewPasswordStl extends StatelessWidget {
-  NewPasswordStl({Key? key}) : super(key: key);
+class NewPasswordStl extends StatefulWidget {
+  const NewPasswordStl({Key? key}) : super(key: key);
 
-  String newPassword = "";
-  String confirmNewPassword = "";
+  @override
+  State<NewPasswordStl> createState() => _NewPasswordStlState();
+}
+
+class _NewPasswordStlState extends State<NewPasswordStl> {
+
+  String passNew = "";
+  String passNewErrorText = "Senha Incorreta!";
+  bool passNewError = false;
+
+  String passNewConfirm = "";
+  String passNewConfirmErrorText = "Senha Incorreta!";
+  bool passNewConfirmError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -68,49 +79,64 @@ class NewPasswordStl extends StatelessWidget {
                           //     obscure: false),
                           // const SizedBox(height: 14),
                           CustomTextField(
-                              keyboardType: TextInputType.name,
                               onChanged: (text) {
-                                newPassword = text;
+                                passNew = text;
+                                setState(() {
+                                  passNewError = false;
+                                });
                               },
-                              hint: "Nova senha",
+                              hint: "Nova Senha",
                               action: () {},
-                              errorText: "Campo Obrigatório!",
-                              showErrorText: false,
+                              errorText: passNewErrorText,
+                              showErrorText: passNewError,
                               obscure: true),
                           const SizedBox(height: 14),
                           CustomTextField(
-                              keyboardType: TextInputType.name,
                               onChanged: (text) {
-                                confirmNewPassword = text;
+                                passNewConfirm = text;
+                                setState(() {
+                                  passNewConfirmError = false;
+                                });
                               },
                               hint: "Confirme a senha",
                               action: () {},
-                              errorText: "Campo Obrigatório!",
-                              showErrorText: false,
+                              errorText: passNewConfirmErrorText,
+                              showErrorText: passNewConfirmError,
                               obscure: true),
                           const SizedBox(
                             height: 50,
                           ),
+
+                          YellowButtonLarge(
+                              title: "Atualizar",
+                              action: () {
+
+                                if (passNew.isEmpty || passNew == "") {
+                                  passNewError = true;
+                                  passNewErrorText = "Campo obrigatório!";
+
+                                  setState(() {});
+                                }
+
+                                if (passNewConfirm.isEmpty ||
+                                    passNewConfirm == "") {
+                                  passNewConfirmError = true;
+                                  passNewConfirmErrorText =
+                                      "Campo obrigatório!";
+                                  setState(() {});
+                                }
+                                if (passNew != passNewConfirm) {
+                                  passNewConfirmError = true;
+                                  passNewConfirmErrorText =
+                                      "Senhas não conferem!";
+                                  setState(() {});
+                                }
+
+                              }),
+
                           YellowButtonLarge(title: "Atualizar", action: () {
-                            if (newPassword == "" || confirmNewPassword == "") {
-                              showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: const Text(
-                                            "PREENCHA TODOS OS CAMPOS"),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () =>
-                                                Navigator.pop(context, "OK"),
-                                            child: const Text("OK"),
-                                          )
-                                        ],
-                                      );
-                                    });
-                            } else {
-                              if (newPassword == confirmNewPassword) {
-                              FirebaseAuth.instance.currentUser!.updatePassword(newPassword);
+                              if (passNew == passNewConfirm) {
+                              FirebaseAuth.instance.currentUser!.updatePassword(passNew);
                               showDialog(
                                     context: context,
                                     builder: (context) {
@@ -143,8 +169,8 @@ class NewPasswordStl extends StatelessWidget {
                                       );
                                     });
                             }                              
-                            }
                           }),
+
                           const SizedBox(
                             height: 15,
                           ),
