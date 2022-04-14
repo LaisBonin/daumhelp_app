@@ -90,6 +90,7 @@ class SettingsDrawer extends StatelessWidget {
                   action: () {
                     exitDialog(
                         context,
+                        "Deseja realmente sair?",
                         "Sair",
                         "Voltar",
                         (() => Navigator.push(

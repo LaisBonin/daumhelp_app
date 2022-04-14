@@ -2,7 +2,7 @@ import 'package:daumhelp_app/pages/login_page_stl.dart';
 import 'package:daumhelp_app/widgets/button_dialogbox.dart';
 import 'package:flutter/material.dart';
 
-exitDialog(BuildContext context, String leftButtonTitle, String rightButtonTitle, Function() leftButtonAction, Function() rightButtonAction) {
+exitDialog(BuildContext context, String dialogTitle, String leftButtonTitle, String rightButtonTitle, Function() leftButtonAction, Function() rightButtonAction) {
 
   showDialog(
       context: context,
@@ -18,7 +18,7 @@ exitDialog(BuildContext context, String leftButtonTitle, String rightButtonTitle
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Você realmente deseja sair?",
+                  dialogTitle,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
