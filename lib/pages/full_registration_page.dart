@@ -9,8 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../widgets/inform_dialog.dart';
+import '../widgets/skill_dot.dart';
 
 class FullRegistrationPageStl extends StatefulWidget {
   const FullRegistrationPageStl({Key? key}) : super(key: key);
@@ -39,7 +39,8 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
   String course = "";
   String period = "";
   String contact = "";
-  List? currentSkills;
+  String skill = "";
+  List? currentSkills = [];
 
   String firstNameErrorText = "Campo obrigatório!";
   bool firstNameError = false;
@@ -118,6 +119,7 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                               course = snapshot.data!["curso"];
                               period = snapshot.data!["period"];
                               contact = snapshot.data!["contact"];
+                              currentSkills = snapshot.data!["skills"];
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,9 +128,6 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                     keyboardType: TextInputType.name,
                                     onChanged: (text) {
                                       firstName = text;
-                                      // setState(() {
-                                      //   firstNameError = false;
-                                      // });
                                     },
                                     hint: "Primeiro Nome",
                                     action: () {},
@@ -145,9 +144,6 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                     keyboardType: TextInputType.name,
                                     onChanged: (text) {
                                       lastName = text;
-                                      // setState(() {
-                                      //   lastNameError = false;
-                                      // });
                                     },
                                     hint: "Último Nome",
                                     action: () {},
@@ -163,9 +159,6 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                   CustomTextField(
                                     onChanged: (text) {
                                       course = text;
-                                      // setState(() {
-                                      //   courseError = false;
-                                      // });
                                     },
                                     hint: "Curso",
                                     action: () {},
@@ -185,9 +178,6 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                     keyboardType: TextInputType.number,
                                     onChanged: (text) {
                                       period = text;
-                                      // setState(() {
-                                      //   periodError = false;
-                                      // });
                                     },
                                     hint: "Periodo",
                                     action: () {},
@@ -205,9 +195,6 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                     readOnly: true,
                                     onChanged: (text) {
                                       email = text;
-                                      // setState(() {
-                                      //   emailError = false;
-                                      // });
                                     },
                                     hint: "Email",
                                     action: () {},
@@ -222,14 +209,11 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                   ),
                                   CustomTextField(
                                     inputFormatters: [
-                                      MaskedInputFormatter('(##)#########')
+                                      MaskedInputFormatter('(##)#####-####')
                                     ],
                                     keyboardType: TextInputType.phone,
                                     onChanged: (text) {
                                       contact = text;
-                                      // setState(() {
-                                      //   contactError = false;
-                                      // });
                                     },
                                     hint: "Numero do WhatsApp",
                                     action: () {},
@@ -273,6 +257,9 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                       Expanded(
                                         flex: 3,
                                         child: CustomTextField(
+                                          onChanged: (text) {
+                                            skill = text;
+                                          },
                                           hint: "Habilidades",
                                           action: () {},
                                           errorText: "Campo Obrigatório!",
@@ -295,7 +282,22 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                             width: 60,
                                             height: 60,
                                             child: IconButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  var collection =
+                                                      FirebaseFirestore.instance
+                                                          .collection("users");
+                                                  collection
+                                                      .doc(user["id"])
+                                                      .update({
+                                                    'skills':
+                                                        FieldValue.arrayUnion(
+                                                            [skill])
+                                                  }).then(
+                                                    (value) => setState(
+                                                      () {},
+                                                    ),
+                                                  );
+                                                },
                                                 icon: const Icon(
                                                   Icons.add,
                                                   color:
@@ -305,75 +307,56 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                           ))
                                     ],
                                   ),
-                                  // const SizedBox(
-                                  //   height: 16,
-                                  // ),
-                                  // ListView.builder(
-                                  //     padding: const EdgeInsets.all(0),
-                                  //     shrinkWrap: true,
-                                  //     itemCount: currentSkills!.length,
-                                  //     itemBuilder: ((context, index) {
-                                  //       return SkillDot(
-                                  //           skillName: currentSkills![index]);
-                                  //     })),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  ListView.builder(
+                                      padding: const EdgeInsets.all(0),
+                                      shrinkWrap: true,
+                                      itemCount: currentSkills?.length,
+                                      itemBuilder: ((context, index) {
+                                        return Row(
+                                          children: [
+                                            SkillDot(
+                                                skillName:
+                                                    currentSkills?[index]),
+                                            const SizedBox(
+                                              width: 8,
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                var collection =
+                                                    FirebaseFirestore.instance
+                                                        .collection("users");
+                                                collection
+                                                    .doc(user["id"])
+                                                    .update({
+                                                  'skills':
+                                                      FieldValue.arrayRemove([
+                                                    currentSkills?[index]
+                                                  ])
+                                                }).then(
+                                                  (value) => setState(
+                                                    () {},
+                                                  ),
+                                                );
+                                              },
+                                              child: Icon(
+                                                Icons.close_rounded,
+                                                size: 20,
+                                                color: Theme.of(context)
+                                                    .errorColor,
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      })),
                                   const SizedBox(
                                     height: 24,
                                   ),
                                   YellowButtonLarge(
                                       title: "Atualizar",
                                       action: () {
-                                        // bool emailValid = RegExp(
-                                        //         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                        //     .hasMatch(email);
-                                        // if (email.isEmpty || email == "") {
-                                        //   emailError = true;
-
-                                        //   emailErrorText = "Campo obrigatório!";
-                                        //   setState(() {});
-                                        // } else if (emailValid == false) {
-                                        //   emailError = true;
-
-                                        //   emailErrorText =
-                                        //       "Digite um email válido!";
-                                        //   setState(() {});
-                                        // }
-
-                                        // if (firstName == "") {
-                                        //   firstNameError = true;
-                                        //   firstNameErrorText =
-                                        //       "Campo obrigatório!";
-
-                                        //   setState(() {});
-                                        // }
-
-                                        // if (lastName.isEmpty ||
-                                        //     lastName == "") {
-                                        //   lastNameError = true;
-                                        //   lastNameErrorText =
-                                        //       "Campo obrigatório!";
-
-                                        //   setState(() {});
-                                        // }
-                                        // if (course.isEmpty || course == "") {
-                                        //   courseError = true;
-                                        //   courseErrorText =
-                                        //       "Campo obrigatório!";
-
-                                        //   setState(() {});
-                                        // }
-                                        // if (period.isEmpty || period == "") {
-                                        //   periodError = true;
-                                        //   periodErrorText =
-                                        //       "Campo obrigatório!";
-
-                                        //   setState(() {});
-                                        // }
-                                        // if (contact.isEmpty || contact == "") {
-                                        //   contactError = true;
-                                        //   contactErrorText =
-                                        //       "Campo obrigatório!";
-                                        //   setState(() {});
-                                        // }
                                         if (firstName == "" ||
                                             lastName == "" ||
                                             course == "" ||
@@ -419,7 +402,11 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                               "email": email,
                                               "contact": contact
                                             },
-                                          );
+                                          ).then((value) =>
+                                              collection.doc(user["id"]).set({
+                                                'skills': FieldValue.arrayUnion(
+                                                    [currentSkills])
+                                              }));
                                         }
                                       }),
                                   const SizedBox(
@@ -436,7 +423,7 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                             }
                             if (snapshot.hasError) {
                               return Container(
-                                color: Colors.white,
+                                color: Colors.pink,
                                 child: const Text("QUEBROUUUU"),
                               );
                             } else {

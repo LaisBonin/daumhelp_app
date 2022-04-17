@@ -20,7 +20,7 @@ class DrawerButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             primary: Theme.of(context).backgroundColor,
-            elevation: 50,
+            elevation: 5,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20)),
             )),

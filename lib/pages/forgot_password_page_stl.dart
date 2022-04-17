@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:daumhelp_app/widgets/button_large.dart';
 import 'package:daumhelp_app/widgets/return_button.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:daumhelp_app/widgets/text_field.dart';
+
+import '../widgets/inform_dialog.dart';
 
 class ForgotPasswordPageStl extends StatefulWidget {
   const ForgotPasswordPageStl({Key? key}) : super(key: key);
@@ -12,6 +15,7 @@ class ForgotPasswordPageStl extends StatefulWidget {
 }
 
 class _ForgotPasswordPageStlState extends State<ForgotPasswordPageStl> {
+  TextEditingController emailController = TextEditingController();
   bool emailError = false;
   String emailErrorText = "Campo obrigatório!";
   String email = "";
@@ -97,6 +101,7 @@ class _ForgotPasswordPageStlState extends State<ForgotPasswordPageStl> {
                           ),
                           const SizedBox(height: 22),
                           CustomTextField(
+                              controller: emailController,
                               onChanged: (text) {
                                 email = text;
                                 setState(() {
@@ -125,6 +130,20 @@ class _ForgotPasswordPageStlState extends State<ForgotPasswordPageStl> {
                                   emailError = true;
                                   emailErrorText = "Digite um email válido!";
                                   setState(() {});
+                                } else {
+                                  FirebaseAuth.instance
+                                      .sendPasswordResetEmail(email: email);
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return InformDialog(
+                                            dialogTitle:
+                                                "Email de recuperação enviado",
+                                            buttonTitle: "Voltar",
+                                            buttonAction: () {
+                                              Navigator.pop(context);
+                                            });
+                                      }).then((value) => Navigator.pop(context));
                                 }
                               }),
                           const SizedBox(

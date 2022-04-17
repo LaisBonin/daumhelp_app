@@ -40,111 +40,116 @@ class _MyApplicationsPageState extends State<MyApplicationsPage> {
         backgroundColor: Colors.transparent,
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 48,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      const ReturnButton(),
-                      Text(
-                        "Candidaturas",
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              FutureBuilder<List>(
-                  future: fetchAppliedSubjects(),
-                  builder: (context, snapshot) {
-                    /// deu ruim
-                    if (snapshot.hasError) {
-                      const Text("Something went wrong");
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
-                      );
-                    }
-                    if (!snapshot.hasData) {
-                      return const Text("error");
-                    }
-
-                    /// carregando
-                    if (snapshot.data!.isEmpty && !snapshot.hasError) {
-                      return Text(
-                        "Você ainda não tem candidaturas",
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      );
-                    }
-
-                    /// caminho feliz
-                    if (snapshot.hasData && !snapshot.hasError) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: ((context, index) {
-                          return SubjectListTile(
-                              subjectName: snapshot.data![index],
-                              subjectIcon: Icon(Icons.delete_rounded,
-                                  color: Theme.of(context).primaryColor),
-                              subjectAction: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return ExitDialog(
-                                        dialogTitle:
-                                            "Deseja remover candidatura em " +
-                                                snapshot.data![index]
-                                                    .toString() +
-                                                "?",
-                                        leftButtonAction: () async {
-                                          final userCredential =
-                                              FirebaseAuth.instance.currentUser;
-                                          final infoCurrentUser =
-                                              await FirebaseFirestore.instance
-                                                  .collection("users")
-                                                  .doc(userCredential!.uid)
-                                                  .get();
-                                          FirebaseFirestore.instance
-                                              .collection("users")
-                                              .doc(userCredential.uid)
-                                              .update({
-                                            'applies': FieldValue.arrayRemove(
-                                                [snapshot.data![index]])
-                                          });
-                                          Navigator.of(context).pop();
-                                        },
-                                        leftButtonTitle: "Remover",
-                                        rightButtonAction: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        rightButtonTitle: "Voltar",
-                                      );
-                                    }).then((value) {
-                                  setState(() {});
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 48,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        const ReturnButton(),
+                        Text(
+                          "Candidaturas",
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                FutureBuilder<List>(
+                    future: fetchAppliedSubjects(),
+                    builder: (context, snapshot) {
+                      /// deu ruim
+                      if (snapshot.hasError) {
+                        const Text("Something went wrong");
+                      }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        );
+                      }
+                      if (!snapshot.hasData) {
+                        return const Text("error");
+                      }
+          
+                      /// carregando
+                      if (snapshot.data!.isEmpty && !snapshot.hasError) {
+                        return Text(
+                          "Você ainda não tem candidaturas",
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        );
+                      }
+          
+                      /// caminho feliz
+                      if (snapshot.hasData && !snapshot.hasError) {
+                        return ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: ((context, index) {
+                            return SubjectListTile(
+                                subjectName: snapshot.data![index],
+                                subjectIcon: Icon(Icons.delete_rounded,
+                                    color: Theme.of(context).primaryColor),
+                                subjectAction: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return ExitDialog(
+                                          dialogTitle:
+                                              "Deseja remover candidatura em " +
+                                                  snapshot.data![index]
+                                                      .toString() +
+                                                  "?",
+                                          leftButtonAction: () async {
+                                            final userCredential =
+                                                FirebaseAuth.instance.currentUser;
+                                            final infoCurrentUser =
+                                                await FirebaseFirestore.instance
+                                                    .collection("users")
+                                                    .doc(userCredential!.uid)
+                                                    .get();
+                                            FirebaseFirestore.instance
+                                                .collection("users")
+                                                .doc(userCredential.uid)
+                                                .update({
+                                              'applies': FieldValue.arrayRemove(
+                                                  [snapshot.data![index]])
+                                            });
+                                            Navigator.of(context).pop();
+                                          },
+                                          leftButtonTitle: "Remover",
+                                          rightButtonAction: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          rightButtonTitle: "Voltar",
+                                        );
+                                      }).then((value) {
+                                    setState(() {});
+                                  });
                                 });
-                              });
-                        }),
-                      );
-                    } else {
-                      // sei la quye que deu
-                      return CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
-                      );
-                    }
-                  })
-            ],
+                          }),
+                        );
+                      } else {
+                        // sei la quye que deu
+                        return CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor,
+                        );
+                      }
+                    })
+              ],
+            ),
           ),
         ),
       ),

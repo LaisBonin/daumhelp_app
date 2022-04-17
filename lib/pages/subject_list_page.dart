@@ -36,75 +36,78 @@ class _SubjectListPageState extends State<SubjectListPage> {
         backgroundColor: Colors.transparent,
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 48,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Matérias",
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      _scaffoldKey.currentState!.openEndDrawer();
-                    },
-                    icon: const Icon(
-                      Icons.settings,
-                      size: 32,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 48,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Matérias",
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
-                  )
-                ],
-              ),
-              FutureBuilder<QuerySnapshot>(
-                future: getSubjectList(),
-                builder: ((context, snapshot) {
-                  if (!snapshot.hasData && !snapshot.hasError) {
-                    return Center(
-                        child: CircularProgressIndicator(
-                            color: Theme.of(context).primaryColor));
-                  }
-                  if (snapshot.hasError) {
-                    return Container(
-                      color: Colors.white,
-                      child: const Text("QUEBROUUUU"),
-                    );
-                  } else {
-                    final subjects = snapshot.data!.docs;
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: subjects.length,
-                      itemBuilder: ((context, index) {
-                        return SubjectListTile(
-                            subjectName: subjects[index]["name"],
-                            subjectIcon: Icon(
-                              handleIconFromFirebase(
-                                subjects[index]["icon"],
-                              ),
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            subjectAction: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SubjectPage(
-                                    selectedSubjectName: subjects[index]
-                                        ["name"],
-                                  ),
+                    IconButton(
+                      onPressed: () {
+                        _scaffoldKey.currentState!.openEndDrawer();
+                      },
+                      icon: const Icon(
+                        Icons.settings,
+                        size: 32,
+                      ),
+                    )
+                  ],
+                ),
+                FutureBuilder<QuerySnapshot>(
+                  future: getSubjectList(),
+                  builder: ((context, snapshot) {
+                    if (!snapshot.hasData && !snapshot.hasError) {
+                      return Center(
+                          child: CircularProgressIndicator(
+                              color: Theme.of(context).primaryColor));
+                    }
+                    if (snapshot.hasError) {
+                      return Container(
+                        color: Colors.white,
+                        child: const Text("QUEBROUUUU"),
+                      );
+                    } else {
+                      final subjects = snapshot.data!.docs;
+                      return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: subjects.length,
+                        itemBuilder: ((context, index) {
+                          return SubjectListTile(
+                              subjectName: subjects[index]["name"],
+                              subjectIcon: Icon(
+                                handleIconFromFirebase(
+                                  subjects[index]["icon"],
                                 ),
-                              );
-                            });
-                      }),
-                    );
-                  }
-                }),
-              ),
-            ],
+                                color: Theme.of(context).primaryColor,
+                              ),
+                              subjectAction: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SubjectPage(
+                                      selectedSubjectName: subjects[index]
+                                          ["name"],
+                                    ),
+                                  ),
+                                );
+                              });
+                        }),
+                      );
+                    }
+                  }),
+                ),
+              ],
+            ),
           ),
         ),
       ),
