@@ -1,4 +1,5 @@
 import 'package:daumhelp_app/pages/login_page_stl.dart';
+import 'package:daumhelp_app/widgets/splash_screen.dart';
 import 'package:daumhelp_app/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,9 +18,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Da um help!',
       theme: HelpTheme.theme,
-      home: const LoginPageStl(),
+      home:  const LoginPageStl(),
     );
   }
 }

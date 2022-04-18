@@ -45,6 +45,7 @@ dependencies:
   carousel_slider: ^4.0.0
   flutter_multi_formatter: ^2.5.1
   equatable: ^2.0.3
+  flutter_native_splash: ^2.1.6
 
 
 dev_dependencies:
@@ -99,3 +100,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_native_splash:
+  color: "#555555"
+  image: images/splash_logo.png
