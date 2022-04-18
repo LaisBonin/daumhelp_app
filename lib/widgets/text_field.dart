@@ -39,52 +39,50 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Column(
-        children: [
-          TextField(
-            inputFormatters: widget.inputFormatters,
-            keyboardType: widget.keyboardType,
-            readOnly: widget.readOnly,
-            controller: widget.controller,
-            onChanged: widget.onChanged,
-            obscureText: showPassword == false ? widget.obscure : false,
-            style: Theme.of(context)
-                .textTheme
-                .titleSmall
-                ?.copyWith(color: Theme.of(context).backgroundColor),
-            decoration: InputDecoration(
-              errorText: widget.showErrorText ? widget.errorText : null,
-              filled: true,
-              fillColor: Theme.of(context).canvasColor,
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-              hintText: widget.hint,
-              hintStyle: const TextStyle(color: HelpTheme.helpDarkGrey),
-              suffixIcon: widget.obscure == true
-                  ? GestureDetector(
-                      child: Icon(
-                        showPassword == false
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        color: HelpTheme.helpYellow,
-                      ),
-                      onTap: () {
-                        setState((() {
-                          showPassword = !showPassword;
-                        }));
-                      },
-                    )
-                  : null,
-              focusColor: HelpTheme.helpYellow,
-              focusedBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                borderSide: BorderSide(color: HelpTheme.helpYellow, width: 3.0),
-              ),
-            ),
+    return Material(
+      elevation: 5,
+      borderRadius: const BorderRadius.all(Radius.circular(10)),
+      child: TextField(
+        inputFormatters: widget.inputFormatters,
+        keyboardType: widget.keyboardType,
+        readOnly: widget.readOnly,
+        controller: widget.controller,
+        onChanged: widget.onChanged,
+        obscureText: showPassword == false ? widget.obscure : false,
+        style: Theme.of(context)
+            .textTheme
+            .titleSmall
+            ?.copyWith(color: Theme.of(context).backgroundColor),
+        decoration: InputDecoration(
+          errorText: widget.showErrorText ? widget.errorText : null,
+          filled: true,
+          fillColor: Theme.of(context).canvasColor,
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
-        ],
+          hintText: widget.hint,
+          hintStyle: const TextStyle(color: HelpTheme.helpDarkGrey),
+          suffixIcon: widget.obscure == true
+              ? GestureDetector(
+                  child: Icon(
+                    showPassword == false
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    color: HelpTheme.helpYellow,
+                  ),
+                  onTap: () {
+                    setState((() {
+                      showPassword = !showPassword;
+                    }));
+                  },
+                )
+              : null,
+          focusColor: HelpTheme.helpYellow,
+          focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(color: HelpTheme.helpYellow, width: 3.0),
+          ),
+        ),
       ),
     );
   }
