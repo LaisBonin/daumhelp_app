@@ -40,6 +40,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.transparent,
       elevation: 5,
       borderRadius: const BorderRadius.all(Radius.circular(10)),
       child: TextField(
