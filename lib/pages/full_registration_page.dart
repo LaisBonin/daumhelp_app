@@ -282,21 +282,50 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                             width: 60,
                                             height: 60,
                                             child: IconButton(
-                                                onPressed: () {
-                                                  var collection =
-                                                      FirebaseFirestore.instance
-                                                          .collection("users");
-                                                  collection
-                                                      .doc(user["id"])
-                                                      .update({
-                                                    'skills':
-                                                        FieldValue.arrayUnion(
-                                                            [skill])
-                                                  }).then(
-                                                    (value) => setState(
-                                                      () {},
-                                                    ),
-                                                  );
+                                                onPressed: () async {
+                                                  final userCredential =
+                                                      FirebaseAuth
+                                                          .instance.currentUser;
+                                                  final infoCurrentUser =
+                                                      await FirebaseFirestore
+                                                          .instance
+                                                          .collection("users")
+                                                          .doc(userCredential!
+                                                              .uid)
+                                                          .get();
+                                                  if (infoCurrentUser["name"] ==
+                                                      "") {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return InformDialog(
+                                                              dialogTitle:
+                                                                  "Atualize seus dados antes de adicionar habilidaes",
+                                                              buttonTitle:
+                                                                  "Voltar",
+                                                              buttonAction: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              });
+                                                        });
+                                                  } else {
+                                                    var collection =
+                                                        FirebaseFirestore
+                                                            .instance
+                                                            .collection(
+                                                                "users");
+                                                    collection
+                                                        .doc(user["id"])
+                                                        .update({
+                                                      'skills':
+                                                          FieldValue.arrayUnion(
+                                                              [skill])
+                                                    }).then(
+                                                      (value) => setState(
+                                                        () {},
+                                                      ),
+                                                    );
+                                                  }
                                                 },
                                                 icon: const Icon(
                                                   Icons.add,
@@ -383,11 +412,7 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                                         "Dados atualizados com sucesso!",
                                                     buttonTitle: "Voltar",
                                                     buttonAction: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  const SubjectListPage()));
+                                                      Navigator.pop(context);
                                                     });
                                               });
                                           var collection = FirebaseFirestore
