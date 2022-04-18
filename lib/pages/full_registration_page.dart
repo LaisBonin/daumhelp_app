@@ -300,6 +300,8 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                                                 .uid)
                                                             .get();
                                                     if (infoCurrentUser[
+                                                            "name"] !=
+                                                        firstName || infoCurrentUser[
                                                             "name"] ==
                                                         "") {
                                                       showDialog(
