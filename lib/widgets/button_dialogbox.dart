@@ -20,7 +20,7 @@ class DialogButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             primary: color,
-            elevation: 50,
+            elevation: 5,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
             )),

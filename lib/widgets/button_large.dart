@@ -17,7 +17,7 @@ class YellowButtonLarge extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             primary: Theme.of(context).primaryColor,
-            elevation: 50,
+            elevation: 5,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
             )),

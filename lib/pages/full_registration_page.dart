@@ -272,67 +272,93 @@ class _FullRegistrationPageStlState extends State<FullRegistrationPageStl> {
                                       ),
                                       Expanded(
                                           flex: 1,
-                                          child: Container(
-                                            decoration: const BoxDecoration(
-                                              color: HelpTheme.helpYellow,
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(10),
-                                              ),
+                                          child: Material(
+                                            elevation: 5,
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                              Radius.circular(10),
                                             ),
-                                            width: 60,
-                                            height: 60,
-                                            child: IconButton(
-                                                onPressed: () async {
-                                                  final userCredential =
-                                                      FirebaseAuth
-                                                          .instance.currentUser;
-                                                  final infoCurrentUser =
-                                                      await FirebaseFirestore
-                                                          .instance
-                                                          .collection("users")
-                                                          .doc(userCredential!
-                                                              .uid)
-                                                          .get();
-                                                  if (infoCurrentUser["name"] ==
-                                                      "") {
-                                                    showDialog(
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return InformDialog(
-                                                              dialogTitle:
-                                                                  "Atualize seus dados antes de adicionar habilidaes",
-                                                              buttonTitle:
-                                                                  "Voltar",
-                                                              buttonAction: () {
-                                                                Navigator.pop(
-                                                                    context);
-                                                              });
-                                                        });
-                                                  } else {
-                                                    var collection =
-                                                        FirebaseFirestore
+                                            child: Container(
+                                              decoration: const BoxDecoration(
+                                                color: HelpTheme.helpYellow,
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(10),
+                                                ),
+                                              ),
+                                              width: 60,
+                                              height: 60,
+                                              child: IconButton(
+                                                  onPressed: () async {
+                                                    final userCredential =
+                                                        FirebaseAuth.instance
+                                                            .currentUser;
+                                                    final infoCurrentUser =
+                                                        await FirebaseFirestore
                                                             .instance
-                                                            .collection(
-                                                                "users");
-                                                    collection
-                                                        .doc(user["id"])
-                                                        .update({
-                                                      'skills':
-                                                          FieldValue.arrayUnion(
-                                                              [skill])
-                                                    }).then(
-                                                      (value) => setState(
-                                                        () {},
-                                                      ),
-                                                    );
-                                                  }
-                                                },
-                                                icon: const Icon(
-                                                  Icons.add,
-                                                  color:
-                                                      HelpTheme.helpButtonText,
-                                                  size: 32,
-                                                )),
+                                                            .collection("users")
+                                                            .doc(userCredential!
+                                                                .uid)
+                                                            .get();
+                                                    if (infoCurrentUser[
+                                                            "name"] ==
+                                                        "") {
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return InformDialog(
+                                                                dialogTitle:
+                                                                    "Atualize seus dados antes de adicionar habilidaes",
+                                                                buttonTitle:
+                                                                    "Voltar",
+                                                                buttonAction:
+                                                                    () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                });
+                                                          });
+                                                    } else if (infoCurrentUser[
+                                                              "skills"]
+                                                          .toString()
+                                                          .contains(skill)) {
+                                                        showDialog(
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return InformDialog(
+                                                                  dialogTitle:
+                                                                      "Você já adicionou esta habilidade",
+                                                                  buttonTitle:
+                                                                      "Voltar",
+                                                                  buttonAction:
+                                                                      () {
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  });
+                                                            });
+                                                      } else {
+                                                      var collection =
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  "users");
+                                                      collection
+                                                          .doc(user["id"])
+                                                          .update({
+                                                        'skills': FieldValue
+                                                            .arrayUnion([skill])
+                                                      }).then(
+                                                        (value) => setState(
+                                                          () {},
+                                                        ),
+                                                      );
+                                                    }
+                                                  },
+                                                  icon: const Icon(
+                                                    Icons.add,
+                                                    color: HelpTheme
+                                                        .helpButtonText,
+                                                    size: 32,
+                                                  )),
+                                            ),
                                           ))
                                     ],
                                   ),

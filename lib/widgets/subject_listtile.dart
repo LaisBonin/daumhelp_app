@@ -16,25 +16,32 @@ class SubjectListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).hoverColor,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
+        Material(
+          color: Colors.transparent,
+          elevation: 5,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
           ),
-          child: ListTile(
-            contentPadding:
-                const EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15),
-            onTap: subjectAction,
-            title: Text(
-              subjectName,
-              style: Theme.of(context).textTheme.titleMedium,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).hoverColor,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
             ),
-            trailing: subjectIcon,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            tileColor: Theme.of(context).hoverColor,
+            child: ListTile(
+              contentPadding: const EdgeInsets.only(
+                  top: 10, bottom: 10, left: 15, right: 15),
+              onTap: subjectAction,
+              title: Text(
+                subjectName,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              trailing: subjectIcon,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              tileColor: Theme.of(context).hoverColor,
+            ),
           ),
         ),
         const SizedBox(
