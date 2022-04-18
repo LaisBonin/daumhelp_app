@@ -211,13 +211,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                                   "Conta criada com sucesso",
                                               buttonTitle: "Voltar",
                                               buttonAction: () {
-                                                Navigator.push(
+                                                Navigator.pop(context);
+                                              });
+                                        }).then((value) => Navigator.pushReplacement(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            const SubjectListPage()));
-                                              });
-                                        });
+                                                            const SubjectListPage())));
                                   } on FirebaseAuthException catch (e) {
                                     if (e.code == 'weak-password') {
                                       passError = true;
